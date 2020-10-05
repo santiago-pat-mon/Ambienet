@@ -1,0 +1,23 @@
+<div class="general">
+    <div class="login">
+        <div class="title">
+            <p>Login</p>
+        </div>
+        <div class="loginForm">
+            <form [formGroup]="loginForm" (ngSubmit)="validateCredentialsLogin(loginForm)">
+                <mat-form-field>
+                    <mat-label>Correo Electrónico</mat-label>
+                    <input matInput formControlName="email" type="email" required />
+                    <mat-error *ngIf="loginForm.controls.email.invalid">{{getErrorMessage("email")}}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput type="password" formControlName="password" required />
+                    <mat-error *ngIf="loginForm.controls.password.invalid">{{getErrorMessage("password")}}</mat-error>
+                </mat-form-field>
+                <br />
+                <button mat-raised-button style="background-color: #1f7500bd;">INGRESAR</button>
+            </form>
+        </div>
+    </div>
+</div>

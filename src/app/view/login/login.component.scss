@@ -1,0 +1,59 @@
+
+$tablet-width: 768px;
+$desktop-width: 1024px;
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin smallPhone {
+  @media (max-width: 330px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+// login container
+.general {
+    background-color: #1f7500bd;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.login {
+    background-color: #FFFFFF;
+    height: 350px;
+    width: 320px;
+    border-radius: 10px;
+    -webkit-box-shadow: -10px 15px 35px 5px rgba(0,0,0,0.75);
+    -moz-box-shadow: -10px 15px 35px 5px rgba(0,0,0,0.75);
+    box-shadow: -10px 15px 35px 5px rgba(0,0,0,0.75);
+    @include mobile {
+        width: 330px;
+        width: 300px;
+    }
+    @include smallPhone() {
+        width: 280px;
+        width: 250px;
+    }
+}
+
+.title {
+    text-align: center;
+}
+
+.loginForm {
+    text-align: center;
+}
+
+.loginForm mat-form-field {
+    width: 80%;
+}
