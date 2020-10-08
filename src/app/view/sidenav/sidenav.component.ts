@@ -2,15 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import * as SecureLS from 'secure-ls';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-sidenav',
+  templateUrl: './sidenav.component.html',
+  styleUrls: ['./sidenav.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class SidenavComponent implements OnInit {
+
   ls: SecureLS
   rol: string
-  currentScreenWidth: string = ""
-  sidenavWidth = 4.2
 
   constructor() { }
 
@@ -21,13 +20,6 @@ export class HomeComponent implements OnInit {
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
-  }
-
-  increase() {
-    this.sidenavWidth = 16
-  }
-  decrease() {
-    this.sidenavWidth = 4.2
   }
 
 }

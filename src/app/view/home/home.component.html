@@ -1,2 +1,22 @@
-<app-topmenu></app-topmenu>
-<p>home works!</p>
+<div *ngIf="rol=='admin'">
+    <app-topmenu (sidenavToggle)="snav.toggle()"></app-topmenu>
+    <mat-sidenav-container class="example-container">
+        <!-- Side navigation -->
+        <mat-sidenav #snav [mode]="currentScreenWidth === 'xs' ? 'over' : 'side'"
+            [fixedInViewport]="currentScreenWidth === 'xs'" fixedTopGap="40"
+            [opened]="currentScreenWidth === 'xs' ? 'false' : 'true'" [ngStyle]="{
+            'width.em': currentScreenWidth === 'xs' ? 16 : sidenavWidth
+            }" style="background-color: #1f7500bd;" (mouseenter)="increase()" (mouseleave)="decrease()">
+            <app-sidenav></app-sidenav>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <!--Content-->
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>
+<div *ngIf="rol=='user'">
+    <app-topmenu></app-topmenu>
+    <!--Content-->
+    <router-outlet></router-outlet>
+</div>

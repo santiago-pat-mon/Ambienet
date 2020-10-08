@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup
   email = ""
   password = ""
+  rol = ""
   errorMessage = ""
   userLoggedIn
 
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.required]),
+      rol: new FormControl("", [Validators.required])
     })
   }
 
@@ -54,18 +56,23 @@ export class LoginComponent implements OnInit {
           }
         }
       ) */
-      let prueba = this.loginService.verifyUser(form.value)
-      console.log(prueba)
+      this.userLoggedIn = this.loginService.verifyUser(form.value)
 
-      if (prueba == true) {
+      if (this.userLoggedIn == "admin") {
         this.router.navigate(["dashboard"])
         var ls = new SecureLS({ encodingType: "aes" })
         ls.set("isLoggedIn", "true")
+        ls.set("isLoggedRol", "admin")
       } else {
-        this.launchMessage("Usuario o contraseña incorrecta")
+        if (this.userLoggedIn == "user") {
+          this.router.navigate(["dashboard"])
+          var ls = new SecureLS({ encodingType: "aes" })
+          ls.set("isLoggedIn", "true")
+          ls.set("isLoggedRol", "user")
+        } else {
+          this.launchMessage("Usuario o contraseña incorrecta")
+        }
       }
-
-
     } else {
       this.launchMessage("Por favor verifica los datos")
     }
@@ -86,14 +93,14 @@ export class LoginComponent implements OnInit {
     switch (component) {
       case "email":
         errorMessage = this.loginForm.get("email").hasError("required")
-          ? "Campo requerido"
+          ? "Campo email requerido"
           : this.loginForm.get("email").hasError("email")
             ? "Ingresa un correo válido"
             : ""
         break
       case "password":
         errorMessage = this.loginForm.get("password").hasError("required")
-          ? "Campo requerido"
+          ? "Campo password requerido"
           : ""
         break
     }

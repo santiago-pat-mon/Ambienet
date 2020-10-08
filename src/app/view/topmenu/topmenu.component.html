@@ -1,8 +1,17 @@
-<div class="topMenu">
+<div class="topMenu" *ngIf="rol=='admin'">
     <mat-toolbar style="background-color: #1f7500bd; width: 100%;">
-        <button mat-icon-button class="hamburger-menu" style="color: #FFFFFF;" (click)="menu()">
+        <button mat-icon-button class="hamburger-menu" style="color: #FFFFFF;" (click)="onToggleSidenav()">
             <mat-icon>menu</mat-icon>
         </button>
+        <span style="color: #FFFFFF;">AmbieNet</span>
+        <span class="example-spacer"></span>
+        <button class="menu-button" mat-icon-button style="color: #FFFFFF;" (click)="logOut()">
+            <mat-icon>power_settings_new</mat-icon>
+        </button>
+    </mat-toolbar>
+</div>
+<div class="topMenu" *ngIf="rol=='user'">
+    <mat-toolbar style="background-color: #1f7500bd; width: 100%;">
         <span style="color: #FFFFFF;">AmbieNet</span>
         <span class="example-spacer"></span>
         <button class="menu-button" mat-icon-button style="color: #FFFFFF;" (click)="logOut()">

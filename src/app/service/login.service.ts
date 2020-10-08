@@ -11,8 +11,13 @@ export class LoginService {
   constructor() { }
 
   verifyUser(submission: any) {
-    if (submission.email == "admin@admin.com" && submission.password == "12345") {
-      return true
+    if (submission.email == "admin@admin.com" && submission.password == "12345" && submission.rol == "1") {
+      return "admin"
+    }
+    else {
+      if (submission.email == "admin@admin.com" && submission.password == "12345" && submission.rol == "2") {
+        return "user"
+      }
     }
     return false
   }
