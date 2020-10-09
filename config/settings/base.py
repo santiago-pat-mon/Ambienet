@@ -50,6 +50,8 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'AmbieNet.users.apps.UsersAppConfig',
+    'AmbieNet.posts.apps.PostsAppConfig',
+
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
