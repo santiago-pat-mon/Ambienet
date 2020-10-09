@@ -1,0 +1,42 @@
+<div class="container" *ngIf="rol=='user'">
+    <div class="dataContainer">
+        <div>
+            <p>Mi perfil</p>
+            <div class="userForm">
+                <form [formGroup]="userForm" (ngSubmit)="validateCredentialsLogin(userForm)">
+                    <mat-form-field>
+                        <mat-label>Nombre</mat-label>
+                        <input matInput formControlName="name" type="text" required />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Apellidos</mat-label>
+                        <input matInput formControlName="last_name" type="text" required />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Correo Electrónico</mat-label>
+                        <input matInput formControlName="email" type="email" required />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput type="password" formControlName="password" required />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Genero</mat-label>
+                        <mat-select matSelect formControlName="gender" required>
+                            <mat-option value="1">Maculino</mat-option>
+                            <mat-option value="2">Femenino</mat-option>
+                            <mat-option value="3">Otro</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br />
+                    <button mat-raised-button style="background-color: #1f7500bd;">INGRESAR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="rol=='admin'">
+    <div class="dataContainer">
+        <p>Acceso restringido. No eres un usuario, eres un administrador.</p>
+    </div>
+</div>

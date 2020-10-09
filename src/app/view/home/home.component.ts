@@ -6,16 +6,22 @@ import * as SecureLS from 'secure-ls';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
   ls: SecureLS
   rol: string
   currentScreenWidth: string = ""
   sidenavWidth = 4.2
+  size = true
 
   constructor() { }
 
   ngOnInit(): void {
     this.startVariables()
+    if (window.innerWidth <= 768) {
+      this.size = false
+      console.log("entre")
+    }
   }
 
   startVariables() {

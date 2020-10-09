@@ -6,7 +6,7 @@
             [fixedInViewport]="currentScreenWidth === 'xs'" fixedTopGap="40"
             [opened]="currentScreenWidth === 'xs' ? 'false' : 'true'" [ngStyle]="{
             'width.em': currentScreenWidth === 'xs' ? 16 : sidenavWidth
-            }" style="background-color: #1f7500bd;" (mouseenter)="increase()" (mouseleave)="decrease()">
+            }" style="background-color: #1f7500;" (mouseenter)="increase()" (mouseleave)="decrease()">
             <app-sidenav></app-sidenav>
         </mat-sidenav>
         <mat-sidenav-content>
@@ -17,6 +17,34 @@
 </div>
 <div *ngIf="rol=='user'">
     <app-topmenu></app-topmenu>
+    <div *ngIf="size">
+        <mat-toolbar style="background-color: #589b3f; width: 100%; height: 40px;">
+            <div style="margin-left: 2%;">
+                <b style="font-size: 15px;">Mi nombre de Usuario</b>
+            </div>
+            <div style="margin-left: auto;">
+                <button mat-button routerLink="/dashboard" hidden>Inicio</button>
+                <button mat-button routerLink="/profile" hidden>Mi perfil</button>
+                <button mat-button>Realizar aporte</button>
+                <button mat-button>After</button>
+            </div>
+        </mat-toolbar>
+    </div>
+    <div *ngIf="!size">
+        <mat-toolbar style="background-color: #589b3f; width: 100%; height: 40px;">
+            <button mat-button [matMenuTriggerFor]="menu">
+                <mat-icon style="color: #FFFFFF;">menu</mat-icon>
+                <b style="color: #FFFFFF;">Menu</b>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/dashboard" hidden>Inicio</button>
+                <button mat-menu-item routerLink="/profile" hidden>Mi perfil</button>
+                <button mat-menu-item>Realizar aporte</button>
+                <button mat-menu-item>After</button>
+            </mat-menu>
+        </mat-toolbar>
+    </div>
+
     <!--Content-->
     <router-outlet></router-outlet>
 </div>

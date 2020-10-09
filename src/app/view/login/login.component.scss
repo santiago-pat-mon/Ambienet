@@ -46,6 +46,24 @@ $desktop-width: 1024px;
     }
 }
 
+.register {
+  background-color: #FFFFFF;
+  height: 500px;
+  width: 380px;
+  border-radius: 10px;
+  -webkit-box-shadow: -10px 15px 35px 5px rgba(0,0,0,0.75);
+  -moz-box-shadow: -10px 15px 35px 5px rgba(0,0,0,0.75);
+  box-shadow: -10px 15px 35px 5px rgba(0,0,0,0.75);
+  @include mobile {
+      width: 330px;
+      width: 300px;
+  }
+  @include smallPhone() {
+      width: 280px;
+      width: 250px;
+  }
+}
+
 .title {
     text-align: center;
 }
@@ -57,3 +75,12 @@ $desktop-width: 1024px;
 .loginForm mat-form-field {
     width: 80%;
 }
+
+.registerForm {
+  text-align: center;
+}
+
+.registerForm mat-form-field {
+  width: 80%;
+}
+

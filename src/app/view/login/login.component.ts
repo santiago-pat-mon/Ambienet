@@ -13,11 +13,16 @@ import { LoginService } from 'src/app/service/login.service';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup
+  registerForm: FormGroup
+  name = ""
+  last_name = ""
+  gender = ""
   email = ""
   password = ""
   rol = ""
   errorMessage = ""
   userLoggedIn
+  register = false
 
   constructor(
     private loginService: LoginService,
@@ -35,6 +40,14 @@ export class LoginComponent implements OnInit {
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.required]),
       rol: new FormControl("", [Validators.required])
+    })
+
+    this.registerForm = this.formBuilder.group({
+      name: new FormControl("", [Validators.required]),
+      last_name: new FormControl("", [Validators.required]),
+      email: new FormControl("", [Validators.required, Validators.email]),
+      password: new FormControl("", [Validators.required]),
+      gender: new FormControl("", [Validators.required])
     })
   }
 
@@ -76,6 +89,10 @@ export class LoginComponent implements OnInit {
     } else {
       this.launchMessage("Por favor verifica los datos")
     }
+  }
+
+  validateCredentialsRegister(form: FormGroup) {
+
   }
 
   /** Launch message of the snackBar component */

@@ -16,9 +16,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { SidenavComponent } from './view/sidenav/sidenav.component';
+import { ProfileComponent } from './view/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { SidenavComponent } from './view/sidenav/sidenav.component';
     HomeComponent,
     TopmenuComponent,
     DashboardComponent,
-    SidenavComponent
+    SidenavComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +48,8 @@ import { SidenavComponent } from './view/sidenav/sidenav.component';
     MatSidenavModule,
     MatButtonModule,
     MatListModule,
+    MatTabsModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
