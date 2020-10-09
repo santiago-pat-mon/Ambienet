@@ -28,7 +28,7 @@ class User(AmbieNetModel, AbstractUser):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
 
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     """All users get verified by email message."""
     is_verified = models.BooleanField(
