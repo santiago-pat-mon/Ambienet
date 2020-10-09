@@ -1,6 +1,6 @@
 # Django
 from django.db import models
-from djando.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 # Utils
 from AmbieNet.util.models import AmbieNetModel
@@ -38,7 +38,7 @@ class User(AmbieNetModel, AbstractUser):
     )
 
 
-     def __str__(self):
+    def __str__(self):
         """Return username."""
         return self.username
 
