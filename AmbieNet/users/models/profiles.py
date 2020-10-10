@@ -1,7 +1,7 @@
 #Django
 from django.db import models
 #Utilities
-from AmbieNet.util.models import AmbieNetModel
+from AmbieNet.util.models.ambienet import AmbieNetModel
 
 class Profile(AmbieNetModel):
     """

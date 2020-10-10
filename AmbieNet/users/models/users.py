@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 # Utils
-from AmbieNet.util.models import AmbieNetModel
+from AmbieNet.util.models.ambienet import AmbieNetModel
 
 
 class User(AmbieNetModel, AbstractUser):
