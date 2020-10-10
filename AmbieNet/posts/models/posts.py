@@ -2,7 +2,7 @@
 from django.db import models
 
 #Utils
-from AmbieNet.util.models import AmbieNetModel
+from AmbieNet.util.models.ambienet import AmbieNetModel
 from AmbieNet.users.models import User
 from AmbieNet.users.models import Profile
 
@@ -20,8 +20,8 @@ class Post(AmbieNetModel):
 
     mapa = models.ImageField(upload_to='posts/maps')
 
-    created = models.DateTimeField(auto_now_add = True)
-    modified = models.DateTimeField(auto_now = True)
+
+
 
 def __str__(self):
         """Return username."""

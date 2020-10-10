@@ -2,7 +2,7 @@
 from django.db import models
 
 #Utils
-from AmbieNet.util.models import AmbieNetModel
+from AmbieNet.util.models.ambienet import AmbieNetModel
 
 class Image(AmbieNetModel):
     post = models.ForeignKey('posts.Post',on_delete=models.CASCADE )
