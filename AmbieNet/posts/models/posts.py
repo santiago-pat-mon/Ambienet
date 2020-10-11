@@ -11,19 +11,33 @@ class Post(AmbieNetModel):
     Posts.
     Data from common posts of application, (posts of social network).
     """
+
+    """User's Data """
     user = models.ForeignKey (User, on_delete = models.CASCADE)
     profile = models.ForeignKey (Profile, on_delete = models.PROTECT)
     
+
+
+
+
+
+
+
+
+
+    """Post's Data """
     title = models.CharField(max_length=60)
-    
     description = models.CharField(max_length=255)
 
-    mapa = models.ImageField(upload_to='posts/maps')
+    """Location Data """
+    #if precision is not exactly change for DecimalField
+    latitud = models.FloatField(default=0.0)
+    longitud = models.FloatField(default=0.0)
 
 
 
 
-def __str__(self):
+    def __str__(self):
         """Return username."""
         return self.title
 

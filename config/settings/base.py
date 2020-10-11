@@ -41,6 +41,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+
 ]
 
 THIRD_PARTY_APPS = [
@@ -158,6 +159,8 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERYD_TASK_TIME_LIMIT = 5 * 60
 CELERYD_TASK_SOFT_TIME_LIMIT = 60"""
+
+
 
 # Django REST Framework
 REST_FRAMEWORK = {

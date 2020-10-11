@@ -26,6 +26,10 @@ class Profile(AmbieNetModel):
     state = models.TextField(max_length=30)
     city = models.TextField(max_length=30)
 
+    """User's ubication exactly"""
+    latitud = models.FloatField()
+    longitud = models.FloatField()
+
     reputation = models.FloatField(
         default=5.0,
         help_text="User's reputation based on the rides taken and offered."
