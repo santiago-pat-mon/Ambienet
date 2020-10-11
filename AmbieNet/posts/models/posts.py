@@ -26,8 +26,11 @@ class Post(AmbieNetModel):
 
 
     """Post's Data """
-    title = models.CharField(max_length=60)
+    title = models.CharField(max_length=60, blank=False)
     description = models.CharField(max_length=255)
+    type_catastrophe = models.CharField(blank=False, max_length=20)
+    #"likes"
+    validator_number = models.IntegerField(default=0)
 
     """Location Data """
     #if precision is not exactly change for DecimalField
