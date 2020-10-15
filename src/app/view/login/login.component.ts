@@ -14,15 +14,17 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup
   registerForm: FormGroup
-  name = ""
+  first_name = ""
   last_name = ""
-  gender = ""
+  phone = ""
+  user_name = ""
   email = ""
   password = ""
   rol = ""
   errorMessage = ""
   userLoggedIn
   register = false
+  match = false
 
   constructor(
     private loginService: LoginService,
@@ -43,16 +45,17 @@ export class LoginComponent implements OnInit {
     })
 
     this.registerForm = this.formBuilder.group({
-      name: new FormControl("", [Validators.required]),
+      first_name: new FormControl("", [Validators.required]),
       last_name: new FormControl("", [Validators.required]),
+      phone: new FormControl(""),
+      user_name: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.required]),
-      gender: new FormControl("", [Validators.required])
+      repeat_password: new FormControl("", [Validators.required]),
     })
   }
 
   validateCredentialsLogin(form: FormGroup) {
-
     if (form.valid) {
       /* this.loginService.verifyUser(form.value).subscribe(
         p => {
@@ -92,7 +95,27 @@ export class LoginComponent implements OnInit {
   }
 
   validateCredentialsRegister(form: FormGroup) {
+    if (form.value.password === form.value.repeat_password) {
+      this.match = true
+    } else {
+      this.match = false
+    }
 
+    if (form.valid && this.match == true) {
+
+      /* Aqui es donde llamo al servicio de registrar usuarios y le envio el form.value */
+      console.log("Datos enviados")
+      console.log(form.value)
+      this.register = false
+      this.launchMessage("Registrado!!")
+
+    } else {
+      if (this.match == false) {
+        this.launchMessage("Por favor verifica los datos, las contraseñas no son iguales.")
+      } else {
+        this.launchMessage("Por favor verifica los datos.")
+      }
+    }
   }
 
   /** Launch message of the snackBar component */
@@ -108,6 +131,21 @@ export class LoginComponent implements OnInit {
   getErrorMessage(component: string) {
     let errorMessage = ""
     switch (component) {
+      case "first_name":
+        errorMessage = this.registerForm.get("first_name").hasError("required")
+          ? "Campo Nombre requerido"
+          : ""
+        break
+      case "last_name":
+        errorMessage = this.registerForm.get("last_name").hasError("required")
+          ? "Campo Apellidos requerido"
+          : ""
+        break
+      case "user_name":
+        errorMessage = this.registerForm.get("user_name").hasError("required")
+          ? "Campo UserName requerido"
+          : ""
+        break
       case "email":
         errorMessage = this.loginForm.get("email").hasError("required")
           ? "Campo email requerido"
@@ -117,7 +155,7 @@ export class LoginComponent implements OnInit {
         break
       case "password":
         errorMessage = this.loginForm.get("password").hasError("required")
-          ? "Campo password requerido"
+          ? "Campo Contraseña requerido"
           : ""
         break
     }
