@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup
   first_name = ""
   last_name = ""
-  phone = ""
-  user_name = ""
+  phone_number = ""
+  username = ""
   email = ""
   password = ""
   rol = ""
@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       first_name: new FormControl("", [Validators.required]),
       last_name: new FormControl("", [Validators.required]),
-      phone: new FormControl(""),
-      user_name: new FormControl("", [Validators.required]),
+      phone_number: new FormControl(""),
+      username: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
       password: new FormControl("", [Validators.required]),
       repeat_password: new FormControl("", [Validators.required]),
@@ -151,8 +151,8 @@ export class LoginComponent implements OnInit {
           ? "Campo Apellidos requerido"
           : ""
         break
-      case "user_name":
-        errorMessage = this.registerForm.get("user_name").hasError("required")
+      case "username":
+        errorMessage = this.registerForm.get("username").hasError("required")
           ? "Campo UserName requerido"
           : ""
         break
