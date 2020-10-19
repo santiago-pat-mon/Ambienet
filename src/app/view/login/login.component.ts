@@ -108,6 +108,7 @@ export class LoginComponent implements OnInit {
       this.loginService.registerUser(form.value).subscribe(
         p => {
           this.registeredUser = p !== undefined ? p : []
+          console.log(this.registeredUser)
         },
         e => { console.log(e), this.launchMessage(e) },
         () => {
@@ -115,7 +116,8 @@ export class LoginComponent implements OnInit {
         }
       )
       console.log("Datos enviados")
-      console.log(form.value)
+      console.log("por fuera", this.registeredUser)
+      //console.log(form.value)
       this.register = false
       this.launchMessage("Registrado!!")
 
