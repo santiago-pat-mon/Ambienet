@@ -107,7 +107,7 @@ export class LoginComponent implements OnInit {
       /* Aqui es donde llamo al servicio de registrar usuarios y le envio el form.value */
       this.loginService.registerUser(form.value).subscribe(
         p => {
-          this.registeredUser = p.results !== undefined ? p.results : []
+          this.registeredUser = p !== undefined ? p : []
         },
         e => { console.log(e), this.launchMessage(e) },
         () => {
