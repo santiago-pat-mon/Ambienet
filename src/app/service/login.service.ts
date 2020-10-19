@@ -7,8 +7,7 @@ import { GlobalVariable } from '../config/global';
   providedIn: 'root'
 })
 export class LoginService {
-
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   verifyUser(submission: any) {
     if (submission.email == "admin@admin.com" && submission.password == "12345" && submission.rol == "1") {
@@ -21,4 +20,30 @@ export class LoginService {
     }
     return false
   }
+
+  registerUser(submission: any): Observable<any> {
+    return this.http.post(buildPostUrl(GlobalVariable.REGISTER_USER), submission, {
+      headers: this.getHeadersNA()
+    })
+  }
+
+  private getHeadersNA() {
+    // I included these headers because otherwise FireFox
+    // will request text/html instead of application/json
+    const headers = new HttpHeaders()
+    headers.set("Accept", "application/json")
+    return headers
+  }
+}
+
+function buildGetUrl(type: string): string {
+  let finalUrl = GlobalVariable.BASE_SERVER_URL
+  finalUrl += type
+  return finalUrl
+}
+
+function buildPostUrl(type: string): string {
+  let finalUrl = GlobalVariable.BASE_SERVER_URL
+  finalUrl += type
+  return finalUrl
 }

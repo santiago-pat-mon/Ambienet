@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   rol = ""
   errorMessage = ""
   userLoggedIn
+  registeredUser
   register = false
   match = false
 
@@ -104,6 +105,15 @@ export class LoginComponent implements OnInit {
     if (form.valid && this.match == true) {
 
       /* Aqui es donde llamo al servicio de registrar usuarios y le envio el form.value */
+      this.loginService.registerUser(form.value).subscribe(
+        p => {
+          this.registeredUser = p.results !== undefined ? p.results : []
+        },
+        e => { console.log(e), this.launchMessage(e) },
+        () => {
+          this.launchMessage("Usuario o contraseña incorrecta")
+        }
+      )
       console.log("Datos enviados")
       console.log(form.value)
       this.register = false

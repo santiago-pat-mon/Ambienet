@@ -5,28 +5,37 @@
             <div class="userForm">
                 <form [formGroup]="userForm" (ngSubmit)="validateCredentialsLogin(userForm)">
                     <mat-form-field>
-                        <mat-label>Nombre</mat-label>
-                        <input matInput formControlName="name" type="text" required />
+                        <mat-label>Nombre(s)</mat-label>
+                        <input matInput formControlName="first_name" type="text" required />
+                        <mat-error *ngIf="userForm.controls.first_name.invalid">{{getErrorMessage("first_name")}}
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field>
-                        <mat-label>Apellidos</mat-label>
+                        <mat-label>Apellido(s)</mat-label>
                         <input matInput formControlName="last_name" type="text" required />
+                        <mat-error *ngIf="userForm.controls.last_name.invalid">{{getErrorMessage("last_name")}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Teléfono</mat-label>
+                        <input matInput formControlName="phone" type="number" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>User Name</mat-label>
+                        <input matInput formControlName="user_name" type="text" required />
+                        <mat-error *ngIf="userForm.controls.user_name.invalid">{{getErrorMessage("user_name")}}
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field>
                         <mat-label>Correo Electrónico</mat-label>
                         <input matInput formControlName="email" type="email" required />
+                        <mat-error *ngIf="userForm.controls.email.invalid">{{getErrorMessage("email")}}</mat-error>
                     </mat-form-field>
                     <mat-form-field>
                         <mat-label>Contraseña</mat-label>
                         <input matInput type="password" formControlName="password" required />
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Genero</mat-label>
-                        <mat-select matSelect formControlName="gender" required>
-                            <mat-option value="1">Maculino</mat-option>
-                            <mat-option value="2">Femenino</mat-option>
-                            <mat-option value="3">Otro</mat-option>
-                        </mat-select>
+                        <mat-error *ngIf="userForm.controls.password.invalid">{{getErrorMessage("password")}}
+                        </mat-error>
                     </mat-form-field>
                     <br />
                     <button mat-raised-button style="background-color: #1f7500bd;">INGRESAR</button>

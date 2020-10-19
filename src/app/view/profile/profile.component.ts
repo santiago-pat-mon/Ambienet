@@ -28,11 +28,12 @@ export class ProfileComponent implements OnInit {
 
   initForms() {
     this.userForm = this.formBuilder.group({
-      name: new FormControl("", [Validators.required]),
+      first_name: new FormControl("", [Validators.required]),
       last_name: new FormControl("", [Validators.required]),
-      email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", [Validators.required]),
-      gender: new FormControl("", [Validators.required])
+      phone: new FormControl("", [Validators.required, Validators.email]),
+      user_name: new FormControl("", [Validators.required]),
+      email: new FormControl("", [Validators.required]),
+      password: new FormControl("", [Validators.required])
     })
   }
 
@@ -42,6 +43,40 @@ export class ProfileComponent implements OnInit {
   }
 
   validateCredentialsLogin(form: FormGroup) {
+  }
+
+  getErrorMessage(component: string) {
+    let errorMessage = ""
+    switch (component) {
+      case "first_name":
+        errorMessage = this.userForm.get("first_name").hasError("required")
+          ? "Campo Nombre requerido"
+          : ""
+        break
+      case "last_name":
+        errorMessage = this.userForm.get("last_name").hasError("required")
+          ? "Campo Apellidos requerido"
+          : ""
+        break
+      case "user_name":
+        errorMessage = this.userForm.get("user_name").hasError("required")
+          ? "Campo UserName requerido"
+          : ""
+        break
+      case "email":
+        errorMessage = this.userForm.get("email").hasError("required")
+          ? "Campo email requerido"
+          : this.userForm.get("email").hasError("email")
+            ? "Ingresa un correo válido"
+            : ""
+        break
+      case "password":
+        errorMessage = this.userForm.get("password").hasError("required")
+          ? "Campo Contraseña requerido"
+          : ""
+        break
+    }
+    return errorMessage
   }
 
 }
