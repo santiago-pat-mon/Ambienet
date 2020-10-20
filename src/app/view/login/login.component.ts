@@ -110,16 +110,37 @@ export class LoginComponent implements OnInit {
           this.registeredUser = p !== undefined ? p : []
           console.log(this.registeredUser)
         },
-        e => { console.log(e), this.launchMessage(e) },
+        e => { console.log(e), this.launchMessage(e)
+          let aux = false
+          if(e.error.email != undefined) {
+            this.launchMessage("Este Correo ya se encuentra en uso, por favor digite otro.")
+            aux = true
+          }
+          if(e.error.username != undefined) {
+            if(e.error.username[0] == "This field must be unique.") {
+              this.launchMessage("El User Name ya se encuentra en uso, por favor digite otro.")
+              aux = true
+            }
+          }
+          if(e.error.phone_number != undefined) {
+            this.launchMessage("Por favor verifique el número de teléfono.")
+            aux = true
+          }
+          if(e.error.non_field_errors != undefined) {
+            this.launchMessage("La contraseña es muy debil.")
+            aux = true
+          }
+          if(aux == false && e.error){
+            this.launchMessage("Verifique que: El campo nombre y apellidos tenga mas de 3 caracteres, el username tenga mas de 6 caracteres o que la contraseña tenga mas de 8 caracteres.")
+            aux = false
+          }          
+        },
         () => {
-          this.launchMessage("Usuario o contraseña incorrecta")
+          console.log("por fuera", this.registeredUser)
+          this.register = false
+          this.launchMessage("Registrado!!")
         }
       )
-      console.log("Datos enviados")
-      console.log("por fuera", this.registeredUser)
-      //console.log(form.value)
-      this.register = false
-      this.launchMessage("Registrado!!")
 
     } else {
       if (this.match == false) {
