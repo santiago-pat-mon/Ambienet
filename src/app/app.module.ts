@@ -19,10 +19,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { SidenavComponent } from './view/sidenav/sidenav.component';
 import { ProfileComponent } from './view/profile/profile.component';
+import { ViewobjectDialogComponent } from './view/viewobject-dialog/viewobject-dialog.component';
+import { CreatepostComponent } from './view/createpost/createpost.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,8 @@ import { ProfileComponent } from './view/profile/profile.component';
     DashboardComponent,
     SidenavComponent,
     ProfileComponent,
+    ViewobjectDialogComponent,
+    CreatepostComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +58,8 @@ import { ProfileComponent } from './view/profile/profile.component';
     MatListModule,
     MatTabsModule,
     MatMenuModule,
+    MatCardModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

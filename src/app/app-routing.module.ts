@@ -5,6 +5,7 @@ import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './view/login/login.component';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { ProfileComponent } from './view/profile/profile.component';
+import { CreatepostComponent } from './view/createpost/createpost.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -27,6 +28,11 @@ const routes: Routes = [
         path: "profile",
         canActivate: [AuthGuard],
         component: ProfileComponent,
+      },
+      {
+        path: "createpost",
+        canActivate: [AuthGuard],
+        component: CreatepostComponent,
       },
     ]
   }

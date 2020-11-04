@@ -1,0 +1,41 @@
+@mixin smallmobile {
+    @media (max-width: 335px) {
+      @content;
+    }
+}
+
+@mixin medianMeasure {
+    @media (max-width: 580px) {
+        @content;
+    }
+}
+
+.container {
+    margin: auto;
+    width: 90%;
+}
+
+.imageButton img {
+    width: 450px;
+    height: 300px;
+    @include medianMeasure() {
+        width: 250px;
+        height: 170px;
+    }
+    @include smallmobile() {
+        width: 150px;
+        height: 110px;
+    }
+}
+
+.validateButton {
+    margin-right: 15px;
+    @include smallmobile() {
+        margin-right: 0px;
+    }
+}
+
+mat-card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
