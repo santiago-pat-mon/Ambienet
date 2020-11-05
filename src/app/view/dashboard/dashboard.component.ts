@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
       title: "Prueba 1",
       description: "Esta es la descripcion de la prueba 1 sadadasssss ssssssssssssss assssssssssssss ssssssssssssss dasdddddddddd dddddddddddddd saaaaaaaa aaaaaaaaaaaaaaaa aaaaaaaaaaaa dassssss ssssssss sssssss ssssssssss sssssss dsaaaaaa aaaaaaaaaaaa aaaaaaa asdddddd ddddddddd dddddddd",
       image: "mclaren1.jpg",
+      user: "Steven Saenz M",
+      userImage: "default-user-image.png",
       validation: "3",
       novalidation: "1"
     },
@@ -21,6 +23,8 @@ export class DashboardComponent implements OnInit {
       title: "Prueba 2",
       description: "Esta es la descripcion de la prueba 2",
       image: "mclaren2.jpg",
+      user: "Santiago Patiño M",
+      userImage: "default-user-image.png",
       validation: "4",
       novalidation: "1"
     },
@@ -28,6 +32,8 @@ export class DashboardComponent implements OnInit {
       title: "Prueba 3",
       description: "Esta es la descripcion de la prueba 3",
       image: "mclaren3.jpg",
+      user: "Santiago Suaza Z",
+      userImage: "default-user-image.png",
       validation: "5",
       novalidation: "1"
     }

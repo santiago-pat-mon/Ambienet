@@ -2,7 +2,8 @@
     <mat-card *ngFor="let object of pruebaInformacion">
         <mat-card-header>
             <!-- <mat-card-title>Distritos</mat-card-title> -->
-            <mat-card-subtitle><b>Validados:</b> {{object.validation}} - <b>Falsos:</b> {{object.novalidation}}
+            <mat-card-subtitle><img class="profilePicture" src="../../assets/imagenesPruebaBorrar/{{object.userImage}}"
+                    title="{{object.user}}" /><b>{{object.user}}</b>
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content style="text-align: center;">
@@ -15,9 +16,8 @@
             </div>
             <p>{{object.description}}</p>
             <div>
-                <button class="validateButton" mat-raised-button color="primary"
-                    (click)="viewObject(null)">Validar</button>
-                <button mat-raised-button color="primary" (click)="viewObject(null)">No puedo corroborar</button>
+                <b class="countValidation">{{object.validation}}</b>
+                <button mat-raised-button color="primary" (click)="viewObject(null)">Validar</button>
             </div>
         </mat-card-content>
     </mat-card>
