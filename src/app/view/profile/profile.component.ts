@@ -70,7 +70,8 @@ export class ProfileComponent implements OnInit {
     var files = event.target.files;
     var file = files[0];
     if (files && file) {
-      var name = file.name.split(".")[1]
+      var name1 = file.name.split(".")
+      var name = name1[name1.length - 1]
       if (name.toLowerCase() == "jpg" || name.toLowerCase() == "jpeg" || name.toLowerCase() == "png") {
         this.selectedFile.name = file.name;
         this.selectedFile.type = "profilePicture";

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 
+import { AgmCoreModule } from '@agm/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './view/login/login.component';
@@ -41,6 +42,9 @@ import { CreatepostComponent } from './view/createpost/createpost.component';
     CreatepostComponent,
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyANunCOJ1Dq-s8MuO0_l6t-wmGfG_KDWR4'
+    }),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

@@ -8,6 +8,7 @@ import { ViewobjectDialogComponent } from '../viewobject-dialog/viewobject-dialo
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  zoom = 16;
 
   pruebaInformacion = [
     {
@@ -17,7 +18,9 @@ export class DashboardComponent implements OnInit {
       user: "Steven Saenz M",
       userImage: "default-user-image.png",
       validation: "3",
-      novalidation: "1"
+      novalidation: "1",
+      lat: 4.5131224878387,
+      lng: -75.65562403136823
     },
     {
       title: "Prueba 2",
@@ -26,7 +29,9 @@ export class DashboardComponent implements OnInit {
       user: "Santiago Patiño M",
       userImage: "default-user-image.png",
       validation: "4",
-      novalidation: "1"
+      novalidation: "1",
+      lat: 5.5131224878387,
+      lng: -75.65562403136823
     },
     {
       title: "Prueba 3",
@@ -35,7 +40,9 @@ export class DashboardComponent implements OnInit {
       user: "Santiago Suaza Z",
       userImage: "default-user-image.png",
       validation: "5",
-      novalidation: "1"
+      novalidation: "1",
+      lat: 6.5131224878387,
+      lng: -75.65562403136823
     }
   ]
 

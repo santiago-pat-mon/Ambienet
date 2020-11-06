@@ -17,7 +17,11 @@
                         </button>
                     </mat-tab>
                     <mat-tab label="Ubicación">
-                        Aquí va la ubicación en google maps
+                        <div style="width: 600px; margin: auto;">
+                            <agm-map [latitude]="object.lat" [longitude]="object.lng" [zoom]="zoom">
+                                <agm-marker [latitude]="object.lat" [longitude]="object.lng"></agm-marker>
+                            </agm-map>
+                        </div>
                     </mat-tab>
                 </mat-tab-group>
             </div>
