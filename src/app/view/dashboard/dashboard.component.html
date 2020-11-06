@@ -9,10 +9,17 @@
         <mat-card-content style="text-align: center;">
             <h2>{{object.title}}</h2>
             <div>
-                <button class="imageButton" (click)="viewObject(object)"
-                    style="margin: 0px; padding: 0px; border: 0px; cursor: pointer;">
-                    <img src="../../assets/imagenesPruebaBorrar/{{object.image}}" />
-                </button>
+                <mat-tab-group mat-align-tabs="center">
+                    <mat-tab label="Imagen">
+                        <button class="imageButton" (click)="viewObject(object)"
+                            style="margin: 0px; padding: 0px; border: 0px; cursor: pointer;">
+                            <img src="../../assets/imagenesPruebaBorrar/{{object.image}}" />
+                        </button>
+                    </mat-tab>
+                    <mat-tab label="Ubicación">
+                        Aquí va la ubicación en google maps
+                    </mat-tab>
+                </mat-tab-group>
             </div>
             <p>{{object.description}}</p>
             <div>
