@@ -1,1 +1,41 @@
-<p>createpost works!</p>
+<div class="container">
+    <mat-card style="margin-top: 10px;">
+        <mat-card-header>
+            <!-- <mat-card-title>Distritos</mat-card-title> -->
+            <!-- <mat-card-subtitle></mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content style="text-align: center;">
+            <h2>Crea tu Post</h2>
+            <div>
+                <mat-tab-group mat-align-tabs="center">
+                    <mat-tab label="Tu Ubicación">
+                        <div style="width: 600px; margin: auto;">
+                            <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom">
+                                <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
+                                    <agm-info-window>
+                                        <strong>Mi Ubicación</strong>
+                                    </agm-info-window>
+                                </agm-marker>
+                            </agm-map>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Escoger una Ubicación">
+                        <div style="width: 600px; margin: auto;">
+                            <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom"
+                                (mapClick)="mapClicked($event)">
+                                <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
+                                    <agm-info-window>
+                                        <strong>Mi Ubicación</strong>
+                                    </agm-info-window>
+                                </agm-marker>
+                            </agm-map>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+            <div>
+                <button mat-raised-button color="primary" (click)="createPost()">Crear</button>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

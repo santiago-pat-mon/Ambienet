@@ -1,50 +1,52 @@
 <div class="container" *ngIf="rol=='user'">
     <div class="dataContainer">
-        <p>Mi perfil</p>
-        <div class="userForm">
-            <form [formGroup]="userForm" (ngSubmit)="validateCredentialsProfile(userForm)">
-                <mat-form-field>
-                    <mat-label>Nombre(s)</mat-label>
-                    <input matInput formControlName="first_name" type="text" required />
-                    <mat-error *ngIf="userForm.controls.first_name.invalid">{{getErrorMessage("first_name")}}
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Apellido(s)</mat-label>
-                    <input matInput formControlName="last_name" type="text" required />
-                    <mat-error *ngIf="userForm.controls.last_name.invalid">{{getErrorMessage("last_name")}}
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Teléfono</mat-label>
-                    <input matInput formControlName="phone" type="number" />
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>User Name</mat-label>
-                    <input matInput formControlName="user_name" type="text" required />
-                    <mat-error *ngIf="userForm.controls.user_name.invalid">{{getErrorMessage("user_name")}}
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Correo Electrónico</mat-label>
-                    <input matInput formControlName="email" type="email" required />
-                    <mat-error *ngIf="userForm.controls.email.invalid">{{getErrorMessage("email")}}</mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Contraseña</mat-label>
-                    <input matInput type="password" formControlName="password" required />
-                    <mat-error *ngIf="userForm.controls.password.invalid">{{getErrorMessage("password")}}
-                    </mat-error>
-                </mat-form-field>
-                <br />
-                <!-- Select file-->
-                <mat-label style="font-size: 15px;">Foto de perfil</mat-label><br /><br />
-                <input #inputFile type="file" (change)="selectFile($event)">
-                <br />
-                <br />
-                <button mat-raised-button style="background-color: #1f7500bd; color: #FFFFFF;">ACTUALIZAR</button>
-            </form>
-        </div>
+        <mat-card>
+            <p>Mi perfil</p>
+            <div class="userForm">
+                <form [formGroup]="userForm" (ngSubmit)="validateCredentialsProfile(userForm)">
+                    <mat-form-field>
+                        <mat-label>Nombre(s)</mat-label>
+                        <input matInput formControlName="first_name" type="text" required />
+                        <mat-error *ngIf="userForm.controls.first_name.invalid">{{getErrorMessage("first_name")}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Apellido(s)</mat-label>
+                        <input matInput formControlName="last_name" type="text" required />
+                        <mat-error *ngIf="userForm.controls.last_name.invalid">{{getErrorMessage("last_name")}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Teléfono</mat-label>
+                        <input matInput formControlName="phone" type="number" />
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>User Name</mat-label>
+                        <input matInput formControlName="user_name" type="text" required />
+                        <mat-error *ngIf="userForm.controls.user_name.invalid">{{getErrorMessage("user_name")}}
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Correo Electrónico</mat-label>
+                        <input matInput formControlName="email" type="email" required />
+                        <mat-error *ngIf="userForm.controls.email.invalid">{{getErrorMessage("email")}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Contraseña</mat-label>
+                        <input matInput type="password" formControlName="password" required />
+                        <mat-error *ngIf="userForm.controls.password.invalid">{{getErrorMessage("password")}}
+                        </mat-error>
+                    </mat-form-field>
+                    <br />
+                    <!-- Select file-->
+                    <mat-label style="font-size: 15px;">Foto de perfil</mat-label><br /><br />
+                    <input #inputFile type="file" (change)="selectFile($event)">
+                    <br />
+                    <br />
+                    <button mat-raised-button style="background-color: #1f7500bd; color: #FFFFFF;">ACTUALIZAR</button>
+                </form>
+            </div>
+        </mat-card>
     </div>
 </div>
 <div *ngIf="rol=='admin'">

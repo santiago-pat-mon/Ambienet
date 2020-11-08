@@ -19,7 +19,11 @@
                     <mat-tab label="Ubicación">
                         <div style="width: 600px; margin: auto;">
                             <agm-map [latitude]="object.lat" [longitude]="object.lng" [zoom]="zoom">
-                                <agm-marker [latitude]="object.lat" [longitude]="object.lng"></agm-marker>
+                                <agm-marker [latitude]="object.lat" [longitude]="object.lng">
+                                    <agm-info-window>
+                                        <strong>{{object.title}}</strong>
+                                    </agm-info-window>
+                                </agm-marker>
                             </agm-map>
                         </div>
                     </mat-tab>
