@@ -28,6 +28,17 @@
     }
 }
 
+.mapContainer {
+    width: 600px; 
+    margin: auto;
+    @include smallmobile() {
+        width: 200px;
+    }
+    @include medianMeasure() {
+        width: 450px;
+    }
+}
+
 agm-map {
     height: 350px;
 }

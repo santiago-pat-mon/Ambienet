@@ -1,6 +1,29 @@
+@mixin smallmobile {
+    @media (max-width: 335px) {
+      @content;
+    }
+}
+
+@mixin medianMeasure {
+    @media (max-width: 580px) {
+        @content;
+    }
+}
+
 .container {
     margin: auto;
     width: 90%;
+}
+
+.mapContainer {
+    width: 600px; 
+    margin: auto;
+    @include smallmobile() {
+        width: 200px;
+    }
+    @include medianMeasure() {
+        width: 450px;
+    }
 }
 
 agm-map {

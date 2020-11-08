@@ -27,7 +27,20 @@ export class CreatepostComponent implements OnInit {
     console.log("Longitud: ", this.myLongitude)
   }
 
-  mapClicked($event: MouseEvent) {
+  /* The event in HTML would be mapClick but because this is a beta version it does not recognize the events, the API has an error
+  https://github.com/SebastianM/angular-google-maps/issues/1845#issuecomment-672051511 */
+  /* mapClicked($event: google.maps.MouseEvent) {
+    this.myLatitude = $event.latLng.lat()
+    this.myLongitude = $event.latLng.lng()
+  } */
+
+  /* Small solution to the error raised above */
+  public mapReadyHandler(map: google.maps.Map): void {
+    map.addListener('click', (e: google.maps.MouseEvent) => {
+      // Here we can get correct event
+      this.myLatitude = e.latLng.lat()
+      this.myLongitude = e.latLng.lng()
+    });
   }
 
 }

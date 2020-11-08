@@ -17,7 +17,7 @@
                         </button>
                     </mat-tab>
                     <mat-tab label="Ubicación">
-                        <div style="width: 600px; margin: auto;">
+                        <div class="mapContainer">
                             <agm-map [latitude]="object.lat" [longitude]="object.lng" [zoom]="zoom">
                                 <agm-marker [latitude]="object.lat" [longitude]="object.lng">
                                     <agm-info-window>

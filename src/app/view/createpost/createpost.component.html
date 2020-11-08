@@ -9,7 +9,7 @@
             <div>
                 <mat-tab-group mat-align-tabs="center">
                     <mat-tab label="Tu Ubicación">
-                        <div style="width: 600px; margin: auto;">
+                        <div class="mapContainer">
                             <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom">
                                 <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
                                     <agm-info-window>
@@ -20,12 +20,15 @@
                         </div>
                     </mat-tab>
                     <mat-tab label="Escoger una Ubicación">
-                        <div style="width: 600px; margin: auto;">
+                        <p><b>Importante:</b> Debes dar doble Clic para poner tu nueva marca</p>
+                        <div class="mapContainer">
                             <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom"
-                                (mapClick)="mapClicked($event)">
+                                (mapReady)="mapReadyHandler($event)">
                                 <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
                                     <agm-info-window>
-                                        <strong>Mi Ubicación</strong>
+                                        <strong>Ubicación</strong>
+                                        <p><b>Latitud: </b>{{myLatitude}}</p>
+                                        <p><b>Longitud: </b>{{myLongitude}}</p>
                                     </agm-info-window>
                                 </agm-marker>
                             </agm-map>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import * as SecureLS from 'secure-ls';
 
 @Component({
@@ -6,6 +6,8 @@ import * as SecureLS from 'secure-ls';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
+
 
 export class HomeComponent implements OnInit {
   ls: SecureLS
@@ -16,12 +18,19 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    if (event.target.innerWidth <= 768) {
+      this.size = false
+    } else {
+      if (event.target.innerWidth > 768) {
+        this.size = true
+      }
+    }
+  }
+
   ngOnInit(): void {
     this.startVariables()
-    if (window.innerWidth <= 768) {
-      this.size = false
-      console.log("entre")
-    }
   }
 
   startVariables() {
