@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import * as SecureLS from 'secure-ls';
 import { ViewobjectDialogComponent } from '../viewobject-dialog/viewobject-dialog.component';
 
 @Component({
@@ -8,6 +9,8 @@ import { ViewobjectDialogComponent } from '../viewobject-dialog/viewobject-dialo
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  ls: SecureLS
+  rol: string
   zoom = 16;
 
   pruebaInformacion = [
@@ -51,7 +54,12 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.startVariables()
+  }
 
+  startVariables() {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.rol = this.ls.get("isLoggedRol")
   }
 
   viewObject(object) {

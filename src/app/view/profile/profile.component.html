@@ -54,3 +54,9 @@
         <p>Acceso restringido. No eres un usuario, eres un administrador.</p>
     </div>
 </div>
+<div *ngIf="rol=='guest'">
+    <div class="dataContainer">
+        <p>Por favor regístrate para acceder a estas funcionalidades.</p>
+        <button mat-raised-button color="primary" (click)="registerGuest()" hidden>Registrate</button>
+    </div>
+</div>

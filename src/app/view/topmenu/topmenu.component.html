@@ -19,3 +19,12 @@
         </button>
     </mat-toolbar>
 </div>
+<div class="topMenu" *ngIf="rol=='guest'">
+    <mat-toolbar style="background-color: #1f7500; width: 100%;">
+        <span style="color: #FFFFFF; margin-left: 2%;">AmbieNet</span>
+        <span class="example-spacer"></span>
+        <button class="menu-button" mat-icon-button style="color: #FFFFFF;" (click)="logOut()">
+            <mat-icon>power_settings_new</mat-icon>
+        </button>
+    </mat-toolbar>
+</div>

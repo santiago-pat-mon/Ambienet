@@ -12,12 +12,12 @@
                 <mat-tab-group mat-align-tabs="center">
                     <mat-tab label="Imagen">
                         <button class="imageButton" (click)="viewObject(object)"
-                            style="margin: 0px; padding: 0px; border: 0px; cursor: pointer;">
+                            style="margin: 0px; margin-top: 20px; margin-bottom: 10px; padding: 0px; border: 0px; cursor: pointer;">
                             <img src="../../assets/imagenesPruebaBorrar/{{object.image}}" />
                         </button>
                     </mat-tab>
                     <mat-tab label="Ubicación">
-                        <div class="mapContainer">
+                        <div class="mapContainerDashboard">
                             <agm-map [latitude]="object.lat" [longitude]="object.lng" [zoom]="zoom">
                                 <agm-marker [latitude]="object.lat" [longitude]="object.lng">
                                     <agm-info-window>
@@ -32,7 +32,8 @@
             <p>{{object.description}}</p>
             <div>
                 <b class="countValidation">{{object.validation}}</b>
-                <button mat-raised-button color="primary" (click)="viewObject(null)">Validar</button>
+                <button mat-raised-button color="primary" (click)="viewObject(null)"
+                    [disabled]="rol=='guest' ? true : false">Validar</button>
             </div>
         </mat-card-content>
     </mat-card>

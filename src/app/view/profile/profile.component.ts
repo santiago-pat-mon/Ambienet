@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfileService } from "src/app/service/profile.service";
 import * as SecureLS from 'secure-ls';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -29,6 +30,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
+    private router: Router,
     private profileService: ProfileService,
   ) { }
 
@@ -100,6 +102,11 @@ export class ProfileComponent implements OnInit {
       () => {
       }
     );
+  }
+
+  registerGuest() {
+    window.localStorage.clear()
+    this.router.navigate(["/login/"])
   }
 
   getErrorMessage(component: string) {

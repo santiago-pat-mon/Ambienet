@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import * as SecureLS from 'secure-ls';
 
 @Component({
@@ -16,7 +17,9 @@ export class HomeComponent implements OnInit {
   sidenavWidth = 4.2
   size = true
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -36,6 +39,11 @@ export class HomeComponent implements OnInit {
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
+  }
+
+  registerGuest() {
+    window.localStorage.clear()
+    this.router.navigate(["/login/"])
   }
 
   increase() {

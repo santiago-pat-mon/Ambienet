@@ -110,30 +110,31 @@ export class LoginComponent implements OnInit {
           this.registeredUser = p !== undefined ? p : []
           console.log(this.registeredUser)
         },
-        e => { console.log(e), this.launchMessage(e)
+        e => {
+          console.log(e), this.launchMessage(e)
           let aux = false
-          if(e.error.email != undefined) {
+          if (e.error.email != undefined) {
             this.launchMessage("Este Correo ya se encuentra en uso, por favor digite otro.")
             aux = true
           }
-          if(e.error.username != undefined) {
-            if(e.error.username[0] == "This field must be unique.") {
+          if (e.error.username != undefined) {
+            if (e.error.username[0] == "This field must be unique.") {
               this.launchMessage("El User Name ya se encuentra en uso, por favor digite otro.")
               aux = true
             }
           }
-          if(e.error.phone_number != undefined) {
+          if (e.error.phone_number != undefined) {
             this.launchMessage("Por favor verifique el número de teléfono.")
             aux = true
           }
-          if(e.error.non_field_errors != undefined) {
+          if (e.error.non_field_errors != undefined) {
             this.launchMessage("La contraseña es muy debil.")
             aux = true
           }
-          if(aux == false && e.error){
+          if (aux == false && e.error) {
             this.launchMessage("Verifique que: El campo nombre y apellidos tenga mas de 3 caracteres, el username tenga mas de 6 caracteres o que la contraseña tenga mas de 8 caracteres.")
             aux = false
-          }          
+          }
         },
         () => {
           console.log("por fuera", this.registeredUser)
@@ -149,6 +150,13 @@ export class LoginComponent implements OnInit {
         this.launchMessage("Por favor verifica los datos.")
       }
     }
+  }
+
+  enterGuest() {
+    this.router.navigate(["dashboard"])
+    var ls = new SecureLS({ encodingType: "aes" })
+    ls.set("isLoggedIn", "true")
+    ls.set("isLoggedRol", "guest")
   }
 
   /** Launch message of the snackBar component */

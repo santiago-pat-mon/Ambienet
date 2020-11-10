@@ -48,3 +48,19 @@
     <!--Content-->
     <router-outlet></router-outlet>
 </div>
+
+<!-- Guest -->
+<div *ngIf="rol=='guest'">
+    <app-topmenu></app-topmenu>
+
+    <mat-toolbar style="background-color: #589b3f; width: 100%; height: 40px;">
+        <div style="margin-left: 2%;">
+            <b style="font-size: 15px;">Invitado(a)</b>
+        </div>
+        <div style="margin-left: auto;">
+            <button mat-button (click)="registerGuest()" hidden>Registrate</button>
+        </div>
+    </mat-toolbar>
+    <!--Content-->
+    <router-outlet></router-outlet>
+</div>

@@ -1,5 +1,5 @@
-<div class="container">
-    <mat-card style="margin-top: 10px;">
+<div class="container" *ngIf="rol=='user'">
+    <mat-card style="margin-top: 10px; margin-bottom: 20px;">
         <mat-card-header>
             <!-- <mat-card-title>Distritos</mat-card-title> -->
             <!-- <mat-card-subtitle></mat-card-subtitle> -->
@@ -7,21 +7,15 @@
         <mat-card-content style="text-align: center;">
             <h2>Crea tu Post</h2>
             <div>
+                <p><b>Importante:</b> Por defecto tienes la ubicación de tu dispositivo, pero si quieres poner
+                    una marca en un lugar distinto debes dar doble Clic en la ubicación que desees del mapa.
+                    El botón “Ubicación del dispositivo” pondrá la ubicación de tu dispositivo nuevamente. </p>
+                <button mat-raised-button color="primary" (click)="selectDeviceLocation()">
+                    Ubicación del dispositivo
+                </button>
                 <mat-tab-group mat-align-tabs="center">
-                    <mat-tab label="Tu Ubicación">
-                        <div class="mapContainer">
-                            <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom">
-                                <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
-                                    <agm-info-window>
-                                        <strong>Mi Ubicación</strong>
-                                    </agm-info-window>
-                                </agm-marker>
-                            </agm-map>
-                        </div>
-                    </mat-tab>
-                    <mat-tab label="Escoger una Ubicación">
-                        <p><b>Importante:</b> Debes dar doble Clic para poner tu nueva marca</p>
-                        <div class="mapContainer">
+                    <mat-tab label="Mapa">
+                        <div class="mapContainerPost">
                             <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom"
                                 (mapReady)="mapReadyHandler($event)">
                                 <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
@@ -35,10 +29,26 @@
                         </div>
                     </mat-tab>
                 </mat-tab-group>
-            </div>
-            <div>
-                <button mat-raised-button color="primary" (click)="createPost()">Crear</button>
+                <div style="margin-top: 20px;">
+                    <mat-form-field>
+                        <mat-label>Descripción</mat-label>
+                        <textarea matInput rows="5" cols="60"></textarea>
+                    </mat-form-field>
+                    <br />
+                    <button mat-raised-button color="primary" (click)="createPost()">Crear</button>
+                </div>
             </div>
         </mat-card-content>
     </mat-card>
+</div>
+<div *ngIf="rol=='admin'">
+    <div class="dataContainer">
+        <p>Acceso restringido. No eres un usuario, eres un administrador.</p>
+    </div>
+</div>
+<div *ngIf="rol=='guest'">
+    <div class="dataContainer">
+        <p>Por favor regístrate para acceder a estas funcionalidades.</p>
+        <button mat-raised-button color="primary" (click)="registerGuest()" hidden>Registrate</button>
+    </div>
 </div>

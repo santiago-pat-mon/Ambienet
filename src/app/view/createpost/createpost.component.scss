@@ -15,9 +15,18 @@
     width: 90%;
 }
 
-.mapContainer {
+.dataContainer {
+    width: 90%;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.mapContainerPost {
     width: 600px; 
     margin: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
     @include smallmobile() {
         width: 200px;
     }
@@ -28,4 +37,8 @@
 
 agm-map {
     height: 350px;
+}
+
+mat-form-field {
+    width: 90%;
 }

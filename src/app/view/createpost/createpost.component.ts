@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import * as SecureLS from 'secure-ls';
 
 @Component({
   selector: 'app-createpost',
@@ -6,14 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./createpost.component.scss']
 })
 export class CreatepostComponent implements OnInit {
+  ls: SecureLS
+  rol: string
   myLatitude
   myLongitude
   zoom = 16
 
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
+    this.startVariables()
     navigator.geolocation.getCurrentPosition(position => this.getPosition(position))
+  }
+
+  startVariables() {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.rol = this.ls.get("isLoggedRol")
   }
 
   createPost() {
@@ -41,6 +53,16 @@ export class CreatepostComponent implements OnInit {
       this.myLatitude = e.latLng.lat()
       this.myLongitude = e.latLng.lng()
     });
+  }
+
+  selectDeviceLocation() {
+    navigator.geolocation.getCurrentPosition(position => this.getPosition(position))
+    console.log("hola")
+  }
+
+  registerGuest() {
+    window.localStorage.clear()
+    this.router.navigate(["/login/"])
   }
 
 }
