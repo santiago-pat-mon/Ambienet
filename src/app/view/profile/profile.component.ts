@@ -21,6 +21,15 @@ export class ProfileComponent implements OnInit {
   password = ""
   errorMessage = ""
   auxPictureFile = false
+  profileToSend = {
+    first_name: "",
+    last_name: "",
+    phone: "",
+    user_name: "",
+    email: "",
+    password: "",
+    profileImage: ""
+  }
   selectedFile = {
     name: null,
     base64textString: null,
@@ -56,14 +65,39 @@ export class ProfileComponent implements OnInit {
   }
 
   validateCredentialsProfile(form: FormGroup) {
-    if (this.auxPictureFile != true) {
-      this.uploadFile()
-      this.auxPictureFile = false
+    if (form.valid) {
+      if (this.auxPictureFile != true) {
+        if (this.selectedFile.name != null) {
+          this.uploadFile()
 
-      /* aca se envian los datos al django el nombre de la imagen seria this.selectedFile.name pero como solo es URL
-        seria var urlImage = this.selectedFile.type + "/" + this.selectedFile.name */
+          /* aca se envian los datos al django el nombre de la imagen seria this.selectedFile.name pero como solo es URL
+           seria var urlImage = this.selectedFile.type + "/" + this.selectedFile.name */
 
-      this.launchMessage("Datos actualizados")
+          this.profileToSend.first_name = form.value.first_name
+          this.profileToSend.last_name = form.value.last_name
+          this.profileToSend.phone = form.value.phone
+          this.profileToSend.user_name = form.value.user_name
+          this.profileToSend.email = form.value.email
+          this.profileToSend.password = form.value.password
+          this.profileToSend.profileImage = this.selectedFile.type + "/" + this.selectedFile.name
+          console.log("Con imagen ", this.profileToSend)
+        } else {
+          this.profileToSend.first_name = form.value.first_name
+          this.profileToSend.last_name = form.value.last_name
+          this.profileToSend.phone = form.value.phone
+          this.profileToSend.user_name = form.value.user_name
+          this.profileToSend.email = form.value.email
+          this.profileToSend.password = form.value.password
+          this.profileToSend.profileImage = ""
+          console.log("Sin imagen ", this.profileToSend)
+        }
+        this.launchMessage("Datos actualizados.")
+
+      } else {
+        this.launchMessage("Por favor verifique que el formato de la imagen sea la correcta.")
+      }
+    } else {
+      this.launchMessage("Por favor llene todos los campos del formulario.")
     }
   }
 
@@ -77,6 +111,7 @@ export class ProfileComponent implements OnInit {
       if (name.toLowerCase() == "jpg" || name.toLowerCase() == "jpeg" || name.toLowerCase() == "png") {
         this.selectedFile.name = file.name;
         this.selectedFile.type = "profilePicture";
+        this.auxPictureFile = false
         var reader = new FileReader();
         reader.onload = this._handleReaderLoaded.bind(this);
         reader.readAsBinaryString(file);
