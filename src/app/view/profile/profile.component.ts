@@ -14,12 +14,16 @@ export class ProfileComponent implements OnInit {
   userForm: FormGroup
   ls: SecureLS
   rol: string
+  userData
   name = ""
   last_name = ""
   gender = ""
   email = ""
   password = ""
   errorMessage = ""
+  myLatitude
+  myLongitude
+  zoom = 16
   auxPictureFile = false
   profileToSend = {
     first_name: "",
@@ -46,6 +50,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.startVariables()
     this.initForms()
+    this.loadUserData()
   }
 
   initForms() {
@@ -62,6 +67,28 @@ export class ProfileComponent implements OnInit {
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
+  }
+
+  loadUserData() {
+
+    /* ESTE SERIA EL METODO QUE LLAMA AL SERVICIO DE TRAER LOS DATOS DEL USUARIO */
+
+    this.userData = "Servicio que se conecta"
+
+    /* SE CARGA LA UBICACION QUE TRAIGA EL USUARIO YA SEA POR DEFECTO O LA QUE SELECCIONO
+       ES DECIR, ACA TENGO QUE ACTUALIZAR LAS VARIABLES this.myLatitude Y this.myLongitude   
+       
+       if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
+        } else {
+          this.launchMessage("Su navegador o dispositivo no soporta la API de geolocalización. Por favor selecciona tu ubicación manualmente.")
+        }
+
+       EL CODIGO ANTERIOR YA NO VA DE PRIMERO YA QUE PARA ESO ESTA EN EL BOTON DE "Ubicacion de mi dispositivo" PARA QUE EL USUARIO
+       ELIJA CUANDO EL QUIERA ACTUALIZAR SU POSICION YA SEA DANDOLE AL BOTON O DANDO CLIC EN EL MAPA
+    */
+
+
   }
 
   validateCredentialsProfile(form: FormGroup) {
@@ -88,9 +115,19 @@ export class ProfileComponent implements OnInit {
           this.profileToSend.user_name = form.value.user_name
           this.profileToSend.email = form.value.email
           this.profileToSend.password = form.value.password
-          this.profileToSend.profileImage = ""
+          if (this.userData.profileImage != "") {
+            this.profileToSend.profileImage = this.userData.profileImage /* EN REALIDAD ACA SI TIENE IMAGEN LE MANDAMOS LA MISMA URL SINO TIENE IMAGEN SI SE MANDA VACIO */
+          } else {
+            this.profileToSend.profileImage = ""
+          }
           console.log("Sin imagen ", this.profileToSend)
         }
+
+
+
+        /* ACA REALIZAMOS LA CONEXION CON DJANGO MEDIANTE EL SERVICIO PARA ENVIAR EL OBJETO JSON profileToSend  */
+
+
         this.launchMessage("Datos actualizados.")
 
       } else {
@@ -142,6 +179,55 @@ export class ProfileComponent implements OnInit {
   registerGuest() {
     window.localStorage.clear()
     this.router.navigate(["/login/"])
+  }
+
+  getPosition(position) {
+    this.zoom = 16
+    this.myLatitude = position.coords.latitude
+    this.myLongitude = position.coords.longitude
+    console.log("Latitud: ", this.myLatitude)
+    console.log("Longitud: ", this.myLongitude)
+  }
+
+  positionError(error) {
+    console.log(error)
+    switch (error.code) {
+      case 1:
+        this.launchMessage("Geolocalización denegada por el usuario. Por favor activa la geolocalización o escoge tu ubicación manualmente.")
+        break
+      case 2:
+        this.launchMessage("No se ha podido acceder a la información de su posición. Por favor escoge tu ubicación manualmente.")
+        break
+      case 3:
+        this.launchMessage("El servicio ha tardado demasiado tiempo en responder. Inténtalo de nuevo o escoge tu ubicación manualmente.")
+        break
+      default:
+        this.launchMessage("Error desconocido en Google Maps.")
+    }
+
+    this.myLatitude = 4.5349888296673075
+    this.myLongitude = -75.67577780594667
+    this.zoom = 10
+  }
+
+  selectDeviceLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
+      this.zoom = 16
+    } else {
+      this.launchMessage("Su navegador o dispositivo no soporta la API de geolocalización. Por favor selecciona tu ubicación manualmente.")
+    }
+  }
+
+  /* Small solution to the error raised above */
+  public mapReadyHandler(map: google.maps.Map): void {
+    map.addListener('click', (e: google.maps.MouseEvent) => {
+      // Here we can get correct event
+      this.myLatitude = e.latLng.lat()
+      this.myLongitude = e.latLng.lng()
+      console.log("Latitud: ", this.myLatitude)
+      console.log("Longitud: ", this.myLongitude)
+    });
   }
 
   getErrorMessage(component: string) {

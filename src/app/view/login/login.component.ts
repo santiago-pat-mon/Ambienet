@@ -21,6 +21,20 @@ export class LoginComponent implements OnInit {
   email = ""
   password = ""
   rol = ""
+  myLatitude
+  myLongitude
+  zoom = 16
+  userToSend = {
+    first_name: "",
+    last_name: "",
+    phone_number: "",
+    username: "",
+    email: "",
+    password: "",
+    image: "",
+    latitude: "",
+    longitude: ""
+  }
   errorMessage = ""
   userLoggedIn
   registeredUser
@@ -36,6 +50,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForms()
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
+    } else {
+      this.launchMessage("Su navegador o dispositivo no soporta la API de geolocalización. Por favor selecciona tu ubicación manualmente.")
+    }
   }
 
   initForms() {
@@ -104,8 +123,18 @@ export class LoginComponent implements OnInit {
 
     if (form.valid && this.match == true) {
 
+      this.userToSend.first_name = form.value.first_name
+      this.userToSend.last_name = form.value.last_name
+      this.userToSend.phone_number = form.value.phone_number
+      this.userToSend.username = form.value.username
+      this.userToSend.email = form.value.email
+      this.userToSend.password = form.value.password
+      this.userToSend.image = ""
+      this.userToSend.latitude = this.myLatitude
+      this.userToSend.longitude = this.myLongitude
+
       /* Aqui es donde llamo al servicio de registrar usuarios y le envio el form.value */
-      this.loginService.registerUser(form.value).subscribe(
+      this.loginService.registerUser(this.userToSend).subscribe(
         p => {
           this.registeredUser = p !== undefined ? p : []
           console.log(this.registeredUser)
@@ -159,14 +188,53 @@ export class LoginComponent implements OnInit {
     ls.set("isLoggedRol", "guest")
   }
 
-  /** Launch message of the snackBar component */
-  launchMessage(message: string) {
-    this.errorMessage = ""
-    const action = "OK"
+  getPosition(position) {
+    this.zoom = 16
+    this.myLatitude = position.coords.latitude
+    this.myLongitude = position.coords.longitude
+    console.log("Latitud: ", this.myLatitude)
+    console.log("Longitud: ", this.myLongitude)
+  }
 
-    this.snackBar.open(message, action, {
-      duration: 5000
-    })
+  positionError(error) {
+    console.log(error)
+    switch (error.code) {
+      case 1:
+        this.launchMessage("Geolocalización denegada por el usuario. Por favor activa la geolocalización o escoge tu ubicación manualmente.")
+        break
+      case 2:
+        this.launchMessage("No se ha podido acceder a la información de su posición. Por favor escoge tu ubicación manualmente.")
+        break
+      case 3:
+        this.launchMessage("El servicio ha tardado demasiado tiempo en responder. Inténtalo de nuevo o escoge tu ubicación manualmente.")
+        break
+      default:
+        this.launchMessage("Error desconocido en Google Maps.")
+    }
+
+    this.myLatitude = 4.5349888296673075
+    this.myLongitude = -75.67577780594667
+    this.zoom = 10
+  }
+
+  selectDeviceLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
+      this.zoom = 16
+    } else {
+      this.launchMessage("Su navegador o dispositivo no soporta la API de geolocalización. Por favor selecciona tu ubicación manualmente.")
+    }
+  }
+
+  /* Small solution to the error raised above */
+  public mapReadyHandler(map: google.maps.Map): void {
+    map.addListener('click', (e: google.maps.MouseEvent) => {
+      // Here we can get correct event
+      this.myLatitude = e.latLng.lat()
+      this.myLongitude = e.latLng.lng()
+      console.log("Latitud: ", this.myLatitude)
+      console.log("Longitud: ", this.myLongitude)
+    });
   }
 
   getErrorMessage(component: string) {
@@ -203,4 +271,13 @@ export class LoginComponent implements OnInit {
     return errorMessage
   }
 
+  /** Launch message of the snackBar component */
+  launchMessage(message: string) {
+    this.errorMessage = ""
+    const action = "OK"
+
+    this.snackBar.open(message, action, {
+      duration: 10000
+    })
+  }
 }

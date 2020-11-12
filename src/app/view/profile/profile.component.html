@@ -1,7 +1,26 @@
 <div class="container" *ngIf="rol=='user'">
     <div class="dataContainer">
         <mat-card>
-            <p>Mi perfil</p>
+            <p>Actualizar mi perfil</p>
+            <mat-tab-group mat-align-tabs="center">
+                <mat-tab label="Mi ubicación">
+                    <div class="mapContainerPost">
+                        <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom"
+                            (mapReady)="mapReadyHandler($event)">
+                            <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
+                                <agm-info-window>
+                                    <strong>Ubicación</strong>
+                                    <p><b>Latitud: </b>{{myLatitude}}</p>
+                                    <p><b>Longitud: </b>{{myLongitude}}</p>
+                                </agm-info-window>
+                            </agm-marker>
+                        </agm-map>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+            <button mat-raised-button color="primary" style="margin-top: 20px;" (click)="selectDeviceLocation()">
+                Ubicación del dispositivo
+            </button>
             <div class="userForm">
                 <form [formGroup]="userForm" (ngSubmit)="validateCredentialsProfile(userForm)">
                     <mat-form-field>

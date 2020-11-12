@@ -19,6 +19,12 @@ $desktop-width: 1024px;
   }
 }
 
+@mixin medianMeasure {
+  @media (max-width: 580px) {
+      @content;
+  }
+}
+
 // login container
 .general {
     background-color: #1f7500bd;
@@ -48,8 +54,11 @@ $desktop-width: 1024px;
 
 .register {
   background-color: #FFFFFF;
+  text-align: center;
+  overflow: auto;
+  overflow-x: hidden;
   height: 620px;
-  width: 380px;
+  width: 400px;
   border-radius: 10px;
   -webkit-box-shadow: -10px 15px 35px 5px rgba(0,0,0,0.75);
   -moz-box-shadow: -10px 15px 35px 5px rgba(0,0,0,0.75);
@@ -66,6 +75,9 @@ $desktop-width: 1024px;
 
 .title {
     text-align: center;
+    font-weight: bold;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .loginForm {
@@ -78,9 +90,31 @@ $desktop-width: 1024px;
 
 .registerForm {
   text-align: center;
+  margin-top: 20px;
 }
 
 .registerForm mat-form-field {
   width: 80%;
 }
 
+.mapContainerPost {
+  width: 600px; 
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  @include smallPhone() {
+      width: 200px;
+  }
+  @include medianMeasure() {
+      width: 450px;
+  }
+}
+
+agm-map {
+  height: 300px;
+}
+
+mat-tab-group {
+  margin: auto;
+  width: 85%;
+}

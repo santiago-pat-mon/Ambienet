@@ -42,7 +42,11 @@ export class CreatepostComponent implements OnInit {
   ngOnInit(): void {
     this.startVariables()
     this.initForms()
-    navigator.geolocation.getCurrentPosition(position => this.getPosition(position))
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
+    } else {
+      this.launchMessage("Su navegador o dispositivo no soporta la API de geolocalización. Por favor selecciona tu ubicación manualmente.")
+    }
   }
 
   startVariables() {
@@ -143,11 +147,34 @@ export class CreatepostComponent implements OnInit {
   }
 
   getPosition(position) {
+    this.zoom = 16
     this.myLatitude = position.coords.latitude
     this.myLongitude = position.coords.longitude
     console.log("Latitud: ", this.myLatitude)
     console.log("Longitud: ", this.myLongitude)
   }
+
+  positionError(error) {
+    console.log(error)
+    switch (error.code) {
+      case 1:
+        this.launchMessage("Geolocalización denegada por el usuario. Por favor activa la geolocalización o escoge tu ubicación manualmente.")
+        break
+      case 2:
+        this.launchMessage("No se ha podido acceder a la información de su posición. Por favor escoge tu ubicación manualmente.")
+        break
+      case 3:
+        this.launchMessage("El servicio ha tardado demasiado tiempo en responder. Inténtalo de nuevo o escoge tu ubicación manualmente.")
+        break
+      default:
+        this.launchMessage("Error desconocido en Google Maps.")
+    }
+
+    this.myLatitude = 4.5349888296673075
+    this.myLongitude = -75.67577780594667
+    this.zoom = 10
+  }
+
 
   /* The event in HTML would be mapClick but because this is a beta version it does not recognize the events, the API has an error
   https://github.com/SebastianM/angular-google-maps/issues/1845#issuecomment-672051511 */
@@ -162,11 +189,18 @@ export class CreatepostComponent implements OnInit {
       // Here we can get correct event
       this.myLatitude = e.latLng.lat()
       this.myLongitude = e.latLng.lng()
+      console.log("Latitud: ", this.myLatitude)
+      console.log("Longitud: ", this.myLongitude)
     });
   }
 
   selectDeviceLocation() {
-    navigator.geolocation.getCurrentPosition(position => this.getPosition(position))
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
+      this.zoom = 16
+    } else {
+      this.launchMessage("Su navegador o dispositivo no soporta la API de geolocalización. Por favor selecciona tu ubicación manualmente.")
+    }
   }
 
   registerGuest() {
@@ -196,7 +230,7 @@ export class CreatepostComponent implements OnInit {
     this.errorMessage = ""
     const action = "OK"
     this.snackBar.open(message, action, {
-      duration: 5000,
+      duration: 10000,
     })
   }
 }
