@@ -32,6 +32,7 @@ export class LoginService {
     // will request text/html instead of application/json
     const headers = new HttpHeaders()
     headers.set("Accept", "application/json")
+    headers.set("Authorization", "Token ")
     return headers
   }
 }

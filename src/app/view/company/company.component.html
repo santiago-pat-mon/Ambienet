@@ -1,1 +1,20 @@
-<p>company works!</p>
+<div class="container" *ngIf="rol=='user' || rol == 'admin'">
+    <div class="dataContainer">
+        <mat-card>
+            <p>Subir información</p>
+            <!-- Select file-->
+            <br />
+            <mat-label style="font-size: 15px;">Información</mat-label><br /><br />
+            <input #inputFile type="file" (change)="selectFile($event)">
+            <br />
+            <br />
+            <button mat-raised-button color="primary" (click)="loadData()">Cargar</button>
+        </mat-card>
+    </div>
+</div>
+<div *ngIf="rol=='guest'">
+    <div class="dataContainer">
+        <p>Por favor regístrate para acceder a estas funcionalidades.</p>
+        <button mat-raised-button color="primary" (click)="registerGuest()" hidden>Registrate</button>
+    </div>
+</div>

@@ -14,12 +14,14 @@ export class CreatepostComponent implements OnInit {
   ls: SecureLS
   rol: string
   postForm: FormGroup
+  selectedDate = ""
   postToSend = {
     title: "",
     description: "",
     postImage: "",
     latitude: 0,
-    longitude: 0
+    longitude: 0,
+    date: ""
   }
   myLatitude
   myLongitude
@@ -62,7 +64,7 @@ export class CreatepostComponent implements OnInit {
   }
 
   validateCredentialsPost(form: FormGroup) {
-    if (form.valid) {
+    if (form.valid && this.selectedDate != "") {
       if (this.auxPictureFile != true) {
         if (this.selectedFile.name != null) {
           this.uploadFile()
@@ -75,6 +77,7 @@ export class CreatepostComponent implements OnInit {
           this.postToSend.postImage = this.selectedFile.type + "/" + this.selectedFile.name
           this.postToSend.latitude = this.myLatitude
           this.postToSend.longitude = this.myLongitude
+          this.postToSend.date = this.selectedDate
           console.log(this.postToSend)
           this.launchMessage("Post creado con imagen.")
 
@@ -84,6 +87,7 @@ export class CreatepostComponent implements OnInit {
           this.postToSend.postImage = ""
           this.postToSend.latitude = this.myLatitude
           this.postToSend.longitude = this.myLongitude
+          this.postToSend.date = this.selectedDate
           console.log(this.postToSend)
           this.launchMessage("Post creado sin imagen.")
         }
@@ -116,7 +120,7 @@ export class CreatepostComponent implements OnInit {
       var name1 = file.name.split(".")
       var name = name1[name1.length - 1]
       if (name.toLowerCase() == "jpg" || name.toLowerCase() == "jpeg" || name.toLowerCase() == "png") {
-        this.selectedFile.name = file.name;
+        this.selectedFile.name = this.uuid() + "." + name.toLowerCase();
         this.selectedFile.type = "postPicture";
         this.auxPictureFile = false
         var reader = new FileReader();
@@ -208,6 +212,14 @@ export class CreatepostComponent implements OnInit {
     this.router.navigate(["/login/"])
   }
 
+  getDate(event: any) {
+    let date = new Date(event.target.value)
+    let dateNow = new Date()
+    console.log((date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " + dateNow.getHours() + ":" + dateNow.getMinutes() + ":" + dateNow.getSeconds())
+
+    this.selectedDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " + dateNow.getHours() + ":" + dateNow.getMinutes() + ":" + dateNow.getSeconds()
+  }
+
   getErrorMessage(component: string) {
     let errorMessage = ""
     switch (component) {
@@ -223,6 +235,19 @@ export class CreatepostComponent implements OnInit {
         break
     }
     return errorMessage
+  }
+
+  uuid() {
+    var uuidValue = "", k, randomValue;
+    for (k = 0; k < 12; k++) {
+      randomValue = Math.random() * 16 | 0;
+
+      if (k == 8) {
+        uuidValue += "-"
+      }
+      uuidValue += (k == 12 ? 4 : (k == 16 ? (randomValue & 3 | 8) : randomValue)).toString(16);
+    }
+    return uuidValue;
   }
 
   /** Launch message of the snackBar component */

@@ -145,7 +145,7 @@ export class ProfileComponent implements OnInit {
       var name1 = file.name.split(".")
       var name = name1[name1.length - 1]
       if (name.toLowerCase() == "jpg" || name.toLowerCase() == "jpeg" || name.toLowerCase() == "png") {
-        this.selectedFile.name = file.name;
+        this.selectedFile.name = this.uuid() + "." + name.toLowerCase();
         this.selectedFile.type = "profilePicture";
         this.auxPictureFile = false
         var reader = new FileReader();
@@ -261,6 +261,19 @@ export class ProfileComponent implements OnInit {
         break
     }
     return errorMessage
+  }
+
+  uuid() {
+    var uuidValue = "", k, randomValue;
+    for (k = 0; k < 12; k++) {
+      randomValue = Math.random() * 16 | 0;
+
+      if (k == 8) {
+        uuidValue += "-"
+      }
+      uuidValue += (k == 12 ? 4 : (k == 16 ? (randomValue & 3 | 8) : randomValue)).toString(16);
+    }
+    return uuidValue;
   }
 
   /** Launch message of the snackBar component */

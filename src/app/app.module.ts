@@ -22,6 +22,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { SidenavComponent } from './view/sidenav/sidenav.component';
@@ -66,6 +68,8 @@ import { CompanyComponent } from './view/company/company.component';
     MatMenuModule,
     MatCardModule,
     MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

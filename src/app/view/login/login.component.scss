@@ -28,6 +28,11 @@ $desktop-width: 1024px;
 // login container
 .general {
     background-color: #1f7500bd;
+    background: url(../../../assets/colombia_cocora.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     height: 100vh;
     justify-content: center;
     align-items: center;
