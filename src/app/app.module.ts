@@ -28,6 +28,7 @@ import { SidenavComponent } from './view/sidenav/sidenav.component';
 import { ProfileComponent } from './view/profile/profile.component';
 import { ViewobjectDialogComponent } from './view/viewobject-dialog/viewobject-dialog.component';
 import { CreatepostComponent } from './view/createpost/createpost.component';
+import { CompanyComponent } from './view/company/company.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CreatepostComponent } from './view/createpost/createpost.component';
     ProfileComponent,
     ViewobjectDialogComponent,
     CreatepostComponent,
+    CompanyComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({

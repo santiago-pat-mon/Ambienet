@@ -124,7 +124,6 @@ export class ProfileComponent implements OnInit {
         }
 
 
-
         /* ACA REALIZAMOS LA CONEXION CON DJANGO MEDIANTE EL SERVICIO PARA ENVIAR EL OBJETO JSON profileToSend  */
 
 

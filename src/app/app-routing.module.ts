@@ -6,6 +6,7 @@ import { LoginComponent } from './view/login/login.component';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { ProfileComponent } from './view/profile/profile.component';
 import { CreatepostComponent } from './view/createpost/createpost.component';
+import { CompanyComponent } from './view/company/company.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -33,6 +34,11 @@ const routes: Routes = [
         path: "createpost",
         canActivate: [AuthGuard],
         component: CreatepostComponent,
+      },
+      {
+        path: "company",
+        canActivate: [AuthGuard],
+        component: CompanyComponent,
       },
     ]
   }
