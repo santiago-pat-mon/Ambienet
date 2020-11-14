@@ -32,8 +32,19 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  screenWidth() {
+    if (window.innerWidth <= 768) {
+      this.size = false
+    } else {
+      if (window.innerWidth > 768) {
+        this.size = true
+      }
+    }
+  }
+
   ngOnInit(): void {
     this.startVariables()
+    this.screenWidth()
   }
 
   startVariables() {
