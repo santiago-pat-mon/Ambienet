@@ -44,9 +44,7 @@ export class ProfileComponent implements OnInit {
       picture: "url/image.jpg",
     }
   }
-  profileToSend = {
-    profile: {}
-  }
+  profileToSend
   selectedFile = {
     name: null,
     base64textString: null,
@@ -111,7 +109,7 @@ export class ProfileComponent implements OnInit {
         if (this.selectedFile.name != null) {
           this.uploadFile()
 
-          this.profileToSend.profile["picture"] = this.selectedFile.type + "/" + this.selectedFile.name
+          this.profileToSend["picture"] = this.selectedFile.type + "/" + this.selectedFile.name
 
           if (this.userData.first_name != form.value.first_name) {
             this.profileToSend["first_name"] = form.value.first_name
@@ -126,22 +124,22 @@ export class ProfileComponent implements OnInit {
             this.profileToSend["email"] = form.value.email
           }
           if (this.userData.profile.latitude != this.myLatitude) {
-            this.profileToSend.profile["latitude"] = this.myLatitude
+            this.profileToSend["latitude"] = this.myLatitude
           }
           if (this.userData.profile.longitude != this.myLongitude) {
-            this.profileToSend.profile["longitude"] = this.myLongitude
+            this.profileToSend["longitude"] = this.myLongitude
           }
           if (this.userData.profile.biography != form.value.biography) {
-            this.profileToSend.profile["biography"] = form.value.biography
+            this.profileToSend["biography"] = form.value.biography
           }
           if (this.userData.profile.country != form.value.country) {
-            this.profileToSend.profile["country"] = form.value.country
+            this.profileToSend["country"] = form.value.country
           }
           if (this.userData.profile.state != form.value.state) {
-            this.profileToSend.profile["state"] = form.value.state
+            this.profileToSend["state"] = form.value.state
           }
           if (this.userData.profile.city != form.value.city) {
-            this.profileToSend.profile["city"] = form.value.city
+            this.profileToSend["city"] = form.value.city
           }
 
           console.log("Con imagen ", this.profileToSend)
@@ -161,22 +159,22 @@ export class ProfileComponent implements OnInit {
             this.profileToSend["email"] = form.value.email
           }
           if (this.userData.profile.latitude != this.myLatitude) {
-            this.profileToSend.profile["latitude"] = this.myLatitude
+            this.profileToSend["latitude"] = this.myLatitude
           }
           if (this.userData.profile.longitude != this.myLongitude) {
-            this.profileToSend.profile["longitude"] = this.myLongitude
+            this.profileToSend["longitude"] = this.myLongitude
           }
           if (this.userData.profile.biography != form.value.biography) {
-            this.profileToSend.profile["biography"] = form.value.biography
+            this.profileToSend["biography"] = form.value.biography
           }
           if (this.userData.profile.country != form.value.country) {
-            this.profileToSend.profile["country"] = form.value.country
+            this.profileToSend["country"] = form.value.country
           }
           if (this.userData.profile.state != form.value.state) {
-            this.profileToSend.profile["state"] = form.value.state
+            this.profileToSend["state"] = form.value.state
           }
           if (this.userData.profile.city != form.value.city) {
-            this.profileToSend.profile["city"] = form.value.city
+            this.profileToSend["city"] = form.value.city
           }
 
           console.log("Sin imagen ", this.profileToSend)
