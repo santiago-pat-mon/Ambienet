@@ -7,6 +7,8 @@ import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { ProfileComponent } from './view/profile/profile.component';
 import { CreatepostComponent } from './view/createpost/createpost.component';
 import { CompanyComponent } from './view/company/company.component';
+import { ViewpostComponent } from './view/viewpost/viewpost.component';
+import { ViewuserComponent } from './view/viewuser/viewuser.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -39,6 +41,16 @@ const routes: Routes = [
         path: "company",
         canActivate: [AuthGuard],
         component: CompanyComponent,
+      },
+      {
+        path: "viewpost",
+        canActivate: [AuthGuard],
+        component: ViewpostComponent,
+      },
+      {
+        path: "viewuser",
+        canActivate: [AuthGuard],
+        component: ViewuserComponent,
       },
     ]
   }

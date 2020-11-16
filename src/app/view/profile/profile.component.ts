@@ -14,7 +14,6 @@ export class ProfileComponent implements OnInit {
   userForm: FormGroup
   ls: SecureLS
   rol: string
-  userData
   name = ""
   last_name = ""
   gender = ""
@@ -25,14 +24,27 @@ export class ProfileComponent implements OnInit {
   myLongitude
   zoom = 16
   auxPictureFile = false
+  userNameValue
+  reputationValue
+  userData = {
+    username: "sdfs",
+    first_name: "sdf",
+    last_name: "sdfsdf",
+    email: "sdfsd@hola.com",
+    phone_number: "2313131231",
+    profile: {
+      biography: "sdf",
+      country: "sdfsdf",
+      state: "sdfs",
+      city: "sdfsdf",
+      reputation: 5.0,
+      latitude: 4.5121535999999995,
+      longitude: -75.65475839999999,
+      picture: "url/image.jpg",
+    }
+  }
   profileToSend = {
-    first_name: "",
-    last_name: "",
-    phone: "",
-    user_name: "",
-    email: "",
-    password: "",
-    profileImage: ""
+    profile: {}
   }
   selectedFile = {
     name: null,
@@ -57,10 +69,12 @@ export class ProfileComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       first_name: new FormControl("", [Validators.required]),
       last_name: new FormControl("", [Validators.required]),
-      phone: new FormControl("", [Validators.required]),
-      user_name: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
-      password: new FormControl("", [Validators.required])
+      phone_number: new FormControl(""),
+      biography: new FormControl(""),
+      country: new FormControl(""),
+      state: new FormControl(""),
+      city: new FormControl(""),
     })
   }
 
@@ -73,21 +87,20 @@ export class ProfileComponent implements OnInit {
 
     /* ESTE SERIA EL METODO QUE LLAMA AL SERVICIO DE TRAER LOS DATOS DEL USUARIO */
 
-    this.userData = "Servicio que se conecta"
+    //this.userData = "Servicio que se conecta"
 
-    /* SE CARGA LA UBICACION QUE TRAIGA EL USUARIO YA SEA POR DEFECTO O LA QUE SELECCIONO
-       ES DECIR, ACA TENGO QUE ACTUALIZAR LAS VARIABLES this.myLatitude Y this.myLongitude   
-       
-       if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
-        } else {
-          this.launchMessage("Su navegador o dispositivo no soporta la API de geolocalización. Por favor selecciona tu ubicación manualmente.")
-        }
-
-       EL CODIGO ANTERIOR YA NO VA DE PRIMERO YA QUE PARA ESO ESTA EN EL BOTON DE "Ubicacion de mi dispositivo" PARA QUE EL USUARIO
-       ELIJA CUANDO EL QUIERA ACTUALIZAR SU POSICION YA SEA DANDOLE AL BOTON O DANDO CLIC EN EL MAPA
-    */
-
+    this.reputationValue = this.userData.profile.reputation
+    this.userNameValue = this.userData.username
+    this.myLatitude = this.userData.profile.latitude
+    this.myLongitude = this.userData.profile.longitude
+    this.userForm.controls["first_name"].setValue(this.userData.first_name)
+    this.userForm.controls["last_name"].setValue(this.userData.last_name)
+    this.userForm.controls["email"].setValue(this.userData.email)
+    this.userForm.controls["phone_number"].setValue(this.userData.phone_number)
+    this.userForm.controls["biography"].setValue(this.userData.profile.biography)
+    this.userForm.controls["country"].setValue(this.userData.profile.country)
+    this.userForm.controls["state"].setValue(this.userData.profile.state)
+    this.userForm.controls["city"].setValue(this.userData.profile.city)
 
   }
 
@@ -100,26 +113,74 @@ export class ProfileComponent implements OnInit {
           /* aca se envian los datos al django el nombre de la imagen seria this.selectedFile.name pero como solo es URL
            seria var urlImage = this.selectedFile.type + "/" + this.selectedFile.name */
 
-          this.profileToSend.first_name = form.value.first_name
-          this.profileToSend.last_name = form.value.last_name
-          this.profileToSend.phone = form.value.phone
-          this.profileToSend.user_name = form.value.user_name
-          this.profileToSend.email = form.value.email
-          this.profileToSend.password = form.value.password
-          this.profileToSend.profileImage = this.selectedFile.type + "/" + this.selectedFile.name
-          console.log("Con imagen ", this.profileToSend)
-        } else {
-          this.profileToSend.first_name = form.value.first_name
-          this.profileToSend.last_name = form.value.last_name
-          this.profileToSend.phone = form.value.phone
-          this.profileToSend.user_name = form.value.user_name
-          this.profileToSend.email = form.value.email
-          this.profileToSend.password = form.value.password
-          if (this.userData.profileImage != "") {
-            this.profileToSend.profileImage = this.userData.profileImage /* EN REALIDAD ACA SI TIENE IMAGEN LE MANDAMOS LA MISMA URL SINO TIENE IMAGEN SI SE MANDA VACIO */
-          } else {
-            this.profileToSend.profileImage = ""
+          this.profileToSend.profile["picture"] = this.selectedFile.type + "/" + this.selectedFile.name
+
+          if (this.userData.first_name != form.value.first_name) {
+            this.profileToSend["first_name"] = form.value.first_name
           }
+          if (this.userData.last_name != form.value.last_name) {
+            this.profileToSend["last_name"] = form.value.last_name
+          }
+          if (this.userData.phone_number != form.value.phone_number) {
+            this.profileToSend["phone_number"] = form.value.phone_number
+          }
+          if (this.userData.email != form.value.email) {
+            this.profileToSend["email"] = form.value.email
+          }
+          if (this.userData.profile.latitude != this.myLatitude) {
+            this.profileToSend.profile["latitude"] = this.myLatitude
+          }
+          if (this.userData.profile.longitude != this.myLongitude) {
+            this.profileToSend.profile["longitude"] = this.myLongitude
+          }
+          if (this.userData.profile.biography != form.value.biography) {
+            this.profileToSend.profile["biography"] = form.value.biography
+          }
+          if (this.userData.profile.country != form.value.country) {
+            this.profileToSend.profile["country"] = form.value.country
+          }
+          if (this.userData.profile.state != form.value.state) {
+            this.profileToSend.profile["state"] = form.value.state
+          }
+          if (this.userData.profile.city != form.value.city) {
+            this.profileToSend.profile["city"] = form.value.city
+          }
+
+          console.log("Con imagen ", this.profileToSend)
+
+        } else {
+
+          if (this.userData.first_name != form.value.first_name) {
+            this.profileToSend["first_name"] = form.value.first_name
+          }
+          if (this.userData.last_name != form.value.last_name) {
+            this.profileToSend["last_name"] = form.value.last_name
+          }
+          if (this.userData.phone_number != form.value.phone_number) {
+            this.profileToSend["phone_number"] = form.value.phone_number
+          }
+          if (this.userData.email != form.value.email) {
+            this.profileToSend["email"] = form.value.email
+          }
+          if (this.userData.profile.latitude != this.myLatitude) {
+            this.profileToSend.profile["latitude"] = this.myLatitude
+          }
+          if (this.userData.profile.longitude != this.myLongitude) {
+            this.profileToSend.profile["longitude"] = this.myLongitude
+          }
+          if (this.userData.profile.biography != form.value.biography) {
+            this.profileToSend.profile["biography"] = form.value.biography
+          }
+          if (this.userData.profile.country != form.value.country) {
+            this.profileToSend.profile["country"] = form.value.country
+          }
+          if (this.userData.profile.state != form.value.state) {
+            this.profileToSend.profile["state"] = form.value.state
+          }
+          if (this.userData.profile.city != form.value.city) {
+            this.profileToSend.profile["city"] = form.value.city
+          }
+
           console.log("Sin imagen ", this.profileToSend)
         }
 

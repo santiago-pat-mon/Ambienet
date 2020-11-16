@@ -24,6 +24,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { SidenavComponent } from './view/sidenav/sidenav.component';
@@ -31,6 +33,8 @@ import { ProfileComponent } from './view/profile/profile.component';
 import { ViewobjectDialogComponent } from './view/viewobject-dialog/viewobject-dialog.component';
 import { CreatepostComponent } from './view/createpost/createpost.component';
 import { CompanyComponent } from './view/company/company.component';
+import { ViewpostComponent } from './view/viewpost/viewpost.component';
+import { ViewuserComponent } from './view/viewuser/viewuser.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,8 @@ import { CompanyComponent } from './view/company/company.component';
     ViewobjectDialogComponent,
     CreatepostComponent,
     CompanyComponent,
+    ViewpostComponent,
+    ViewuserComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -70,6 +76,8 @@ import { CompanyComponent } from './view/company/company.component';
     MatDialogModule,
     MatNativeDateModule,
     MatDatepickerModule,
+    MatTableModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

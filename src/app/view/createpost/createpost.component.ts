@@ -59,6 +59,7 @@ export class CreatepostComponent implements OnInit {
   initForms() {
     this.postForm = this.formBuilder.group({
       title: new FormControl("", [Validators.required]),
+      typeCatastrophe: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required]),
     })
   }
