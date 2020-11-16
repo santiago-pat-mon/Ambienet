@@ -43,7 +43,7 @@
                 <ng-container matColumnDef="biography">
                     <th mat-header-cell *matHeaderCellDef>Biografía</th>
                     <td mat-cell *matCellDef="let user">
-                        {{ user.profile.biography }}
+                        {{ user.profile.biography == null ? "" : user.profile.biography }}
                     </td>
                 </ng-container>
                 <!-- country Column -->

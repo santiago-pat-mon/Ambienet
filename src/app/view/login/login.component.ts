@@ -25,14 +25,7 @@ export class LoginComponent implements OnInit {
   myLongitude
   zoom = 16
   userToSend = {
-    first_name: "",
-    last_name: "",
-    phone_number: "",
-    username: "",
-    email: "",
-    password: "",
-    latitude: "",
-    longitude: ""
+    profile: {}
   }
   errorMessage = ""
   userLoggedIn
@@ -133,14 +126,14 @@ export class LoginComponent implements OnInit {
 
     if (form.valid && this.match == true) {
 
-      this.userToSend.username = form.value.username
-      this.userToSend.first_name = form.value.first_name
-      this.userToSend.last_name = form.value.last_name
-      this.userToSend.phone_number = form.value.phone_number
-      this.userToSend.email = form.value.email
-      this.userToSend.password = form.value.password
-      this.userToSend.latitude = this.myLatitude
-      this.userToSend.longitude = this.myLongitude
+      this.userToSend["username"] = form.value.username
+      this.userToSend["first_name"] = form.value.first_name
+      this.userToSend["last_name"] = form.value.last_name
+      this.userToSend["phone_number"] = form.value.phone_number
+      this.userToSend["email"] = form.value.email
+      this.userToSend["password"] = form.value.password
+      this.userToSend.profile["latitude"] = this.myLatitude
+      this.userToSend.profile["longitude"] = this.myLongitude
 
       console.log(this.userToSend)
 
