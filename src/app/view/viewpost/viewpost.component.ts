@@ -192,8 +192,8 @@ export class ViewpostComponent implements OnInit {
     /* SE OBTIENE LA DATA DEL SERVICIO */
     this.viewPostService.getPosts().subscribe(
       p => {
-        console.log(p)
-        this.post = p !== undefined ? p : []
+        console.log(p.results)
+        this.post = p.results !== undefined ? p.results : []
       },
       e => { console.log(e), this.launchMessage(e) },
       () => {
@@ -202,16 +202,9 @@ export class ViewpostComponent implements OnInit {
     )
   }
 
-  /*  ngAfterViewInit() {
-     this.postDataSource.paginator = this.paginator
-     console.log(this.postDataSource.paginator)
-     console.log(this.paginator)
-   } */
-
   // set data on table
   setObjectDataSource() {
     this.postDataSource = new MatTableDataSource(this.post)
-    //this.ngAfterViewInit()
     this.postDataSource.paginator = this.paginator
     this.postDataSource.filterPredicate = function (
       data: Post,
