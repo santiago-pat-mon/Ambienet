@@ -7,16 +7,9 @@
         <div class="loginForm">
             <form [formGroup]="loginForm" (ngSubmit)="validateCredentialsLogin(loginForm)">
                 <mat-form-field>
-                    <mat-label>Seleccione su rol</mat-label>
-                    <mat-select matSelect formControlName="rol" required>
-                        <mat-option value="1">Administrador</mat-option>
-                        <mat-option value="2">Usuario</mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>Correo Electrónico</mat-label>
-                    <input matInput formControlName="email" type="email" required />
-                    <mat-error *ngIf="loginForm.controls.email.invalid">{{getErrorMessage("email")}}</mat-error>
+                    <mat-label>Nombre de usuario</mat-label>
+                    <input matInput formControlName="username" type="text" required />
+                    <mat-error *ngIf="loginForm.controls.username.invalid">{{getErrorMessage("username")}}</mat-error>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Contraseña</mat-label>

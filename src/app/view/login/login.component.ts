@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     username: "",
     email: "",
     password: "",
-    image: "",
     latitude: "",
     longitude: ""
   }
@@ -59,9 +58,8 @@ export class LoginComponent implements OnInit {
 
   initForms() {
     this.loginForm = this.formBuilder.group({
-      email: new FormControl("", [Validators.required, Validators.email]),
+      username: new FormControl("", [Validators.required]),
       password: new FormControl("", [Validators.required]),
-      rol: new FormControl("", [Validators.required])
     })
 
     this.registerForm = this.formBuilder.group({
@@ -83,12 +81,22 @@ export class LoginComponent implements OnInit {
         },
         e => { console.log(e), this.launchMessage(e) },
         () => {
-          if (this.userLoggedIn.length > 0) {
+          if (this.userLoggedIn.user.is_stadd == true) {
             this.router.navigate(["dashboard"])
             var ls = new SecureLS({ encodingType: "aes" })
             ls.set("isLoggedIn", "true")
+            ls.set("isLoggedRol", "admin")
+            ls.set("isLoggedToken", this.userLoggedIn.token)
           } else {
-            this.launchMessage("Usuario o contraseña incorrecta")
+            if (this.userLoggedIn.user.is_stadd == false) {
+              this.router.navigate(["dashboard"])
+              var ls = new SecureLS({ encodingType: "aes" })
+              ls.set("isLoggedIn", "true")
+              ls.set("isLoggedRol", "user")
+              ls.set("isLoggedToken", this.userLoggedIn.token)
+            } else {
+              this.launchMessage("Usuario o contraseña incorrecta")
+            }
           }
         }
       )
@@ -109,8 +117,6 @@ export class LoginComponent implements OnInit {
           this.launchMessage("Usuario o contraseña incorrecta")
         }
       } */
-
-      console.log(this.userLoggedIn)
     } else {
       this.launchMessage("Por favor verifica los datos")
     }
@@ -133,6 +139,8 @@ export class LoginComponent implements OnInit {
       this.userToSend.password = form.value.password
       this.userToSend.latitude = this.myLatitude
       this.userToSend.longitude = this.myLongitude
+
+      console.log(this.userToSend)
 
       /* Aqui es donde llamo al servicio de registrar usuarios y le envio el form.value */
       this.loginService.registerUser(this.userToSend).subscribe(
@@ -251,17 +259,18 @@ export class LoginComponent implements OnInit {
           ? "Campo Apellidos requerido"
           : ""
         break
-      case "username":
-        errorMessage = this.registerForm.get("username").hasError("required")
-          ? "Campo UserName requerido"
-          : ""
-        break
+
       case "email":
-        errorMessage = this.loginForm.get("email").hasError("required")
+        errorMessage = this.registerForm.get("email").hasError("required")
           ? "Campo email requerido"
-          : this.loginForm.get("email").hasError("email")
+          : this.registerForm.get("email").hasError("email")
             ? "Ingresa un correo válido"
             : ""
+        break
+      case "username":
+        errorMessage = this.loginForm.get("username").hasError("required")
+          ? "Campo UserName requerido"
+          : ""
         break
       case "password":
         errorMessage = this.loginForm.get("password").hasError("required")

@@ -10,18 +10,9 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   verifyUser(submission: any) {
-    return this.http.post(buildPostUrl(GlobalVariable.REGISTER_USER), submission, {
+    return this.http.post(buildPostUrl(GlobalVariable.LOGIN_USER), submission, {
       headers: this.getHeadersNA()
     })
-    /* if (submission.email == "admin@admin.com" && submission.password == "12345" && submission.rol == "1") {
-      return "admin"
-    }
-    else {
-      if (submission.email == "admin@admin.com" && submission.password == "12345" && submission.rol == "2") {
-        return "user"
-      }
-    }
-    return false */
   }
 
   registerUser(submission: any): Observable<any> {
