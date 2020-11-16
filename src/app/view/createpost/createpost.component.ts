@@ -4,6 +4,7 @@ import { CreatepostService } from "src/app/service/createpost.service";
 import { Router } from '@angular/router';
 import * as SecureLS from 'secure-ls';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Post } from 'src/app/model/post';
 
 @Component({
   selector: 'app-createpost',
@@ -13,16 +14,11 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class CreatepostComponent implements OnInit {
   ls: SecureLS
   rol: string
+  userName
+  registerPostData
   postForm: FormGroup
   selectedDate = ""
-  postToSend = {
-    title: "",
-    description: "",
-    postImage: "",
-    latitude: 0,
-    longitude: 0,
-    date: ""
-  }
+  postToSend: Post
   myLatitude
   myLongitude
   zoom = 16
@@ -54,6 +50,7 @@ export class CreatepostComponent implements OnInit {
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
+    this.userName = this.ls.get("isLoggedUserName")
   }
 
   initForms() {
@@ -70,40 +67,49 @@ export class CreatepostComponent implements OnInit {
         if (this.selectedFile.name != null) {
           this.uploadFile()
 
-          /* aca se envian los datos al django el nombre de la imagen seria this.selectedFile.name pero como solo es URL
-             seria var urlImage = this.selectedFile.type + "/" + this.selectedFile.name */
-
           this.postToSend.title = form.value.title
+          this.postToSend.type_catastrophe = form.value.typeCatastrophe
           this.postToSend.description = form.value.description
-          this.postToSend.postImage = this.selectedFile.type + "/" + this.selectedFile.name
           this.postToSend.latitude = this.myLatitude
           this.postToSend.longitude = this.myLongitude
-          this.postToSend.date = this.selectedDate
+          this.postToSend.created = this.selectedDate
+          this.postToSend.photo = this.selectedFile.type + "/" + this.selectedFile.name
+          this.postToSend.user = this.userName
           console.log(this.postToSend)
           this.launchMessage("Post creado con imagen.")
 
         } else {
           this.postToSend.title = form.value.title
+          this.postToSend.type_catastrophe = form.value.typeCatastrophe
           this.postToSend.description = form.value.description
-          this.postToSend.postImage = ""
           this.postToSend.latitude = this.myLatitude
           this.postToSend.longitude = this.myLongitude
-          this.postToSend.date = this.selectedDate
+          this.postToSend.created = this.selectedDate
+          this.postToSend.photo = ""
+          this.postToSend.user = this.userName
           console.log(this.postToSend)
           this.launchMessage("Post creado sin imagen.")
         }
 
-        /* Conexion y envio del postToSend al servidor Aquí */
+        /* Conexion y envio del postToSend al servidor */
+        this.createPostService.registerPost(this.postToSend).subscribe(
+          p => {
+            this.registerPostData = p !== undefined ? p : []
+          },
+          e => { console.log(e), this.launchMessage(e) },
+          () => {
 
-        this.clearData(form)
-
+            console.log(this.registerPostData)
+            this.launchMessage("Post creado.")
+            this.clearData(form)
+          }
+        )
       } else {
         this.launchMessage("Por favor verifique que el formato de la imagen sea la correcta.")
       }
     } else {
       this.launchMessage("Por favor llene todos los campos del formulario.")
     }
-
   }
 
   clearData(form) {

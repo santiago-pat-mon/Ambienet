@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
   auxPictureFile = false
   userNameValue
   reputationValue
+  userUpdated
   userData = {
     username: "sdfs",
     first_name: "sdf",
@@ -110,9 +111,6 @@ export class ProfileComponent implements OnInit {
         if (this.selectedFile.name != null) {
           this.uploadFile()
 
-          /* aca se envian los datos al django el nombre de la imagen seria this.selectedFile.name pero como solo es URL
-           seria var urlImage = this.selectedFile.type + "/" + this.selectedFile.name */
-
           this.profileToSend.profile["picture"] = this.selectedFile.type + "/" + this.selectedFile.name
 
           if (this.userData.first_name != form.value.first_name) {
@@ -184,18 +182,56 @@ export class ProfileComponent implements OnInit {
           console.log("Sin imagen ", this.profileToSend)
         }
 
-
         /* ACA REALIZAMOS LA CONEXION CON DJANGO MEDIANTE EL SERVICIO PARA ENVIAR EL OBJETO JSON profileToSend  */
-
-
-        this.launchMessage("Datos actualizados.")
-
+        this.profileService.updateUser(this.profileToSend).subscribe(
+          p => {
+            console.log(p)
+            this.userUpdated = p !== undefined ? p : []
+          },
+          e => {
+            console.log(e), this.launchMessage(e)
+            let aux = false
+            if (e.error.email != undefined) {
+              this.launchMessage("Este Correo ya se encuentra en uso, por favor digite otro.")
+              aux = true
+            }
+            if (e.error.username != undefined) {
+              if (e.error.username[0] == "This field must be unique.") {
+                this.launchMessage("El User Name ya se encuentra en uso, por favor digite otro.")
+                aux = true
+              }
+            }
+            if (e.error.phone_number != undefined) {
+              this.launchMessage("Por favor verifique el número de teléfono.")
+              aux = true
+            }
+            if (e.error.non_field_errors != undefined) {
+              this.launchMessage("La contraseña es muy debil.")
+              aux = true
+            }
+            if (aux == false && e.error) {
+              this.launchMessage("Verifique que: El campo nombre y apellidos tenga mas de 3 caracteres, el username tenga mas de 6 caracteres o que la contraseña tenga mas de 8 caracteres.")
+              aux = false
+            }
+          },
+          () => {
+            console.log("Por fuera:", this.userUpdated)
+            this.launchMessage("Datos actualizados.")
+            this.clearData()
+          }
+        )
       } else {
         this.launchMessage("Por favor verifique que el formato de la imagen sea la correcta.")
       }
     } else {
       this.launchMessage("Por favor llene todos los campos del formulario.")
     }
+  }
+
+  clearData() {
+    this.selectedFile.name = null
+    this.selectedFile.base64textString = null
+    this.selectedFile.type = null
   }
 
   /* attached file */

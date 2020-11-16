@@ -89,29 +89,13 @@ export class LoginComponent implements OnInit {
               ls.set("isLoggedToken", this.userLoggedIn.token)
               ls.set("isLoggedFirstName", this.userLoggedIn.user.first_name)
               ls.set("isLoggedLastName", this.userLoggedIn.user.last_name)
+              ls.set("isLoggedUserName", this.userLoggedIn.user.username)
             } else {
               this.launchMessage("Usuario o contraseña incorrecta")
             }
           }
         }
       )
-      /* this.userLoggedIn = this.loginService.verifyUser(form.value)
-
-      if (this.userLoggedIn == "admin") {
-        this.router.navigate(["dashboard"])
-        var ls = new SecureLS({ encodingType: "aes" })
-        ls.set("isLoggedIn", "true")
-        ls.set("isLoggedRol", "admin")
-      } else {
-        if (this.userLoggedIn == "user") {
-          this.router.navigate(["dashboard"])
-          var ls = new SecureLS({ encodingType: "aes" })
-          ls.set("isLoggedIn", "true")
-          ls.set("isLoggedRol", "user")
-        } else {
-          this.launchMessage("Usuario o contraseña incorrecta")
-        }
-      } */
     } else {
       this.launchMessage("Por favor verifica los datos")
     }

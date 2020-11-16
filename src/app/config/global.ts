@@ -6,5 +6,7 @@ export const GlobalVariable = Object.freeze({
     REGISTER_USER: "users/signup/",
     LOGIN_USER: "users/login/",
     READ_USERS: "users/",
+    UPDATE_USER: "users/",
+    REGISTER_POST: "posts/postear/",
     READ_POSTS: "posts/",
 })
