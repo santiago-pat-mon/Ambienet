@@ -74,24 +74,27 @@ export class ViewuserComponent implements OnInit {
 
     this.viewUserService.getUsers().subscribe(
       p => {
-        this.userDataSource = p !== undefined ? p : []
+        console.log(p)
+        this.user = p !== undefined ? p : []
       },
       e => { console.log(e), this.launchMessage(e) },
       () => {
         this.setObjectDataSource()
-      })
+      }
+    )
   }
 
-  ngAfterViewInit() {
+  /* ngAfterViewInit() {
     this.userDataSource.paginator = this.paginator
     console.log(this.userDataSource.paginator)
     console.log(this.paginator)
-  }
+  } */
 
   // set data on table
   setObjectDataSource() {
     this.userDataSource = new MatTableDataSource(this.user)
-    this.ngAfterViewInit()
+    //this.ngAfterViewInit()
+    this.userDataSource.paginator = this.paginator
     this.userDataSource.filterPredicate = function (
       data: User,
       filterValue: string

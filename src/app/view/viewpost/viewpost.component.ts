@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Post } from 'src/app/model/post'
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ViewpostService } from 'src/app/service/viewpost.service';
 import * as SecureLS from 'secure-ls';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-viewpost',
@@ -13,6 +15,7 @@ export class ViewpostComponent implements OnInit {
   ls: SecureLS
   rol: string
   postDataSource
+  errorMessage = ""
   displayedColumns = [
     "title",
     "type_catastrophe",
@@ -170,7 +173,10 @@ export class ViewpostComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
 
-  constructor() { }
+  constructor(
+    private viewPostService: ViewpostService,
+    public snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
     this.startVariables()
@@ -184,20 +190,29 @@ export class ViewpostComponent implements OnInit {
 
   getPostData() {
     /* SE OBTIENE LA DATA DEL SERVICIO */
-
-    this.setObjectDataSource()
+    this.viewPostService.getPosts().subscribe(
+      p => {
+        console.log(p)
+        this.post = p !== undefined ? p : []
+      },
+      e => { console.log(e), this.launchMessage(e) },
+      () => {
+        this.setObjectDataSource()
+      }
+    )
   }
 
-  ngAfterViewInit() {
-    this.postDataSource.paginator = this.paginator
-    console.log(this.postDataSource.paginator)
-    console.log(this.paginator)
-  }
+  /*  ngAfterViewInit() {
+     this.postDataSource.paginator = this.paginator
+     console.log(this.postDataSource.paginator)
+     console.log(this.paginator)
+   } */
 
   // set data on table
   setObjectDataSource() {
     this.postDataSource = new MatTableDataSource(this.post)
-    this.ngAfterViewInit()
+    //this.ngAfterViewInit()
+    this.postDataSource.paginator = this.paginator
     this.postDataSource.filterPredicate = function (
       data: Post,
       filterValue: string
@@ -224,6 +239,15 @@ export class ViewpostComponent implements OnInit {
 
   deletePost(post) {
 
+  }
+
+  /** Launch message of the snackBar component */
+  launchMessage(message: string) {
+    this.errorMessage = ""
+    const action = "OK"
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    })
   }
 
 }
