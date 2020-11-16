@@ -81,19 +81,21 @@ export class LoginComponent implements OnInit {
         },
         e => { console.log(e), this.launchMessage(e) },
         () => {
-          if (this.userLoggedIn.user.is_stadd == true) {
+          if (this.userLoggedIn.user.is_staff == true) {
             this.router.navigate(["dashboard"])
             var ls = new SecureLS({ encodingType: "aes" })
             ls.set("isLoggedIn", "true")
             ls.set("isLoggedRol", "admin")
             ls.set("isLoggedToken", this.userLoggedIn.token)
           } else {
-            if (this.userLoggedIn.user.is_stadd == false) {
+            if (this.userLoggedIn.user.is_staff == false) {
               this.router.navigate(["dashboard"])
               var ls = new SecureLS({ encodingType: "aes" })
               ls.set("isLoggedIn", "true")
               ls.set("isLoggedRol", "user")
               ls.set("isLoggedToken", this.userLoggedIn.token)
+              ls.set("isLoggedFirstName", this.userLoggedIn.user.first_name)
+              ls.set("isLoggedLastName", this.userLoggedIn.user.last_name)
             } else {
               this.launchMessage("Usuario o contraseña incorrecta")
             }

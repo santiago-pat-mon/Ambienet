@@ -20,7 +20,7 @@
     <div *ngIf="size">
         <mat-toolbar style="background-color: #589b3f; width: 100%; height: 40px;">
             <div style="margin-left: 2%;">
-                <b style="font-size: 15px;">Mi nombre de Usuario</b>
+                <b style="font-size: 15px;">{{ first_name_data }} {{ last_name_data }}</b>
             </div>
             <div style="margin-left: auto;">
                 <button mat-button routerLink="/dashboard" hidden>Inicio</button>

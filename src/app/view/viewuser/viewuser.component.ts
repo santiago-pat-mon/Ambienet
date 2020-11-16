@@ -74,7 +74,7 @@ export class ViewuserComponent implements OnInit {
 
     this.viewUserService.getUsers().subscribe(
       p => {
-        this.userDataSource = p.results !== undefined ? p.results : []
+        this.userDataSource = p !== undefined ? p : []
       },
       e => { console.log(e), this.launchMessage(e) },
       () => {

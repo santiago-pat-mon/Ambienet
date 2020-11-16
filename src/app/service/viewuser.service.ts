@@ -1,12 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import * as SecureLS from 'secure-ls';
 import { GlobalVariable } from '../config/global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ViewuserService {
+  ls: SecureLS
+  token
 
   constructor(private http: HttpClient) { }
 
@@ -17,11 +20,13 @@ export class ViewuserService {
   }
 
   private getHeadersNA() {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.token = this.ls.get("isLoggedToken")
     // I included these headers because otherwise FireFox
     // will request text/html instead of application/json
     const headers = new HttpHeaders()
     headers.set("Accept", "application/json")
-    headers.set("Authorization", "Token")
+    headers.set("Authorization", "Token " + this.token)
     return headers
   }
 }

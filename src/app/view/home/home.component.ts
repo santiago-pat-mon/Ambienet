@@ -13,6 +13,8 @@ import * as SecureLS from 'secure-ls';
 export class HomeComponent implements OnInit {
   ls: SecureLS
   rol: string
+  first_name_data
+  last_name_data
   currentScreenWidth: string = ""
   sidenavWidth = 4.2
   size = true
@@ -50,6 +52,8 @@ export class HomeComponent implements OnInit {
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
+    this.first_name_data = this.ls.get("isLoggedFirstName")
+    this.last_name_data = this.ls.get("isLoggedLastName")
   }
 
   registerGuest() {
