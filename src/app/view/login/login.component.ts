@@ -77,9 +77,9 @@ export class LoginComponent implements OnInit {
 
   validateCredentialsLogin(form: FormGroup) {
     if (form.valid) {
-      /* this.loginService.verifyUser(form.value).subscribe(
+      this.loginService.verifyUser(form.value).subscribe(
         p => {
-          this.userLoggedIn = p.results !== undefined ? p.results : []
+          this.userLoggedIn = p !== undefined ? p : []
         },
         e => { console.log(e), this.launchMessage(e) },
         () => {
@@ -91,8 +91,8 @@ export class LoginComponent implements OnInit {
             this.launchMessage("Usuario o contraseña incorrecta")
           }
         }
-      ) */
-      this.userLoggedIn = this.loginService.verifyUser(form.value)
+      )
+      /* this.userLoggedIn = this.loginService.verifyUser(form.value)
 
       if (this.userLoggedIn == "admin") {
         this.router.navigate(["dashboard"])
@@ -108,7 +108,9 @@ export class LoginComponent implements OnInit {
         } else {
           this.launchMessage("Usuario o contraseña incorrecta")
         }
-      }
+      } */
+
+      console.log(this.userLoggedIn)
     } else {
       this.launchMessage("Por favor verifica los datos")
     }
@@ -123,13 +125,12 @@ export class LoginComponent implements OnInit {
 
     if (form.valid && this.match == true) {
 
+      this.userToSend.username = form.value.username
       this.userToSend.first_name = form.value.first_name
       this.userToSend.last_name = form.value.last_name
       this.userToSend.phone_number = form.value.phone_number
-      this.userToSend.username = form.value.username
       this.userToSend.email = form.value.email
       this.userToSend.password = form.value.password
-      this.userToSend.image = ""
       this.userToSend.latitude = this.myLatitude
       this.userToSend.longitude = this.myLongitude
 
@@ -166,7 +167,7 @@ export class LoginComponent implements OnInit {
           }
         },
         () => {
-          console.log("por fuera", this.registeredUser)
+          console.log("Por fuera:", this.registeredUser)
           this.register = false
           this.launchMessage("Registrado!!")
         }

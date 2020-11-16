@@ -4,5 +4,5 @@ export const GlobalVariable = Object.freeze({
     PROFILE_PICTURE_PHP: "attachFile.php",
     POST_PICTURE_PHP: "attachFile.php",
     REGISTER_USER: "users/signup/",
-
+    READ_USERS: "users/",
 })

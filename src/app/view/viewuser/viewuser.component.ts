@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { User } from 'src/app/model/user'
+import { User } from 'src/app/model/user';
+import { ViewuserService } from 'src/app/service/viewuser.service';
 import * as SecureLS from 'secure-ls';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-viewuser',
@@ -13,6 +15,7 @@ export class ViewuserComponent implements OnInit {
   ls: SecureLS
   rol: string
   userDataSource
+  errorMessage = ""
   displayedColumns = [
     "username",
     "name",
@@ -51,11 +54,14 @@ export class ViewuserComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
 
-  constructor() { }
+  constructor(
+    private viewUserService: ViewuserService,
+    public snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit(): void {
     this.startVariables()
-    this.getPostData()
+    this.getUserData()
   }
 
   startVariables() {
@@ -63,10 +69,17 @@ export class ViewuserComponent implements OnInit {
     this.rol = this.ls.get("isLoggedRol")
   }
 
-  getPostData() {
+  getUserData() {
     /* SE OBTIENE LA DATA DEL SERVICIO */
 
-    this.setObjectDataSource()
+    this.viewUserService.getUsers().subscribe(
+      p => {
+        this.userDataSource = p.results !== undefined ? p.results : []
+      },
+      e => { console.log(e), this.launchMessage(e) },
+      () => {
+        this.setObjectDataSource()
+      })
   }
 
   ngAfterViewInit() {
@@ -105,6 +118,15 @@ export class ViewuserComponent implements OnInit {
 
   deleteUser(user) {
 
+  }
+
+  /** Launch message of the snackBar component */
+  launchMessage(message: string) {
+    this.errorMessage = ""
+    const action = "OK"
+    this.snackBar.open(message, action, {
+      duration: 5000,
+    })
   }
 
 }
