@@ -75,34 +75,26 @@ export class CreatepostComponent implements OnInit {
           this.postToSend["photo"] = this.selectedFile.type + "/" + this.selectedFile.name
           this.postToSend["user"] = this.userName
           console.log(this.postToSend)
-          this.launchMessage("Post creado con imagen.")
+
+          /* Conexion y envio del postToSend al servidor */
+          this.createPostService.registerPost(this.postToSend).subscribe(
+            p => {
+              this.registerPostData = p !== undefined ? p : []
+            },
+            e => { console.log(e), this.launchMessage(e) },
+            () => {
+
+              console.log(this.registerPostData)
+              this.clearData(form)
+              this.launchMessage("Post creado.")
+            }
+          )
 
         } else {
-          this.postToSend["title"] = form.value.title
-          this.postToSend["type_catastrophe"] = form.value.typeCatastrophe
-          this.postToSend["description"] = form.value.description
-          this.postToSend["latitude"] = this.myLatitude
-          this.postToSend["longitude"] = this.myLongitude
-          this.postToSend["created"] = this.selectedDate
-          this.postToSend["photo"] = ""
-          this.postToSend["user"] = this.userName
-          console.log(this.postToSend)
-          this.launchMessage("Post creado sin imagen.")
+          this.launchMessage("Por favor ingresa una imagen.")
         }
 
-        /* Conexion y envio del postToSend al servidor */
-        this.createPostService.registerPost(this.postToSend).subscribe(
-          p => {
-            this.registerPostData = p !== undefined ? p : []
-          },
-          e => { console.log(e), this.launchMessage(e) },
-          () => {
 
-            console.log(this.registerPostData)
-            this.clearData(form)
-            this.launchMessage("Post creado.")
-          }
-        )
       } else {
         this.launchMessage("Por favor verifique que el formato de la imagen sea la correcta.")
       }

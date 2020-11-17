@@ -19,16 +19,29 @@ export class ViewpostService {
     })
   }
 
-  private getHeadersNA() {
+  deletePost(submission: any): Observable<any> {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.token = this.ls.get("isLoggedToken")
+    return this.http.delete(buildDeleteUrl(GlobalVariable.DELETE_POST, submission.id), {
+      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token),
+    })
+  }
+
+
+  private getHeadersNA() {
     // I included these headers because otherwise FireFox
     // will request text/html instead of application/json
     const headers = new HttpHeaders()
     headers.set("Accept", "application/json")
-    headers.set("Authorization", "Token " + this.token)
     return headers
   }
+}
+
+function buildDeleteUrl(type: string, id: string): string {
+  let finalUrl = GlobalVariable.BASE_SERVER_URL
+  finalUrl += type
+  finalUrl += id + "/"
+  return finalUrl
 }
 
 function buildGetUrl(type: string): string {

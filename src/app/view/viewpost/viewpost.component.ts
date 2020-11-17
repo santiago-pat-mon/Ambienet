@@ -16,6 +16,7 @@ export class ViewpostComponent implements OnInit {
   rol: string
   postDataSource
   errorMessage = ""
+  post
   displayedColumns = [
     "title",
     "type_catastrophe",
@@ -26,149 +27,6 @@ export class ViewpostComponent implements OnInit {
     "photo",
     "user",
     "delete_post",
-  ]
-
-  post = [
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf1",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
-    {
-      title: "sdf",
-      type_catastrophe: "sdf",
-      description: "sdf",
-      latitude: "sdf",
-      longitude: "sdf",
-      created: "sdf",
-      photo: "sdf",
-      user: "sdf",
-    },
   ]
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
@@ -212,14 +70,14 @@ export class ViewpostComponent implements OnInit {
     ) {
       return (
         /** replace this with the column name you want to filter */
-        data.user
-          .trim()
-          .toLocaleLowerCase()
-          .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0 ||
         data.type_catastrophe
           .trim()
           .toLocaleLowerCase()
-          .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0
+          .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0 /* ||
+        data.type_catastrophe
+          .trim()
+          .toLocaleLowerCase()
+          .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0 */
       )
     }
   }
@@ -231,7 +89,15 @@ export class ViewpostComponent implements OnInit {
   }
 
   deletePost(post) {
-
+    this.viewPostService.deletePost(post).subscribe(
+      p => {
+      },
+      e => { console.log(e), this.launchMessage(e) },
+      () => {
+        this.getPostData()
+        this.launchMessage("Post eliminado")
+      }
+    )
   }
 
   /** Launch message of the snackBar component */

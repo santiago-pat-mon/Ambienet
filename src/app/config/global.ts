@@ -10,4 +10,5 @@ export const GlobalVariable = Object.freeze({
     UPDATE_USER: "users/",
     REGISTER_POST: "posts/publicacion/",
     READ_POSTS: "posts/",
+    DELETE_POST: "posts/"
 })
