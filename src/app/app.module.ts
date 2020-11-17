@@ -35,6 +35,8 @@ import { CreatepostComponent } from './view/createpost/createpost.component';
 import { CompanyComponent } from './view/company/company.component';
 import { ViewpostComponent } from './view/viewpost/viewpost.component';
 import { ViewuserComponent } from './view/viewuser/viewuser.component';
+import { ChartsModule } from 'ng2-charts';
+import { StatisticsComponent } from './view/statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { ViewuserComponent } from './view/viewuser/viewuser.component';
     CompanyComponent,
     ViewpostComponent,
     ViewuserComponent,
+    StatisticsComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -78,6 +81,7 @@ import { ViewuserComponent } from './view/viewuser/viewuser.component';
     MatDatepickerModule,
     MatTableModule,
     MatPaginatorModule,
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

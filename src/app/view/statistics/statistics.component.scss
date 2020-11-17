@@ -1,0 +1,21 @@
+@mixin smallmobile {
+    @media (max-width: 335px) {
+      @content;
+    }
+}
+
+@mixin medianMeasure {
+    @media (max-width: 580px) {
+        @content;
+    }
+}
+
+.container {
+    margin: auto;
+    width: 95%;
+}
+
+.dataContainer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

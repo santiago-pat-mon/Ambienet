@@ -20,19 +20,18 @@ export class CreatepostService {
   }
 
   registerPost(submission: any): Observable<any> {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.token = this.ls.get("isLoggedToken")
     return this.http.post(buildPostUrl(GlobalVariable.REGISTER_POST), submission, {
-      headers: this.getHeadersNA()
+      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token),
     })
   }
 
   private getHeadersNA() {
-    this.ls = new SecureLS({ encodingType: "aes" })
-    this.token = this.ls.get("isLoggedToken")
     // I included these headers because otherwise FireFox
     // will request text/html instead of application/json
     const headers = new HttpHeaders()
     headers.set("Accept", "application/json")
-    headers.set("Authorization", "Token " + this.token)
     return headers
   }
 }

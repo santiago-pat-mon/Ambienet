@@ -9,6 +9,7 @@ import { CreatepostComponent } from './view/createpost/createpost.component';
 import { CompanyComponent } from './view/company/company.component';
 import { ViewpostComponent } from './view/viewpost/viewpost.component';
 import { ViewuserComponent } from './view/viewuser/viewuser.component';
+import { StatisticsComponent } from './view/statistics/statistics.component';
 
 const routes: Routes = [
   { path: "login", component: LoginComponent },
@@ -51,6 +52,11 @@ const routes: Routes = [
         path: "viewuser",
         canActivate: [AuthGuard],
         component: ViewuserComponent,
+      },
+      {
+        path: "statistics",
+        canActivate: [AuthGuard],
+        component: StatisticsComponent,
       },
     ]
   }
