@@ -20,10 +20,8 @@ export class CreatepostService {
   }
 
   registerPost(submission: any): Observable<any> {
-    this.ls = new SecureLS({ encodingType: "aes" })
-    this.token = this.ls.get("isLoggedToken")
     return this.http.post(buildPostUrl(GlobalVariable.REGISTER_POST), submission, {
-      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token),
+      headers: this.getHeadersNA()
     })
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as SecureLS from 'secure-ls';
+import { ViewpostService } from 'src/app/service/viewpost.service';
 import { ViewobjectDialogComponent } from '../viewobject-dialog/viewobject-dialog.component';
 
 @Component({
@@ -12,54 +14,36 @@ export class DashboardComponent implements OnInit {
   ls: SecureLS
   rol: string
   zoom = 16;
-
-  pruebaInformacion = [
-    {
-      title: "Prueba 1",
-      description: "Esta es la descripcion de la prueba 1 sadadasssss ssssssssssssss assssssssssssss ssssssssssssss dasdddddddddd dddddddddddddd saaaaaaaa aaaaaaaaaaaaaaaa aaaaaaaaaaaa dassssss ssssssss sssssss ssssssssss sssssss dsaaaaaa aaaaaaaaaaaa aaaaaaa asdddddd ddddddddd dddddddd",
-      image: "mclaren1.jpg",
-      user: "Steven Saenz M",
-      userImage: "default-user-image.png",
-      validation: "3",
-      novalidation: "1",
-      lat: 4.5131224878387,
-      lng: -75.65562403136823
-    },
-    {
-      title: "Prueba 2",
-      description: "Esta es la descripcion de la prueba 2",
-      image: "mclaren2.jpg",
-      user: "Santiago Patiño M",
-      userImage: "default-user-image.png",
-      validation: "4",
-      novalidation: "1",
-      lat: 5.5131224878387,
-      lng: -75.65562403136823
-    },
-    {
-      title: "Prueba 3",
-      description: "Esta es la descripcion de la prueba 3",
-      image: "mclaren3.jpg",
-      user: "Santiago Suaza Z",
-      userImage: "default-user-image.png",
-      validation: "5",
-      novalidation: "1",
-      lat: 6.5131224878387,
-      lng: -75.65562403136823
-    }
-  ]
+  errorMessage = ""
+  postData = []
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
+    private viewPostService: ViewpostService,
   ) { }
 
   ngOnInit(): void {
     this.startVariables()
+    this.loadData()
   }
 
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
+  }
+
+  loadData() {
+    this.viewPostService.getPosts().subscribe(
+      p => {
+        console.log(p.results)
+        this.postData = p.results !== undefined ? p.results : []
+      },
+      e => { console.log(e), this.launchMessage(e) },
+      () => {
+        console.log("Dashboard actualizado")
+      }
+    )
   }
 
   viewObject(object) {
@@ -69,6 +53,15 @@ export class DashboardComponent implements OnInit {
         type: "image",
         object: object,
       },
+    })
+  }
+
+  /** Launch message of the snackBar component */
+  launchMessage(message: string) {
+    this.errorMessage = ""
+    const action = "OK"
+    this.snackBar.open(message, action, {
+      duration: 5000,
     })
   }
 

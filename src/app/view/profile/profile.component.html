@@ -22,8 +22,10 @@
                 Ubicación del dispositivo
             </button>
             <div class="userForm">
-                <img class="profilePicture"
-                    src="../../assets/imagenesPruebaBorrar/default-user-image.png" /><br /><br />
+                <img *ngIf="userData.profile.picture != ''" class="profilePicture"
+                    src="../../api/{{userData.profile.picture}}" />
+                <img *ngIf="userData.profile.picture == ''" class="profilePicture"
+                    src="../../api/profilePicture/default-user-image.png" /><br /><br />
                 <mat-form-field>
                     <mat-label>Reputación</mat-label>
                     <input matInput [(value)]="reputationValue" type="text" disabled />

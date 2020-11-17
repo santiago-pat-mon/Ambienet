@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
     }
   }
   profileToSend = {}
+  profileToSendData = {}
   selectedFile = {
     name: null,
     base64textString: null,
@@ -114,7 +115,7 @@ export class ProfileComponent implements OnInit {
         if (this.selectedFile.name != null) {
           this.uploadFile()
 
-          this.profileToSend["picture"] = this.selectedFile.type + "/" + this.selectedFile.name
+          this.profileToSendData["picture"] = this.selectedFile.type + "/" + this.selectedFile.name
 
           if (this.userData.first_name != form.value.first_name) {
             this.profileToSend["first_name"] = form.value.first_name
@@ -129,25 +130,26 @@ export class ProfileComponent implements OnInit {
             this.profileToSend["email"] = form.value.email
           }
           if (this.userData.profile.latitude != this.myLatitude) {
-            this.profileToSend["latitude"] = this.myLatitude
+            this.profileToSendData["latitude"] = this.myLatitude
           }
           if (this.userData.profile.longitude != this.myLongitude) {
-            this.profileToSend["longitude"] = this.myLongitude
+            this.profileToSendData["longitude"] = this.myLongitude
           }
           if (this.userData.profile.biography != form.value.biography) {
-            this.profileToSend["biography"] = form.value.biography
+            this.profileToSendData["biography"] = form.value.biography
           }
           if (this.userData.profile.country != form.value.country) {
-            this.profileToSend["country"] = form.value.country
+            this.profileToSendData["country"] = form.value.country
           }
           if (this.userData.profile.state != form.value.state) {
-            this.profileToSend["state"] = form.value.state
+            this.profileToSendData["state"] = form.value.state
           }
           if (this.userData.profile.city != form.value.city) {
-            this.profileToSend["city"] = form.value.city
+            this.profileToSendData["city"] = form.value.city
           }
 
           console.log("Con imagen ", this.profileToSend)
+          console.log("Con imagen ", this.profileToSendData)
 
         } else {
 
@@ -164,25 +166,26 @@ export class ProfileComponent implements OnInit {
             this.profileToSend["email"] = form.value.email
           }
           if (this.userData.profile.latitude != this.myLatitude) {
-            this.profileToSend["latitude"] = this.myLatitude
+            this.profileToSendData["latitude"] = this.myLatitude
           }
           if (this.userData.profile.longitude != this.myLongitude) {
-            this.profileToSend["longitude"] = this.myLongitude
+            this.profileToSendData["longitude"] = this.myLongitude
           }
           if (this.userData.profile.biography != form.value.biography) {
-            this.profileToSend["biography"] = form.value.biography
+            this.profileToSendData["biography"] = form.value.biography
           }
           if (this.userData.profile.country != form.value.country) {
-            this.profileToSend["country"] = form.value.country
+            this.profileToSendData["country"] = form.value.country
           }
           if (this.userData.profile.state != form.value.state) {
-            this.profileToSend["state"] = form.value.state
+            this.profileToSendData["state"] = form.value.state
           }
           if (this.userData.profile.city != form.value.city) {
-            this.profileToSend["city"] = form.value.city
+            this.profileToSendData["city"] = form.value.city
           }
 
           console.log("Sin imagen ", this.profileToSend)
+          console.log("Sin imagen ", this.profileToSendData)
         }
 
         /* ACA REALIZAMOS LA CONEXION CON DJANGO MEDIANTE EL SERVICIO PARA ENVIAR EL OBJETO JSON profileToSend  */
@@ -219,8 +222,22 @@ export class ProfileComponent implements OnInit {
           },
           () => {
             console.log("Por fuera:", this.userUpdated)
-            this.launchMessage("Datos actualizados.")
-            this.clearData()
+
+            this.profileService.updateProfile(this.profileToSendData).subscribe(
+              p => {
+                console.log(p)
+                this.userUpdated = p !== undefined ? p : []
+              },
+              e => {
+                console.log(e), this.launchMessage(e)
+              },
+              () => {
+                console.log("Por fuera:", this.userUpdated)
+                this.loadUserData()
+                this.launchMessage("Datos actualizados.")
+                this.clearData()
+              }
+            )
           }
         )
       } else {

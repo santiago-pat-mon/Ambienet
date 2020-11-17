@@ -30,12 +30,12 @@
                     </mat-tab>
                 </mat-tab-group>
                 <div style="margin-top: 20px;">
-                    <mat-form-field appearance="fill">
+                    <!-- <mat-form-field appearance="fill">
                         <mat-label>Fecha en que ocurrió el suceso*</mat-label>
                         <input matInput [matDatepicker]="picker" (dateChange)="getDate($event)" disabled>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker disabled="false"></mat-datepicker>
-                    </mat-form-field>
+                    </mat-form-field> -->
 
                     <form [formGroup]="postForm" (ngSubmit)="validateCredentialsPost(postForm)">
                         <mat-form-field>

@@ -61,7 +61,7 @@ export class CreatepostComponent implements OnInit {
   }
 
   validateCredentialsPost(form: FormGroup) {
-    if (form.valid && this.selectedDate != "") {
+    if (form.valid) {
       if (this.auxPictureFile != true) {
         if (this.selectedFile.name != null) {
           this.uploadFile()
@@ -71,7 +71,7 @@ export class CreatepostComponent implements OnInit {
           this.postToSend["description"] = form.value.description
           this.postToSend["latitude"] = this.myLatitude
           this.postToSend["longitude"] = this.myLongitude
-          this.postToSend["created"] = this.selectedDate
+          /* this.postToSend["created"] = this.selectedDate */
           this.postToSend["photo"] = this.selectedFile.type + "/" + this.selectedFile.name
           this.postToSend["user"] = this.userName
           console.log(this.postToSend)

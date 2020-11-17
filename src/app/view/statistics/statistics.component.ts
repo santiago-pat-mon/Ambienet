@@ -3,6 +3,7 @@ import * as SecureLS from 'secure-ls';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+import { ViewpostService } from 'src/app/service/viewpost.service';
 
 @Component({
   selector: 'app-statistics',
@@ -14,27 +15,27 @@ export class StatisticsComponent implements OnInit {
   rol: string
   rgba = []
 
-  barData = [
-    {
-      num: 2,
-      nam: "dos",
-    },
-    {
-      num: 5,
-      nam: "hola",
-    },
-    {
-      num: 3,
-      nam: "mundo",
-    },
-    {
-      num: 6,
-      nam: "hi",
-    },
-    {
-      num: 3,
-      nam: "for",
-    },
+  graphicsData = [
+    /*  {
+       num: 2,
+       nam: "dos",
+     },
+     {
+       num: 5,
+       nam: "hola",
+     },
+     {
+       num: 3,
+       nam: "mundo",
+     },
+     {
+       num: 6,
+       nam: "hi",
+     },
+     {
+       num: 3,
+       nam: "for",
+     }, */
   ]
 
   public barChartOptions: ChartOptions = {
@@ -60,14 +61,16 @@ export class StatisticsComponent implements OnInit {
 
   public barChartData: ChartDataSets[] = [
     {
-      data: [12, 14, 14],
+      data: [],
       label: "TOTAL",
       backgroundColor: [],
       borderColor: [],
     },
   ];
 
-  constructor() { }
+  constructor(
+    private viewPostService: ViewpostService,
+  ) { }
 
   ngOnInit(): void {
     this.startVariables()
@@ -80,15 +83,24 @@ export class StatisticsComponent implements OnInit {
   }
 
   loadData() {
-    /* me llegan los datos */
-    this.barData.forEach(element => {
-      this.barChartData[0].data.push(element.num)
-      this.barChartLabels.push(element.nam)
-      this.rgba.push(this.rgbaColor())
-    });
 
-    this.barChartData[0].backgroundColor = this.rgba
+    this.viewPostService.getPosts().subscribe(
+      p => {
+        console.log(p.results)
+        this.graphicsData = p.results !== undefined ? p.results : []
+      },
+      e => { console.log(e) },
+      () => {
+        this.graphicsData.forEach(element => {
+          this.barChartData[0].data.push(element.validator_number)
+          this.barChartLabels.push(element.title)
+          this.rgba.push(this.rgbaColor())
+        });
 
+        this.barChartData[0].backgroundColor = this.rgba
+        console.log("Gráfica mostrada")
+      }
+    )
   }
 
   rgbaColor() {

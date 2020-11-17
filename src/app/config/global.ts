@@ -1,7 +1,7 @@
 export const GlobalVariable = Object.freeze({
     //BASE_SERVER_URL: "http://localhost:8000/",
     BASE_SERVER_URL: "https://ambienetuq.tk/",
-    BASE_API_URL_PHP: "http://localhost/ambienet-rest-api/api/",
+    BASE_API_URL_PHP: "https://ambienet.000webhostapp.com/api/",
     PROFILE_PICTURE_PHP: "attachFile.php",
     POST_PICTURE_PHP: "attachFile.php",
     REGISTER_USER: "users/signup/",

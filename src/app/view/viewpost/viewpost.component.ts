@@ -74,7 +74,7 @@ export class ViewpostComponent implements OnInit {
           .trim()
           .toLocaleLowerCase()
           .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0 /* ||
-        data.type_catastrophe
+        data.username
           .trim()
           .toLocaleLowerCase()
           .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0 */

@@ -8,9 +8,9 @@ describe('CompanyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CompanyComponent ]
+      declarations: [CompanyComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -23,3 +23,12 @@ describe('CompanyComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+describe("Prueba unitaria", () => {
+  //Arrange
+  let rol: CompanyComponent
+  //Act
+  rol.startVariables();
+  //Assert
+  expect(rol.rol).toEqual("admin")
+})

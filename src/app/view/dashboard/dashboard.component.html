@@ -1,9 +1,9 @@
 <div class="container">
-    <mat-card *ngFor="let object of pruebaInformacion">
+    <mat-card *ngFor="let object of postData">
         <mat-card-header>
             <!-- <mat-card-title>Distritos</mat-card-title> -->
-            <mat-card-subtitle><img class="profilePicture" src="../../assets/imagenesPruebaBorrar/{{object.userImage}}"
-                    title="{{object.user}}" /><b>{{object.user}}</b>
+            <mat-card-subtitle><img class="profilePicture" src="../../api/{{object.picture}}"
+                    title="{{object.username}}" /><b>{{object.username}}</b>
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content style="text-align: center;">
@@ -13,13 +13,13 @@
                     <mat-tab label="Imagen">
                         <button class="imageButton" (click)="viewObject(object)"
                             style="margin: 0px; margin-top: 20px; margin-bottom: 10px; padding: 0px; border: 0px; cursor: pointer;">
-                            <img src="../../assets/imagenesPruebaBorrar/{{object.image}}" />
+                            <img src="../../api/{{object.photo}}" />
                         </button>
                     </mat-tab>
                     <mat-tab label="Ubicación">
                         <div class="mapContainerDashboard">
-                            <agm-map [latitude]="object.lat" [longitude]="object.lng" [zoom]="zoom">
-                                <agm-marker [latitude]="object.lat" [longitude]="object.lng">
+                            <agm-map [latitude]="object.latitude" [longitude]="object.longitude" [zoom]="zoom">
+                                <agm-marker [latitude]="object.latitude" [longitude]="object.longitude">
                                     <agm-info-window>
                                         <strong>{{object.title}}</strong>
                                     </agm-info-window>
@@ -29,9 +29,10 @@
                     </mat-tab>
                 </mat-tab-group>
             </div>
+            <h3>{{object.type_catastrophe}}</h3>
             <p>{{object.description}}</p>
             <div>
-                <b class="countValidation">{{object.validation}}</b>
+                <b class="countValidation">{{object.validator_number}}</b>
                 <button mat-raised-button color="primary" (click)="viewObject(null)"
                     [disabled]="rol=='guest' ? true : false">Validar</button>
             </div>
