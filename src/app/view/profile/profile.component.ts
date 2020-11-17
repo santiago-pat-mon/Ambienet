@@ -44,7 +44,7 @@ export class ProfileComponent implements OnInit {
       picture: "url/image.jpg",
     }
   }
-  profileToSend
+  profileToSend = {}
   selectedFile = {
     name: null,
     base64textString: null,
@@ -85,22 +85,27 @@ export class ProfileComponent implements OnInit {
   loadUserData() {
 
     /* ESTE SERIA EL METODO QUE LLAMA AL SERVICIO DE TRAER LOS DATOS DEL USUARIO */
-
-    //this.userData = "Servicio que se conecta"
-
-    this.reputationValue = this.userData.profile.reputation
-    this.userNameValue = this.userData.username
-    this.myLatitude = this.userData.profile.latitude
-    this.myLongitude = this.userData.profile.longitude
-    this.userForm.controls["first_name"].setValue(this.userData.first_name)
-    this.userForm.controls["last_name"].setValue(this.userData.last_name)
-    this.userForm.controls["email"].setValue(this.userData.email)
-    this.userForm.controls["phone_number"].setValue(this.userData.phone_number)
-    this.userForm.controls["biography"].setValue(this.userData.profile.biography)
-    this.userForm.controls["country"].setValue(this.userData.profile.country)
-    this.userForm.controls["state"].setValue(this.userData.profile.state)
-    this.userForm.controls["city"].setValue(this.userData.profile.city)
-
+    this.profileService.getUserData().subscribe(
+      p => {
+        console.log(p)
+        this.userData = p !== undefined ? p : []
+      },
+      e => { console.log(e), this.launchMessage(e) },
+      () => {
+        this.reputationValue = this.userData.profile.reputation
+        this.userNameValue = this.userData.username
+        this.myLatitude = this.userData.profile.latitude
+        this.myLongitude = this.userData.profile.longitude
+        this.userForm.controls["first_name"].setValue(this.userData.first_name)
+        this.userForm.controls["last_name"].setValue(this.userData.last_name)
+        this.userForm.controls["email"].setValue(this.userData.email)
+        this.userForm.controls["phone_number"].setValue(this.userData.phone_number)
+        this.userForm.controls["biography"].setValue(this.userData.profile.biography)
+        this.userForm.controls["country"].setValue(this.userData.profile.country)
+        this.userForm.controls["state"].setValue(this.userData.profile.state)
+        this.userForm.controls["city"].setValue(this.userData.profile.city)
+      }
+    )
   }
 
   validateCredentialsProfile(form: FormGroup) {

@@ -24,9 +24,7 @@ export class LoginComponent implements OnInit {
   myLatitude
   myLongitude
   zoom = 16
-  userToSend = {
-    profile: {}
-  }
+  userToSend = {}
   errorMessage = ""
   userLoggedIn
   registeredUser
@@ -72,7 +70,12 @@ export class LoginComponent implements OnInit {
         p => {
           this.userLoggedIn = p !== undefined ? p : []
         },
-        e => { console.log(e), this.launchMessage(e) },
+        e => {
+          console.log(e)
+          if (e.error != "") {
+            this.launchMessage("Credenciales inválidas")
+          }
+        },
         () => {
           if (this.userLoggedIn.user.is_staff == true) {
             this.router.navigate(["dashboard"])
@@ -116,8 +119,8 @@ export class LoginComponent implements OnInit {
       this.userToSend["phone_number"] = form.value.phone_number
       this.userToSend["email"] = form.value.email
       this.userToSend["password"] = form.value.password
-      this.userToSend.profile["latitude"] = this.myLatitude
-      this.userToSend.profile["longitude"] = this.myLongitude
+      this.userToSend["latitude"] = this.myLatitude
+      this.userToSend["longitude"] = this.myLongitude
 
       console.log(this.userToSend)
 

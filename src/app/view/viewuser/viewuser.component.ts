@@ -16,6 +16,7 @@ export class ViewuserComponent implements OnInit {
   rol: string
   userDataSource
   errorMessage = ""
+  user
   displayedColumns = [
     "username",
     "name",
@@ -30,26 +31,6 @@ export class ViewuserComponent implements OnInit {
     "longitude",
     "picture",
     "delete_user",
-  ]
-
-  user = [
-    {
-      username: "ajshda",
-      first_name: "ajshda",
-      last_name: "ajshda",
-      email: "ajshda",
-      phone_number: "1233321",
-      profile: {
-        biography: "kdjshfksd",
-        country: "kdjshfksd",
-        state: "kdjshfksd",
-        city: "kdjshfksd",
-        reputation: 5.0,
-        latitude: 4.5631,
-        longitude: -71.2323,
-        picture: "url/hola.jpg",
-      }
-    },
   ]
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
@@ -74,7 +55,7 @@ export class ViewuserComponent implements OnInit {
 
     this.viewUserService.getUsers().subscribe(
       p => {
-        console.log(p.results)
+        console.log(p)
         this.user = p.results !== undefined ? p.results : []
       },
       e => { console.log(e), this.launchMessage(e) },

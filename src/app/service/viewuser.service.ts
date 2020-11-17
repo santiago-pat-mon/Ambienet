@@ -22,6 +22,7 @@ export class ViewuserService {
   private getHeadersNA() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.token = this.ls.get("isLoggedToken")
+    console.log(this.token)
     // I included these headers because otherwise FireFox
     // will request text/html instead of application/json
     const headers = new HttpHeaders()

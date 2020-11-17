@@ -4,7 +4,6 @@ import { CreatepostService } from "src/app/service/createpost.service";
 import { Router } from '@angular/router';
 import * as SecureLS from 'secure-ls';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Post } from 'src/app/model/post';
 
 @Component({
   selector: 'app-createpost',
@@ -18,7 +17,7 @@ export class CreatepostComponent implements OnInit {
   registerPostData
   postForm: FormGroup
   selectedDate = ""
-  postToSend: Post
+  postToSend = {}
   myLatitude
   myLongitude
   zoom = 16
@@ -67,26 +66,26 @@ export class CreatepostComponent implements OnInit {
         if (this.selectedFile.name != null) {
           this.uploadFile()
 
-          this.postToSend.title = form.value.title
-          this.postToSend.type_catastrophe = form.value.typeCatastrophe
-          this.postToSend.description = form.value.description
-          this.postToSend.latitude = this.myLatitude
-          this.postToSend.longitude = this.myLongitude
-          this.postToSend.created = this.selectedDate
-          this.postToSend.photo = this.selectedFile.type + "/" + this.selectedFile.name
-          this.postToSend.user = this.userName
+          this.postToSend["title"] = form.value.title
+          this.postToSend["type_catastrophe"] = form.value.typeCatastrophe
+          this.postToSend["description"] = form.value.description
+          this.postToSend["latitude"] = this.myLatitude
+          this.postToSend["longitude"] = this.myLongitude
+          this.postToSend["created"] = this.selectedDate
+          this.postToSend["photo"] = this.selectedFile.type + "/" + this.selectedFile.name
+          this.postToSend["user"] = this.userName
           console.log(this.postToSend)
           this.launchMessage("Post creado con imagen.")
 
         } else {
-          this.postToSend.title = form.value.title
-          this.postToSend.type_catastrophe = form.value.typeCatastrophe
-          this.postToSend.description = form.value.description
-          this.postToSend.latitude = this.myLatitude
-          this.postToSend.longitude = this.myLongitude
-          this.postToSend.created = this.selectedDate
-          this.postToSend.photo = ""
-          this.postToSend.user = this.userName
+          this.postToSend["title"] = form.value.title
+          this.postToSend["type_catastrophe"] = form.value.typeCatastrophe
+          this.postToSend["description"] = form.value.description
+          this.postToSend["latitude"] = this.myLatitude
+          this.postToSend["longitude"] = this.myLongitude
+          this.postToSend["created"] = this.selectedDate
+          this.postToSend["photo"] = ""
+          this.postToSend["user"] = this.userName
           console.log(this.postToSend)
           this.launchMessage("Post creado sin imagen.")
         }
@@ -100,8 +99,8 @@ export class CreatepostComponent implements OnInit {
           () => {
 
             console.log(this.registerPostData)
-            this.launchMessage("Post creado.")
             this.clearData(form)
+            this.launchMessage("Post creado.")
           }
         )
       } else {
@@ -116,6 +115,7 @@ export class CreatepostComponent implements OnInit {
     this.selectedFile.name = null
     this.selectedFile.base64textString = null
     this.selectedFile.type = null
+    this.postToSend = {}
     form.reset()
   }
 
