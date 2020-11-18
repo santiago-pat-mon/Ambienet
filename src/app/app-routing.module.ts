@@ -11,6 +11,7 @@ import { ViewpostComponent } from './view/viewpost/viewpost.component';
 import { ViewuserComponent } from './view/viewuser/viewuser.component';
 import { StatisticsComponent } from './view/statistics/statistics.component';
 
+/* routes */
 const routes: Routes = [
   { path: "login", component: LoginComponent },
   {
