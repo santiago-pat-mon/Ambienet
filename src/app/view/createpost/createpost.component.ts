@@ -194,7 +194,7 @@ export class CreatepostComponent implements OnInit {
   } */
 
   /* Small solution to the error raised above */
-  public mapReadyHandler(map: google.maps.Map): void {
+  /* public mapReadyHandler(map: google.maps.Map): void {
     map.addListener('click', (e: google.maps.MouseEvent) => {
       // Here we can get correct event
       this.myLatitude = e.latLng.lat()
@@ -202,7 +202,7 @@ export class CreatepostComponent implements OnInit {
       console.log("Latitud: ", this.myLatitude)
       console.log("Longitud: ", this.myLongitude)
     });
-  }
+  } */
 
   /* Method that activates device location */
   selectDeviceLocation() {

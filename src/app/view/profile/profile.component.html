@@ -5,8 +5,7 @@
             <mat-tab-group mat-align-tabs="center">
                 <mat-tab label="Mi ubicación">
                     <div class="mapContainerPost">
-                        <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom"
-                            (mapReady)="mapReadyHandler($event)">
+                        <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom">
                             <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
                                 <agm-info-window>
                                     <strong>Ubicación</strong>

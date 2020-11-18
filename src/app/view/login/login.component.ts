@@ -227,7 +227,7 @@ export class LoginComponent implements OnInit {
   }
 
   /* Small solution to the error raised above */
-  public mapReadyHandler(map: google.maps.Map): void {
+  /* public mapReadyHandler(map: google.maps.Map): void {
     map.addListener('click', (e: google.maps.MouseEvent) => {
       // Here we can get correct event
       this.myLatitude = e.latLng.lat()
@@ -235,7 +235,7 @@ export class LoginComponent implements OnInit {
       console.log("Latitud: ", this.myLatitude)
       console.log("Longitud: ", this.myLongitude)
     });
-  }
+  } */
 
   /* Method in charge of alerting the errors of the form */
   getErrorMessage(component: string) {
