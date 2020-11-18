@@ -32,6 +32,7 @@ export class CompanyComponent implements OnInit {
     this.startVariables()
   }
 
+  /* HOLA */
   /* Method in charge of identifying the role that is logged in */
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
