@@ -108,9 +108,9 @@ export class CreatepostComponent implements OnInit {
 
   /* Method in charge of cleaning the variables and the form */
   clearData(form) {
-    this.selectedFile.name = null
+    /* this.selectedFile.name = null
     this.selectedFile.base64textString = null
-    this.selectedFile.type = null
+    this.selectedFile.type = null */
     this.postToSend = {}
     form.reset()
   }

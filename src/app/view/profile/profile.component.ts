@@ -239,7 +239,7 @@ export class ProfileComponent implements OnInit {
                 console.log("Por fuera:", this.userUpdated)
                 this.loadUserData()
                 this.launchMessage("Datos actualizados.")
-                this.clearData()
+                //this.clearData()
               }
             )
           }
