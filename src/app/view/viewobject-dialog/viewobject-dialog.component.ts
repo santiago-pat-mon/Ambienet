@@ -6,10 +6,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './viewobject-dialog.component.html',
   styleUrls: ['./viewobject-dialog.component.scss']
 })
-export class ViewobjectDialogComponent implements OnInit {
 
+export class ViewobjectDialogComponent implements OnInit {
+  /* Declaration of variables */
   objectType = ""
 
+  /* Component constructor */
   constructor(
     public dialogRef: MatDialogRef<ViewobjectDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public object: any
@@ -24,6 +26,7 @@ export class ViewobjectDialogComponent implements OnInit {
   configObject(object) {
   }
 
+  /* Method responsible for closing the generated window */
   onNoClick(): void {
     this.dialogRef.close()
   }

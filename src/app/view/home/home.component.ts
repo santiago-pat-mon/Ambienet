@@ -8,9 +8,8 @@ import * as SecureLS from 'secure-ls';
   styleUrls: ['./home.component.scss']
 })
 
-
-
 export class HomeComponent implements OnInit {
+  /* Declaration of variables */
   ls: SecureLS
   rol: string
   first_name_data
@@ -19,6 +18,7 @@ export class HomeComponent implements OnInit {
   sidenavWidth = 4.2
   size = true
 
+  /* Component constructor */
   constructor(
     private router: Router,
   ) { }
@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
     this.screenWidth()
   }
 
+  /* Method in charge of identifying the role that is logged in */
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
@@ -56,14 +57,18 @@ export class HomeComponent implements OnInit {
     this.last_name_data = this.ls.get("isLoggedLastName")
   }
 
+  /* Method in charge of directing users who have not registered and entered as guests */
   registerGuest() {
     window.localStorage.clear()
     this.router.navigate(["/login/"])
   }
 
+  /* Method in charge of displaying the admin menu */
   increase() {
     this.sidenavWidth = 16
   }
+
+  /* Method in charge of hiding the admin menu */
   decrease() {
     this.sidenavWidth = 4.2
   }

@@ -40,26 +40,27 @@
                     <form [formGroup]="postForm" (ngSubmit)="validateCredentialsPost(postForm)">
                         <mat-form-field>
                             <mat-label>Título</mat-label>
-                            <input matInput type="text" formControlName="title" required />
+                            <input matInput type="text" formControlName="title" maxlength="20"
+                                placeholder="Máximo 20 caracteres" required />
                             <mat-error *ngIf="postForm.controls.title.invalid">{{getErrorMessage("title")}}
                             </mat-error>
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Tipo de catástrofe</mat-label>
                             <mat-select matSelect formControlName="typeCatastrophe" required>
-                                <mat-option value="Derrumbe–Deslizamiento_de_tierra">Derrumbe – Deslizamiento de tierra.
+                                <mat-option value="Derrumbe">Derrumbe – Deslizamiento de tierra.
                                 </mat-option>
                                 <mat-option value="Ola_de_calor">Ola de calor.</mat-option>
                                 <mat-option value="Granizo">Granizo.</mat-option>
                                 <mat-option value="Sequía">Sequía.</mat-option>
                                 <mat-option value="Tormenta">Tormenta.</mat-option>
                                 <mat-option value="Erupción_volcánica">Erupción volcánica.</mat-option>
-                                <mat-option value="Incendios_forestales">Incendios forestales.</mat-option>
+                                <mat-option value="Incendio_forestal">Incendios forestales.</mat-option>
                                 <mat-option value="Inundación">Inundación.</mat-option>
                                 <mat-option value="Sismo">Sismo.</mat-option>
-                                <mat-option value="Contaminación_de_cuencas_hídricas">Contaminación de cuencas hídricas.
+                                <mat-option value="Cuencas_hídricas">Contaminación de cuencas hídricas.
                                 </mat-option>
-                                <mat-option value="Derramamiento_de_petróleo">Derramamiento de petróleo.</mat-option>
+                                <mat-option value="Daño_por_petróleo">Derramamiento de petróleo.</mat-option>
                                 <mat-option value="Tala_de_bosques">Tala de bosques.</mat-option>
                                 <mat-option value="Minería_ilegal">Minería ilegal.</mat-option>
                             </mat-select>

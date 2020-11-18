@@ -11,7 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './viewpost.component.html',
   styleUrls: ['./viewpost.component.scss']
 })
+
 export class ViewpostComponent implements OnInit {
+  /* Declaration of variables */
   ls: SecureLS
   rol: string
   postDataSource
@@ -31,6 +33,7 @@ export class ViewpostComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
 
+  /* Component constructor */
   constructor(
     private viewPostService: ViewpostService,
     public snackBar: MatSnackBar,
@@ -41,13 +44,14 @@ export class ViewpostComponent implements OnInit {
     this.getPostData()
   }
 
+  /* Method in charge of identifying the role that is logged in */
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
   }
 
+  /* Method in charge of obtaining the posts */
   getPostData() {
-    /* SE OBTIENE LA DATA DEL SERVICIO */
     this.viewPostService.getPosts().subscribe(
       p => {
         console.log(p.results)
@@ -73,21 +77,23 @@ export class ViewpostComponent implements OnInit {
         data.type_catastrophe
           .trim()
           .toLocaleLowerCase()
-          .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0 /* ||
+          .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0 ||
         data.username
           .trim()
           .toLocaleLowerCase()
-          .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0 */
+          .indexOf(filterValue.trim().toLocaleLowerCase()) >= 0
       )
     }
   }
 
+  /* Method in charge of filtering the information in the table */
   applyObjectFilter(filterValue: string) {
     filterValue = filterValue.trim() // Remove whitespace
     filterValue = filterValue.toLowerCase() // MatTableDataSource defaults to lowercase matches
     this.postDataSource.filter = filterValue
   }
 
+  /* Method in charge of deleting a post */
   deletePost(post) {
     this.viewPostService.deletePost(post).subscribe(
       p => {

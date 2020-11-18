@@ -1,4 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormsModule } from "@angular/forms";
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ProfileComponent } from './profile.component';
 
@@ -8,9 +12,11 @@ describe('ProfileComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfileComponent ]
+      imports: [FormsModule, MatSnackBarModule, RouterTestingModule, HttpClientTestingModule],
+      providers: [FormBuilder, MatSnackBar],
+      declarations: [ProfileComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +25,7 @@ describe('ProfileComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Componente Profile funcionando correctamente.', () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 import { ViewuserComponent } from './viewuser.component';
 
@@ -8,9 +10,11 @@ describe('ViewuserComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewuserComponent ]
+      imports: [HttpClientTestingModule, MatSnackBarModule],
+      providers: [MatSnackBar],
+      declarations: [ViewuserComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +23,7 @@ describe('ViewuserComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Componente ViewUser funcionando correctamente.', () => {
     expect(component).toBeTruthy();
   });
 });

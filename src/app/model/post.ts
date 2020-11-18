@@ -6,5 +6,5 @@ export interface Post {
     longitude: string
     created: string
     photo: string
-    user: string
+    username: string
 }

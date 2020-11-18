@@ -10,34 +10,13 @@ import { ViewpostService } from 'src/app/service/viewpost.service';
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss']
 })
+
 export class StatisticsComponent implements OnInit {
+  /* Declaration of variables */
   ls: SecureLS
   rol: string
   rgba = []
-
-  graphicsData = [
-    /*  {
-       num: 2,
-       nam: "dos",
-     },
-     {
-       num: 5,
-       nam: "hola",
-     },
-     {
-       num: 3,
-       nam: "mundo",
-     },
-     {
-       num: 6,
-       nam: "hi",
-     },
-     {
-       num: 3,
-       nam: "for",
-     }, */
-  ]
-
+  graphicsData = []
   public barChartOptions: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
@@ -68,6 +47,7 @@ export class StatisticsComponent implements OnInit {
     },
   ];
 
+  /* Component constructor */
   constructor(
     private viewPostService: ViewpostService,
   ) { }
@@ -77,13 +57,14 @@ export class StatisticsComponent implements OnInit {
     this.loadData()
   }
 
+  /* Method in charge of identifying the role that is logged in */
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
   }
 
+  /* Method in charge of loading the posts */
   loadData() {
-
     this.viewPostService.getPosts().subscribe(
       p => {
         console.log(p.results)
@@ -103,6 +84,7 @@ export class StatisticsComponent implements OnInit {
     )
   }
 
+  /* Method in charge of generating random rbg */
   rgbaColor() {
     let color =
       "(" +
@@ -116,6 +98,8 @@ export class StatisticsComponent implements OnInit {
       ")"
     return "rgba" + color
   }
+
+  /* Method responsible for generating random number */
   generarNumero(numero) {
     return (Math.random() * numero).toFixed(0)
   }

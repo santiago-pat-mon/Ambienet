@@ -1,4 +1,7 @@
 export const GlobalVariable = Object.freeze({
+    /* Here all the BackEnd routes that will be 
+       used for communication are declared */
+
     //BASE_SERVER_URL: "http://localhost:8000/",
     BASE_SERVER_URL: "https://ambienetuq.tk/",
     BASE_API_URL_PHP: "https://ambienet.000webhostapp.com/api/",
@@ -10,5 +13,7 @@ export const GlobalVariable = Object.freeze({
     UPDATE_USER: "users/",
     REGISTER_POST: "posts/publicacion/",
     READ_POSTS: "posts/",
-    DELETE_POST: "posts/"
+    DELETE_POST: "posts/",
+    SEND_VALIDATOR_POST: "posts/validator/",
+    INCREASE_POST_VALIDATION: "posts/" /* id del post */
 })

@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { StatisticsComponent } from './statistics.component';
 
@@ -8,9 +9,10 @@ describe('StatisticsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatisticsComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [StatisticsComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('StatisticsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Componente Statitics funcionando correctamente.', () => {
     expect(component).toBeTruthy();
   });
 });

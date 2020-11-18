@@ -3,6 +3,18 @@
         <mat-card>
             <h3>Subir información</h3>
             <!-- Select file-->
+            <p style="padding-left: 15px; padding-right: 15px;">
+                Este apartado es dedicado para los usuarios que sean
+                entusiastas o empresas que deseen aportar su granito
+                de arena en el análisis de los datos para la prevención
+                de posibles desastres naturales. Muchas gracias por
+                tu aporte.
+            </p>
+            <p style="padding-left: 15px; padding-right: 15px;">
+                Si cuenta con archivos o documentos en los cuales analice
+                datos del clima o suelo y desea compartirlos, por favor
+                adjúntelos en el siguiente botón.
+            </p>
             <br />
             <mat-label style="font-size: 15px;">Información</mat-label><br /><br />
             <input #inputFile type="file" (change)="selectFile($event)">

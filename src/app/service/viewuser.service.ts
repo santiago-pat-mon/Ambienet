@@ -13,25 +13,23 @@ export class ViewuserService {
 
   constructor(private http: HttpClient) { }
 
+  /* Select posts from the database */
   getUsers(): Observable<any> {
     return this.http.get(buildGetUrl(GlobalVariable.READ_USERS), {
       headers: this.getHeadersNA(),
     })
   }
 
+  // I included these headers because otherwise FireFox
+  // will request text/html instead of application/json
   private getHeadersNA() {
-    this.ls = new SecureLS({ encodingType: "aes" })
-    this.token = this.ls.get("isLoggedToken")
-    console.log(this.token)
-    // I included these headers because otherwise FireFox
-    // will request text/html instead of application/json
     const headers = new HttpHeaders()
     headers.set("Accept", "application/json")
-    headers.set("Authorization", "Token " + this.token)
     return headers
   }
 }
 
+/* Construction of the get url */
 function buildGetUrl(type: string): string {
   let finalUrl = GlobalVariable.BASE_SERVER_URL
   finalUrl += type

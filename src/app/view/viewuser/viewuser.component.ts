@@ -11,7 +11,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './viewuser.component.html',
   styleUrls: ['./viewuser.component.scss']
 })
+
 export class ViewuserComponent implements OnInit {
+  /* Declaration of variables */
   ls: SecureLS
   rol: string
   userDataSource
@@ -35,6 +37,7 @@ export class ViewuserComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
 
+  /* Component constructor */
   constructor(
     private viewUserService: ViewuserService,
     public snackBar: MatSnackBar,
@@ -45,14 +48,14 @@ export class ViewuserComponent implements OnInit {
     this.getUserData()
   }
 
+  /* Method in charge of identifying the role that is logged in */
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
   }
 
+  /* Method in charge of obtaining the users */
   getUserData() {
-    /* SE OBTIENE LA DATA DEL SERVICIO */
-
     this.viewUserService.getUsers().subscribe(
       p => {
         console.log(p)
@@ -87,6 +90,7 @@ export class ViewuserComponent implements OnInit {
     }
   }
 
+  /* Method in charge of filtering the information in the table */
   applyObjectFilter(filterValue: string) {
     filterValue = filterValue.trim() // Remove whitespace
     filterValue = filterValue.toLowerCase() // MatTableDataSource defaults to lowercase matches
@@ -94,7 +98,6 @@ export class ViewuserComponent implements OnInit {
   }
 
   deleteUser(user) {
-
   }
 
   /** Launch message of the snackBar component */

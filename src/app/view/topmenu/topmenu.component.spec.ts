@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { TopmenuComponent } from './topmenu.component';
 
@@ -8,9 +9,10 @@ describe('TopmenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TopmenuComponent ]
+      imports: [RouterTestingModule],
+      declarations: [TopmenuComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('TopmenuComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Componente TopMenu funcionando correctamente.', () => {
     expect(component).toBeTruthy();
   });
 });

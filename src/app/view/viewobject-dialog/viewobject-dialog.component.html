@@ -1,6 +1,6 @@
 <div *ngIf="objectType=='image'">
     <div class="container">
-        <img src="../../assets/imagenesPruebaBorrar/{{object.object.image}}" width="900px" height="700px" />
+        <img src="../../api/{{object.object.photo}}" width="900px" height="700px" />
         <br />
         <button mat-raised-button color="primary" (click)="onNoClick()">Volver</button>
     </div>

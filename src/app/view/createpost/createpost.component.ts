@@ -11,6 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./createpost.component.scss']
 })
 export class CreatepostComponent implements OnInit {
+  /* Declaration of variables */
   ls: SecureLS
   rol: string
   userName
@@ -29,6 +30,7 @@ export class CreatepostComponent implements OnInit {
     type: null
   }
 
+  /* Component constructor */
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -46,12 +48,14 @@ export class CreatepostComponent implements OnInit {
     }
   }
 
+  /* Method in charge of identifying the role that is logged in */
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
     this.userName = this.ls.get("isLoggedUserName")
   }
 
+  /* Method responsible for initializing the forms */
   initForms() {
     this.postForm = this.formBuilder.group({
       title: new FormControl("", [Validators.required]),
@@ -60,6 +64,8 @@ export class CreatepostComponent implements OnInit {
     })
   }
 
+  /* Method in charge of calling the "createpost" service to send the 
+     required information when creating a new post */
   validateCredentialsPost(form: FormGroup) {
     if (form.valid) {
       if (this.auxPictureFile != true) {
@@ -76,7 +82,7 @@ export class CreatepostComponent implements OnInit {
           this.postToSend["user"] = this.userName
           console.log(this.postToSend)
 
-          /* Conexion y envio del postToSend al servidor */
+          /* Connection and sending of the postToSend to the server */
           this.createPostService.registerPost(this.postToSend).subscribe(
             p => {
               this.registerPostData = p !== undefined ? p : []
@@ -89,12 +95,9 @@ export class CreatepostComponent implements OnInit {
               this.launchMessage("Post creado.")
             }
           )
-
         } else {
           this.launchMessage("Por favor ingresa una imagen.")
         }
-
-
       } else {
         this.launchMessage("Por favor verifique que el formato de la imagen sea la correcta.")
       }
@@ -103,6 +106,7 @@ export class CreatepostComponent implements OnInit {
     }
   }
 
+  /* Method in charge of cleaning the variables and the form */
   clearData(form) {
     this.selectedFile.name = null
     this.selectedFile.base64textString = null
@@ -149,6 +153,7 @@ export class CreatepostComponent implements OnInit {
     );
   }
 
+  /* Method responsible for obtaining the user's location */
   getPosition(position) {
     this.zoom = 16
     this.myLatitude = position.coords.latitude
@@ -157,6 +162,8 @@ export class CreatepostComponent implements OnInit {
     console.log("Longitud: ", this.myLongitude)
   }
 
+  /* Method in charge of alerting the user about possible problems 
+     with obtaining the location */
   positionError(error) {
     console.log(error)
     switch (error.code) {
@@ -197,6 +204,7 @@ export class CreatepostComponent implements OnInit {
     });
   }
 
+  /* Method that activates device location */
   selectDeviceLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
@@ -206,6 +214,7 @@ export class CreatepostComponent implements OnInit {
     }
   }
 
+  /* Method in charge of directing users who have not registered and entered as guests */
   registerGuest() {
     window.localStorage.clear()
     this.router.navigate(["/login/"])
@@ -219,6 +228,7 @@ export class CreatepostComponent implements OnInit {
     this.selectedDate = (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear() + " " + dateNow.getHours() + ":" + dateNow.getMinutes() + ":" + dateNow.getSeconds()
   }
 
+  /* Method in charge of alerting the errors of the form */
   getErrorMessage(component: string) {
     let errorMessage = ""
     switch (component) {
@@ -236,6 +246,7 @@ export class CreatepostComponent implements OnInit {
     return errorMessage
   }
 
+  /* Method that generates a unique id to store the files */
   uuid() {
     var uuidValue = "", k, randomValue;
     for (k = 0; k < 12; k++) {

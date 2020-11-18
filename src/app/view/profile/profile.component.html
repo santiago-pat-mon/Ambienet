@@ -22,9 +22,9 @@
                 Ubicación del dispositivo
             </button>
             <div class="userForm">
-                <img *ngIf="userData.profile.picture != ''" class="profilePicture"
+                <img *ngIf="userData.profile.picture != null" class="profilePicture"
                     src="../../api/{{userData.profile.picture}}" />
-                <img *ngIf="userData.profile.picture == ''" class="profilePicture"
+                <img *ngIf="userData.profile.picture == null" class="profilePicture"
                     src="../../api/profilePicture/default-user-image.png" /><br /><br />
                 <mat-form-field>
                     <mat-label>Reputación</mat-label>

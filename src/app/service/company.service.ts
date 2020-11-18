@@ -9,13 +9,14 @@ export class CompanyService {
 
   constructor(private http: HttpClient) { }
 
-  /* attached file */
+  /* upload attached file */
   uploadFile(selectedFile) {
     let submission = JSON.stringify(selectedFile)
     return this.http.post(buildPOSTUrl(GlobalVariable.POST_PICTURE_PHP), submission);
   }
 }
 
+/* Construction of the post url */
 function buildPOSTUrl(type: string): string {
   let finalUrl = GlobalVariable.BASE_API_URL_PHP
   finalUrl += type

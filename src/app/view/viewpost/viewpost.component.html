@@ -1,6 +1,6 @@
 <div class="container" *ngIf="rol=='admin'">
     <mat-card class="dataContainer">
-        <h3>Hola POST</h3>
+        <h3 style="text-align: center;">POSTS Registrados</h3>
         <div style="overflow-x: auto;">
             <mat-form-field style="width: 100%;">
                 <input matInput (keyup)="applyObjectFilter($event.target.value)"

@@ -2,8 +2,15 @@
     <mat-card *ngFor="let object of postData">
         <mat-card-header>
             <!-- <mat-card-title>Distritos</mat-card-title> -->
-            <mat-card-subtitle><img class="profilePicture" src="../../api/{{object.picture}}"
-                    title="{{object.username}}" /><b>{{object.username}}</b>
+            <mat-card-subtitle>
+                <img *ngIf="object.profile.picture != null" class="profilePicture"
+                    src="../../api/{{object.profile.picture}}" title="{{object.username}}" />
+                <img *ngIf="object.profile.picture == null" class="profilePicture"
+                    src="../../api/profilePicture/default-user-image.png" title="{{object.username}}" />
+                <b>{{object.username}}</b>
+                <b style="margin-left: 15px; font-weight: 600">
+                    <mat-icon>stars</mat-icon>{{object.profile.reputation}}
+                </b>
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content style="text-align: center;">
@@ -33,7 +40,7 @@
             <p>{{object.description}}</p>
             <div>
                 <b class="countValidation">{{object.validator_number}}</b>
-                <button mat-raised-button color="primary" (click)="viewObject(null)"
+                <button mat-raised-button color="primary" (click)="validatePost(object)"
                     [disabled]="rol=='guest' ? true : false">Validar</button>
             </div>
         </mat-card-content>

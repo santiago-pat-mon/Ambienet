@@ -13,12 +13,14 @@ export class ViewpostService {
 
   constructor(private http: HttpClient) { }
 
+  /* Select posts from the database */
   getPosts(): Observable<any> {
     return this.http.get(buildGetUrl(GlobalVariable.READ_POSTS), {
       headers: this.getHeadersNA(),
     })
   }
 
+  /* Delete post from the database */
   deletePost(submission: any): Observable<any> {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.token = this.ls.get("isLoggedToken")
@@ -27,16 +29,30 @@ export class ViewpostService {
     })
   }
 
+  /* Service that sends the information of a user who validated a post */
+  sendValidatorData(submission: any): Observable<any> {
+    return this.http.post(buildPostUrl(GlobalVariable.SEND_VALIDATOR_POST), submission, {
+      headers: this.getHeadersNA()
+    })
+  }
 
+  /* Service that adds one when the validate button is pressed */
+  addValidator(submission: any, id: string): Observable<any> {
+    return this.http.patch(buildPatchUrl(GlobalVariable.INCREASE_POST_VALIDATION, id), submission, {
+      headers: this.getHeadersNA()
+    })
+  }
+
+  // I included these headers because otherwise FireFox
+  // will request text/html instead of application/json
   private getHeadersNA() {
-    // I included these headers because otherwise FireFox
-    // will request text/html instead of application/json
     const headers = new HttpHeaders()
     headers.set("Accept", "application/json")
     return headers
   }
 }
 
+/* Construction of the delete url */
 function buildDeleteUrl(type: string, id: string): string {
   let finalUrl = GlobalVariable.BASE_SERVER_URL
   finalUrl += type
@@ -44,7 +60,23 @@ function buildDeleteUrl(type: string, id: string): string {
   return finalUrl
 }
 
+/* Construction of the patch url */
+function buildPatchUrl(type: string, id: string): string {
+  let finalUrl = GlobalVariable.BASE_SERVER_URL
+  finalUrl += type
+  finalUrl += id + "/"
+  return finalUrl
+}
+
+/* Construction of the get url */
 function buildGetUrl(type: string): string {
+  let finalUrl = GlobalVariable.BASE_SERVER_URL
+  finalUrl += type
+  return finalUrl
+}
+
+/* Construction of the post url */
+function buildPostUrl(type: string): string {
   let finalUrl = GlobalVariable.BASE_SERVER_URL
   finalUrl += type
   return finalUrl

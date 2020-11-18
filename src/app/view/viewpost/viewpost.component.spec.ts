@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 import { ViewpostComponent } from './viewpost.component';
 
@@ -8,9 +10,11 @@ describe('ViewpostComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewpostComponent ]
+      imports: [HttpClientTestingModule, MatSnackBarModule],
+      providers: [MatSnackBar],
+      declarations: [ViewpostComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +23,7 @@ describe('ViewpostComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Componente ViewPost funcionando correctamente.', () => {
     expect(component).toBeTruthy();
   });
 });

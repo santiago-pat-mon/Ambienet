@@ -10,6 +10,7 @@ import * as SecureLS from 'secure-ls';
   styleUrls: ['./company.component.scss']
 })
 export class CompanyComponent implements OnInit {
+  /* Declaration of variables */
   ls: SecureLS
   rol: string
   errorMessage = ""
@@ -20,6 +21,7 @@ export class CompanyComponent implements OnInit {
     type: null
   }
 
+  /* Component constructor */
   constructor(
     public snackBar: MatSnackBar,
     private router: Router,
@@ -30,11 +32,13 @@ export class CompanyComponent implements OnInit {
     this.startVariables()
   }
 
+  /* Method in charge of identifying the role that is logged in */
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
   }
 
+  /* Method responsible for uploading the file to the server */
   loadData() {
     if (this.auxFile != true) {
       this.uploadFile()
@@ -44,6 +48,7 @@ export class CompanyComponent implements OnInit {
     }
   }
 
+  /* Method in charge of directing users who have not registered and entered as guests */
   registerGuest() {
     window.localStorage.clear()
     this.router.navigate(["/login/"])
@@ -87,6 +92,7 @@ export class CompanyComponent implements OnInit {
     );
   }
 
+  /* Method that generates a unique id to store the files */
   uuid() {
     var uuidValue = "", k, randomValue;
     for (k = 0; k < 12; k++) {

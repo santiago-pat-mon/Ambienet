@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  /* Declaration of variables */
   userForm: FormGroup
   ls: SecureLS
   rol: string
@@ -52,6 +53,7 @@ export class ProfileComponent implements OnInit {
     type: null
   }
 
+  /* Component constructor */
   constructor(
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
@@ -65,6 +67,7 @@ export class ProfileComponent implements OnInit {
     this.loadUserData()
   }
 
+  /* Method responsible for initializing the forms */
   initForms() {
     this.userForm = this.formBuilder.group({
       first_name: new FormControl("", [Validators.required]),
@@ -78,14 +81,14 @@ export class ProfileComponent implements OnInit {
     })
   }
 
+  /* Method in charge of identifying the role that is logged in */
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
   }
 
+  /* Method responsible for loading user information */
   loadUserData() {
-
-    /* ESTE SERIA EL METODO QUE LLAMA AL SERVICIO DE TRAER LOS DATOS DEL USUARIO */
     this.profileService.getUserData().subscribe(
       p => {
         console.log(p)
@@ -109,6 +112,7 @@ export class ProfileComponent implements OnInit {
     )
   }
 
+  /* Method in charge of validating that the registration is carried out correctly */
   validateCredentialsProfile(form: FormGroup) {
     if (form.valid) {
       if (this.auxPictureFile != true) {
@@ -188,14 +192,14 @@ export class ProfileComponent implements OnInit {
           console.log("Sin imagen ", this.profileToSendData)
         }
 
-        /* ACA REALIZAMOS LA CONEXION CON DJANGO MEDIANTE EL SERVICIO PARA ENVIAR EL OBJETO JSON profileToSend  */
         this.profileService.updateUser(this.profileToSend).subscribe(
           p => {
             console.log(p)
             this.userUpdated = p !== undefined ? p : []
           },
           e => {
-            console.log(e), this.launchMessage(e)
+            console.log(e)
+            //this.launchMessage(e)
             let aux = false
             if (e.error.email != undefined) {
               this.launchMessage("Este Correo ya se encuentra en uso, por favor digite otro.")
@@ -248,6 +252,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  /* Method in charge of cleaning the variables and the form */
   clearData() {
     this.selectedFile.name = null
     this.selectedFile.base64textString = null
@@ -292,11 +297,13 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+  /* Method in charge of directing users who have not registered and entered as guests */
   registerGuest() {
     window.localStorage.clear()
     this.router.navigate(["/login/"])
   }
 
+  /* Method responsible for obtaining the user's location */
   getPosition(position) {
     this.zoom = 16
     this.myLatitude = position.coords.latitude
@@ -305,6 +312,8 @@ export class ProfileComponent implements OnInit {
     console.log("Longitud: ", this.myLongitude)
   }
 
+  /* Method in charge of alerting the user about possible problems 
+     with obtaining the location */
   positionError(error) {
     console.log(error)
     switch (error.code) {
@@ -326,6 +335,7 @@ export class ProfileComponent implements OnInit {
     this.zoom = 10
   }
 
+  /* Method that activates device location */
   selectDeviceLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
@@ -346,6 +356,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  /* Method in charge of alerting the errors of the form */
   getErrorMessage(component: string) {
     let errorMessage = ""
     switch (component) {
@@ -380,6 +391,7 @@ export class ProfileComponent implements OnInit {
     return errorMessage
   }
 
+  /* Method that generates a unique id to store the files */
   uuid() {
     var uuidValue = "", k, randomValue;
     for (k = 0; k < 12; k++) {

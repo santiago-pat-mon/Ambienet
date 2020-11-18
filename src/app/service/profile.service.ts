@@ -14,7 +14,7 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
-  /* attached file */
+  /* upload attached file */
   uploadFile(selectedFile) {
     let submission = JSON.stringify(selectedFile)
     return this.http.post(buildPOSTUrl(GlobalVariable.PROFILE_PICTURE_PHP), submission);
@@ -40,7 +40,7 @@ export class ProfileService {
     })
   }
 
-  /* Select */
+  /* Select user information */
   getUserData(): Observable<any> {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.userNameData = this.ls.get("isLoggedUserName")
@@ -50,27 +50,30 @@ export class ProfileService {
     })
   }
 
+  // I included these headers because otherwise FireFox
+  // will request text/html instead of application/json
   private getHeadersNA() {
-    // I included these headers because otherwise FireFox
-    // will request text/html instead of application/json
     const headers = new HttpHeaders()
     headers.set('Content-Type', 'application/json')
     return headers
   }
 }
 
+/* Construction of the post url */
 function buildPOSTUrl(type: string): string {
   let finalUrl = GlobalVariable.BASE_API_URL_PHP
   finalUrl += type
   return finalUrl
 }
 
+/* Construction of the patch url */
 function buildPatchUrl(type: string): string {
   let finalUrl = GlobalVariable.BASE_SERVER_URL
   finalUrl += type
   return finalUrl
 }
 
+/* Construction of the get url */
 function buildGetUrl(type: string): string {
   let finalUrl = GlobalVariable.BASE_SERVER_URL
   finalUrl += type

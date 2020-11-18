@@ -10,8 +10,9 @@ import { LoginService } from 'src/app/service/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
 
+export class LoginComponent implements OnInit {
+  /* Declaration of variables */
   loginForm: FormGroup
   registerForm: FormGroup
   first_name = ""
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
   register = false
   match = false
 
+  /* Component constructor */
   constructor(
     private loginService: LoginService,
     private formBuilder: FormBuilder,
@@ -47,6 +49,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /* Method responsible for initializing the forms */
   initForms() {
     this.loginForm = this.formBuilder.group({
       username: new FormControl("", [Validators.required]),
@@ -64,6 +67,7 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  /* Method in charge of validating the login credentials */
   validateCredentialsLogin(form: FormGroup) {
     if (form.valid) {
       this.loginService.verifyUser(form.value).subscribe(
@@ -104,6 +108,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /* Method in charge of validating that the registration is carried out correctly */
   validateCredentialsRegister(form: FormGroup) {
     if (form.value.password === form.value.repeat_password) {
       this.match = true
@@ -124,7 +129,6 @@ export class LoginComponent implements OnInit {
 
       console.log(this.userToSend)
 
-      /* Aqui es donde llamo al servicio de registrar usuarios y le envio el form.value */
       this.loginService.registerUser(this.userToSend).subscribe(
         p => {
           this.registeredUser = p !== undefined ? p : []
@@ -172,6 +176,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /* Responsible method to perform a session for the guest user */
   enterGuest() {
     this.router.navigate(["dashboard"])
     var ls = new SecureLS({ encodingType: "aes" })
@@ -179,6 +184,7 @@ export class LoginComponent implements OnInit {
     ls.set("isLoggedRol", "guest")
   }
 
+  /* Method responsible for obtaining the user's location */
   getPosition(position) {
     this.zoom = 16
     this.myLatitude = position.coords.latitude
@@ -187,6 +193,8 @@ export class LoginComponent implements OnInit {
     console.log("Longitud: ", this.myLongitude)
   }
 
+  /* Method in charge of alerting the user about possible problems 
+     with obtaining the location */
   positionError(error) {
     console.log(error)
     switch (error.code) {
@@ -208,6 +216,7 @@ export class LoginComponent implements OnInit {
     this.zoom = 10
   }
 
+  /* Method that activates device location */
   selectDeviceLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => this.getPosition(position), error => this.positionError(error))
@@ -228,6 +237,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /* Method in charge of alerting the errors of the form */
   getErrorMessage(component: string) {
     let errorMessage = ""
     switch (component) {

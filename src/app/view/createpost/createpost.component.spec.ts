@@ -1,4 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormsModule } from "@angular/forms";
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { CreatepostComponent } from './createpost.component';
 
@@ -8,9 +12,11 @@ describe('CreatepostComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreatepostComponent ]
+      imports: [FormsModule, RouterTestingModule, MatSnackBarModule, HttpClientTestingModule],
+      providers: [FormBuilder, MatSnackBar],
+      declarations: [CreatepostComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +25,7 @@ describe('CreatepostComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Componente CreatePost funcionando correctamente.', () => {
     expect(component).toBeTruthy();
   });
 });

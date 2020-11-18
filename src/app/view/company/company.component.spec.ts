@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { CompanyComponent } from './company.component';
 
@@ -8,7 +11,9 @@ describe('CompanyComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CompanyComponent]
+      imports: [MatSnackBarModule, RouterTestingModule, HttpClientTestingModule],
+      providers: [MatSnackBar],
+      declarations: [CompanyComponent],
     })
       .compileComponents();
   }));
@@ -19,16 +24,7 @@ describe('CompanyComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Componente Company funcionando correctamente.', () => {
     expect(component).toBeTruthy();
   });
 });
-
-describe("Prueba unitaria", () => {
-  //Arrange
-  let rol: CompanyComponent
-  //Act
-  rol.startVariables();
-  //Assert
-  expect(rol.rol).toEqual("admin")
-})
