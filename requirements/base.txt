@@ -6,6 +6,7 @@ psycopg2==2.8.5 --no-binary psycopg2
 
 # Django
 django>=3.1.1
+django-cors-headers>=3.5.0
 
 djangorestframework==3.11.1
 django-filter==2.3.0

@@ -1,2 +1,2 @@
 from .posts import Post
-from .images import Image
+from .validators import Validator

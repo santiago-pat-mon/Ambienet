@@ -10,10 +10,9 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
-    image: cride_production_django
+    image: ambienet_production_django
     depends_on:
       - postgres
-      - redis
     env_file:
       - ./.envs/.production/.django
       - ./.envs/.production/.postgres
@@ -23,18 +22,18 @@ services:
     build:
       context: .
       dockerfile: ./compose/production/postgres/Dockerfile
-    image: cride_production_postgres
+    image: ambienet_production_postgres
     volumes:
       - production_postgres_data:/var/lib/postgresql/data
       - production_postgres_data_backups:/backups
     env_file:
       - ./.envs/.production/.postgres
-
+  
   caddy:
     build:
       context: .
       dockerfile: ./compose/production/caddy/Dockerfile
-    image: cride_production_caddy
+    image: ambienet_production_caddy
     depends_on:
       - django
     volumes:
@@ -44,23 +43,3 @@ services:
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
-
-  redis:
-    image: redis:3.2
-
-  celeryworker:
-    <<: *django
-    image: cride_production_celeryworker
-    command: /start-celeryworker
-
-  celerybeat:
-    <<: *django
-    image: cride_production_celerybeat
-    command: /start-celerybeat
-
-  flower:
-    <<: *django
-    image: cride_production_flower
-    ports:
-      - "5555:5555"
-    command: /start-flower

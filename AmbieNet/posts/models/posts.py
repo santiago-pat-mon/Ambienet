@@ -32,16 +32,21 @@ class Post(AmbieNetModel):
     #"likes"
     validator_number = models.IntegerField(default=0)
 
+    photo=models.CharField(max_length=255, blank=True)
+
+    username = models.CharField(max_length=255, blank=True)
+   
+
     """Location Data """
     #if precision is not exactly change for DecimalField
-    latitud = models.FloatField(default=0.0)
-    longitud = models.FloatField(default=0.0)
+    latitude = models.FloatField(default=0.0)
+    longitude = models.FloatField(default=0.0)
 
 
 
 
     def __str__(self):
-        """Return username."""
+        """Return titles."""
         return self.title
 
 
