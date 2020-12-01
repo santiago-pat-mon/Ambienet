@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   validateToSendData = {}
   addValidator = {}
   countValidate = 0
+  userName = ""
 
   /* Component constructor */
   constructor(
@@ -38,6 +39,7 @@ export class DashboardComponent implements OnInit {
   startVariables() {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
+    this.userName = this.ls.get("isLoggedUserName")
   }
 
   /* Method in charge of loading the posts */
@@ -68,7 +70,7 @@ export class DashboardComponent implements OnInit {
   /* Method in charge of adding one when a post is validated, it also verifies 
      that a user does not validate a post more than once */
   validatePost(object) {
-    this.validateToSendData["user"] = object.username
+    this.validateToSendData["user"] = this.userName
     this.validateToSendData["post"] = object.id
     let auxiliar = object.validator_number
     this.addValidator["validator_number"] = auxiliar + 1
@@ -81,7 +83,9 @@ export class DashboardComponent implements OnInit {
         this.validateData = p !== undefined ? p : []
       },
       e => {
-        //console.log(e)
+        console.log(e)
+        console.log(this.validateToSendData)
+        console.log(this.addValidator)
         if (e.error.non_field_errors != undefined) {
           this.launchMessage("Usted ya validó este post.")
         }
