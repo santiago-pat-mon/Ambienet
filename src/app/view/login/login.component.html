@@ -33,8 +33,13 @@
         <p class="title">Registrarme</p>
         <mat-tab-group mat-align-tabs="center">
             <mat-tab label="Mi ubicación">
+                <p style="font-size: 12px;"><b>Importante:</b> Por defecto tienes la ubicación de tu dispositivo, pero
+                    si quieres poner una marca en un lugar distinto debes dar doble Clic en la ubicación que desees del
+                    mapa.
+                    El botón “Ubicación del dispositivo” pondrá la ubicación de tu dispositivo nuevamente. </p>
                 <div class="mapContainerPost">
-                    <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom">
+                    <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom"
+                        (mapReady)="mapReadyHandler($event)">
                         <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
                             <agm-info-window>
                                 <strong>Ubicación</strong>
