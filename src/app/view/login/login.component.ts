@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit {
     })
 
     this.registerForm = this.formBuilder.group({
-      first_name: new FormControl("", [Validators.required]),
-      last_name: new FormControl("", [Validators.required]),
+      first_name: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]{2,254}")]),
+      last_name: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]{2,254}")]),
       phone_number: new FormControl(""),
       username: new FormControl("", [Validators.required]),
       email: new FormControl("", [Validators.required, Validators.email]),
@@ -244,12 +244,16 @@ export class LoginComponent implements OnInit {
       case "first_name":
         errorMessage = this.registerForm.get("first_name").hasError("required")
           ? "Campo Nombre requerido"
-          : ""
+          : this.registerForm.get("first_name").hasError("pattern")
+            ? "Solo ingresar letras no números"
+            : ""
         break
       case "last_name":
         errorMessage = this.registerForm.get("last_name").hasError("required")
           ? "Campo Apellidos requerido"
-          : ""
+          : this.registerForm.get("last_name").hasError("pattern")
+            ? "Solo ingresar letras no números"
+            : ""
         break
 
       case "email":

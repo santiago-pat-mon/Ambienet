@@ -83,9 +83,7 @@ export class DashboardComponent implements OnInit {
         this.validateData = p !== undefined ? p : []
       },
       e => {
-        console.log(e)
-        console.log(this.validateToSendData)
-        console.log(this.addValidator)
+        //console.log(e)
         if (e.error.non_field_errors != undefined) {
           this.launchMessage("Usted ya validó este post.")
         }

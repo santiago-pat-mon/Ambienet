@@ -62,14 +62,17 @@
                     <mat-form-field>
                         <mat-label>País</mat-label>
                         <input matInput formControlName="country" type="text" />
+                        <mat-error *ngIf="userForm.controls.country.invalid">Solo ingresar letras no números</mat-error>
                     </mat-form-field>
                     <mat-form-field>
                         <mat-label>Departamento</mat-label>
                         <input matInput formControlName="state" type="text" />
+                        <mat-error *ngIf="userForm.controls.state.invalid">Solo ingresar letras no números</mat-error>
                     </mat-form-field>
                     <mat-form-field>
                         <mat-label>Ciudad</mat-label>
                         <input matInput formControlName="city" type="text" />
+                        <mat-error *ngIf="userForm.controls.city.invalid">Solo ingresar letras no números</mat-error>
                     </mat-form-field>
                     <br />
                     <!-- Select file-->

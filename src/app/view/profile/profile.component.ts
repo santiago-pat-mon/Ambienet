@@ -70,14 +70,14 @@ export class ProfileComponent implements OnInit {
   /* Method responsible for initializing the forms */
   initForms() {
     this.userForm = this.formBuilder.group({
-      first_name: new FormControl("", [Validators.required]),
-      last_name: new FormControl("", [Validators.required]),
+      first_name: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]{2,254}")]),
+      last_name: new FormControl("", [Validators.required, Validators.pattern("[a-zA-Z ]{2,254}")]),
       email: new FormControl("", [Validators.required, Validators.email]),
       phone_number: new FormControl(""),
       biography: new FormControl(""),
-      country: new FormControl(""),
-      state: new FormControl(""),
-      city: new FormControl(""),
+      country: new FormControl("", [Validators.pattern("[a-zA-Z ]{2,254}")]),
+      state: new FormControl("", [Validators.pattern("[a-zA-Z ]{2,254}")]),
+      city: new FormControl("", [Validators.pattern("[a-zA-Z ]{2,254}")]),
     })
   }
 
@@ -248,7 +248,7 @@ export class ProfileComponent implements OnInit {
         this.launchMessage("Por favor verifique que el formato de la imagen sea la correcta.")
       }
     } else {
-      this.launchMessage("Por favor llene todos los campos del formulario.")
+      this.launchMessage("Por favor llene todos los campos del formulario o verifique que estén correctos.")
     }
   }
 
@@ -363,12 +363,16 @@ export class ProfileComponent implements OnInit {
       case "first_name":
         errorMessage = this.userForm.get("first_name").hasError("required")
           ? "Campo Nombre requerido"
-          : ""
+          : this.userForm.get("first_name").hasError("pattern")
+            ? "Solo ingresar letras no números"
+            : ""
         break
       case "last_name":
         errorMessage = this.userForm.get("last_name").hasError("required")
           ? "Campo Apellidos requerido"
-          : ""
+          : this.userForm.get("last_name").hasError("pattern")
+            ? "Solo ingresar letras no números"
+            : ""
         break
       case "user_name":
         errorMessage = this.userForm.get("user_name").hasError("required")
