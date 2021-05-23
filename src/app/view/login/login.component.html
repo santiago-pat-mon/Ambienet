@@ -2,7 +2,7 @@
     <!-- LOGIN -->
     <div class="login" *ngIf="register == false">
         <div class="title">
-            <p>Login</p>
+            <p>LOGIN</p>
         </div>
         <div class="loginForm">
             <form [formGroup]="loginForm" (ngSubmit)="validateCredentialsLogin(loginForm)">
@@ -17,13 +17,16 @@
                     <mat-error *ngIf="loginForm.controls.password.invalid">{{getErrorMessage("password")}}</mat-error>
                 </mat-form-field>
                 <br />
-                <button mat-raised-button style="background-color: #1f7500bd; color: #FFFFFF;">INGRESAR</button>
+                <br />
+                <button mat-raised-button
+                    style="background-color: #1f7500bd; color: #FFFFFF; width: 200px;">INGRESAR</button>
             </form>
             <br />
-            <button mat-raised-button color="primary" style="color: #FFFFFF;"
+            <button mat-raised-button color="primary" style="color: #FFFFFF; width: 200px;"
                 (click)="register = true">Registrar</button>
             <br /><br />
-            <button mat-raised-button color="warn" style="color: #FFFFFF;" (click)="enterGuest()">Ingresar como
+            <button mat-raised-button color="warn" style="color: #FFFFFF; width: 200px;" (click)="enterGuest()">Ingresar
+                como
                 Invitado</button>
         </div>
     </div>

@@ -265,7 +265,7 @@ export class LoginComponent implements OnInit {
         break
       case "username":
         errorMessage = this.loginForm.get("username").hasError("required")
-          ? "Campo UserName requerido"
+          ? "Campo Nombre de usuario requerido"
           : ""
         break
       case "password":
