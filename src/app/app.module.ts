@@ -37,6 +37,7 @@ import { ViewpostComponent } from './view/viewpost/viewpost.component';
 import { ViewuserComponent } from './view/viewuser/viewuser.component';
 import { ChartsModule } from 'ng2-charts';
 import { StatisticsComponent } from './view/statistics/statistics.component';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from "ng-recaptcha";
 
 @NgModule({
   declarations: [
@@ -82,8 +83,9 @@ import { StatisticsComponent } from './view/statistics/statistics.component';
     MatTableModule,
     MatPaginatorModule,
     ChartsModule,
+    RecaptchaV3Module,
   ],
-  providers: [],
+  providers: [{ provide: RECAPTCHA_V3_SITE_KEY, useValue: "6LdQN-saAAAAAB-UktrYnqksf2jaX_s47n_KKsWK" }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

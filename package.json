@@ -25,6 +25,7 @@
     "@types/chart.js": "^2.9.28",
     "chart.js": "^2.9.4",
     "chartjs-plugin-datalabels": "^0.7.0",
+    "ng-recaptcha": "^8.0.0",
     "ng2-charts": "^2.4.2",
     "rxjs": "~6.5.5",
     "secure-ls": "^1.2.6",
