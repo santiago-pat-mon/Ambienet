@@ -1,21 +1,22 @@
 <div class="container">
     <mat-card *ngFor="let object of postData">
         <mat-card-header>
-            <!-- <mat-card-title>Distritos</mat-card-title> -->
-            <mat-card-subtitle>
-                <img *ngIf="object.profile.picture != null" class="profilePicture"
-                    src="../../api/{{object.profile.picture}}" title="{{object.username}}" />
-                <img *ngIf="object.profile.picture == null" class="profilePicture"
-                    src="../../api/profilePicture/default-user-image.png" title="{{object.username}}" />
+            <div mat-card-avatar class="profilePicture">
+                <img *ngIf="object.profile.picture != null" src="../../api/{{object.profile.picture}}"
+                    title="{{object.username}}" />
+                <img *ngIf="object.profile.picture == null" src="../../api/profilePicture/default-user-image.png"
+                    title="{{object.username}}" />
+            </div>
+            <mat-card-title>
                 <b>{{object.username}}</b>
-                <b style="margin-left: 15px; font-weight: 600">
-                    <mat-icon>stars</mat-icon>{{object.profile.reputation}}
-                </b>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <mat-icon>stars</mat-icon>{{object.profile.reputation}}
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content style="text-align: center;">
             <h2>{{object.title}}</h2>
-            <div>
+            <section>
                 <mat-tab-group mat-align-tabs="center">
                     <mat-tab label="Imagen">
                         <button class="imageButton" (click)="viewObject(object)"
@@ -35,14 +36,14 @@
                         </div>
                     </mat-tab>
                 </mat-tab-group>
-            </div>
+            </section>
             <h3>{{object.type_catastrophe}}</h3>
             <p>{{object.description}}</p>
-            <div>
+            <section>
                 <b class="countValidation">{{object.validator_number}}</b>
                 <button mat-raised-button color="primary" (click)="validatePost(object)"
                     [disabled]="rol=='guest' ? true : false">Validar</button>
-            </div>
+            </section>
         </mat-card-content>
     </mat-card>
 </div>

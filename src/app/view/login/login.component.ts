@@ -69,6 +69,17 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  loguinTest() {
+    this.router.navigate(["dashboard"])
+    var ls = new SecureLS({ encodingType: "aes" })
+    ls.set("isLoggedIn", "true")
+    ls.set("isLoggedRol", "user")
+    ls.set("isLoggedToken", "123")
+    ls.set("isLoggedFirstName", "test")
+    ls.set("isLoggedLastName", "test2")
+    ls.set("isLoggedUserName", "TEST")
+  }
+
   /* Method in charge of validating the login credentials */
   validateCredentialsLogin(form: FormGroup) {
     if (form.valid) {
@@ -80,7 +91,9 @@ export class LoginComponent implements OnInit {
             //See captcha
             console.log("Token Captcha (Login): " + token);
 
-            this.loginService.verifyUser(form.value).subscribe(
+            this.loguinTest()
+            /* Descomentar y borrar loguinTest */
+            /* this.loginService.verifyUser(form.value).subscribe(
               p => {
                 this.userLoggedIn = p !== undefined ? p : []
               },
@@ -112,7 +125,7 @@ export class LoginComponent implements OnInit {
                   }
                 }
               }
-            )
+            ) */
           },
           (error) => {
             //Captcha error
@@ -120,7 +133,6 @@ export class LoginComponent implements OnInit {
           });
 
       /* IMPORTANTE: Si algo sale mal descomento esto de abajo y borro el mismo codigo del captcha arriba */
-
       /* this.loginService.verifyUser(form.value).subscribe(
         p => {
           this.userLoggedIn = p !== undefined ? p : []
