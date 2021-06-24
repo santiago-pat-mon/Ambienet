@@ -38,6 +38,7 @@ import { ViewuserComponent } from './view/viewuser/viewuser.component';
 import { ChartsModule } from 'ng2-charts';
 import { StatisticsComponent } from './view/statistics/statistics.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from "ng-recaptcha";
+import { RequestsComponent } from './view/requests/requests.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from "ng-recaptcha";
     ViewpostComponent,
     ViewuserComponent,
     StatisticsComponent,
+    RequestsComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({

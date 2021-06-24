@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(["dashboard"])
     var ls = new SecureLS({ encodingType: "aes" })
     ls.set("isLoggedIn", "true")
-    ls.set("isLoggedRol", "user")
+    ls.set("isLoggedRol", "admin")
     ls.set("isLoggedToken", "123")
     ls.set("isLoggedFirstName", "test")
     ls.set("isLoggedLastName", "test2")

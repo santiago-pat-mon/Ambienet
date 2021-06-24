@@ -10,6 +10,7 @@ import { CompanyComponent } from './view/company/company.component';
 import { ViewpostComponent } from './view/viewpost/viewpost.component';
 import { ViewuserComponent } from './view/viewuser/viewuser.component';
 import { StatisticsComponent } from './view/statistics/statistics.component';
+import { RequestsComponent } from './view/requests/requests.component';
 
 /* routes */
 const routes: Routes = [
@@ -53,6 +54,11 @@ const routes: Routes = [
         path: "viewuser",
         canActivate: [AuthGuard],
         component: ViewuserComponent,
+      },
+      {
+        path: "requests",
+        canActivate: [AuthGuard],
+        component: RequestsComponent,
       },
       {
         path: "statistics",

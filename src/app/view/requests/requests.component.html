@@ -1,0 +1,15 @@
+<div class="container" *ngIf="rol=='admin'">
+    <mat-card class="dataContainer">
+        <h3 style="text-align: center;">Peticiones de cambio de ROL</h3>
+        <div style="overflow-x: auto;">
+            <!-- Aquí va la tabla con las peticiones -->
+        </div>
+        <mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </mat-card>
+</div>
+<div class="container" *ngIf="rol=='user' || rol=='guest'">
+    <div class="dataContainer">
+        <p>Acceso restringido. No eres un Administrador, eres un usuario o visitante.</p>
+        <button mat-raised-button color="primary" routerLink="/dashboard">Volver</button>
+    </div>
+</div>
