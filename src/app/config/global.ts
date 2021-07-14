@@ -8,8 +8,8 @@ export const GlobalVariable = Object.freeze({
     POST_PICTURE_PHP: "attachFile.php",
 
     // DJANGO
-    //BASE_SERVER_URL: "http://localhost:8000/",
-    BASE_SERVER_URL: "https://ambienetuq.tk/",
+    BASE_SERVER_URL: "http://localhost:8000/",
+    //BASE_SERVER_URL: "https://ambienetuq.tk/",
     REGISTER_USER: "users/signup/",
     LOGIN_USER: "users/login/",
     READ_USERS: "users/",

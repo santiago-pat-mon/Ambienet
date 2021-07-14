@@ -91,9 +91,9 @@ export class LoginComponent implements OnInit {
             //See captcha
             console.log("Token Captcha (Login): " + token);
 
-            this.loguinTest()
-            /* Descomentar y borrar loguinTest */
-            /* this.loginService.verifyUser(form.value).subscribe(
+            //this.loguinTest()
+
+            this.loginService.verifyUser(form.value).subscribe(
               p => {
                 this.userLoggedIn = p !== undefined ? p : []
               },
@@ -125,47 +125,12 @@ export class LoginComponent implements OnInit {
                   }
                 }
               }
-            ) */
+            )
           },
           (error) => {
             //Captcha error
             console.log("Error (Login): " + error);
           });
-
-      /* IMPORTANTE: Si algo sale mal descomento esto de abajo y borro el mismo codigo del captcha arriba */
-      /* this.loginService.verifyUser(form.value).subscribe(
-        p => {
-          this.userLoggedIn = p !== undefined ? p : []
-        },
-        e => {
-          console.log(e)
-          if (e.error != "") {
-            this.launchMessage("Credenciales inválidas")
-          }
-        },
-        () => {
-          if (this.userLoggedIn.user.is_staff == true) {
-            this.router.navigate(["dashboard"])
-            var ls = new SecureLS({ encodingType: "aes" })
-            ls.set("isLoggedIn", "true")
-            ls.set("isLoggedRol", "admin")
-            ls.set("isLoggedToken", this.userLoggedIn.token)
-          } else {
-            if (this.userLoggedIn.user.is_staff == false) {
-              this.router.navigate(["dashboard"])
-              var ls = new SecureLS({ encodingType: "aes" })
-              ls.set("isLoggedIn", "true")
-              ls.set("isLoggedRol", "user")
-              ls.set("isLoggedToken", this.userLoggedIn.token)
-              ls.set("isLoggedFirstName", this.userLoggedIn.user.first_name)
-              ls.set("isLoggedLastName", this.userLoggedIn.user.last_name)
-              ls.set("isLoggedUserName", this.userLoggedIn.user.username)
-            } else {
-              this.launchMessage("Usuario o contraseña incorrecta")
-            }
-          }
-        }
-      ) */
     } else {
       this.launchMessage("Por favor verifica los datos")
     }
@@ -240,47 +205,6 @@ export class LoginComponent implements OnInit {
             //Captcha error
             console.log("Error (Register): " + error);
           });
-
-      /* IMPORTANTE: Si algo sale mal descomento esto de abajo y borro el mismo codigo del captcha arriba */
-
-      /* this.loginService.registerUser(this.userToSend).subscribe(
-        p => {
-          this.registeredUser = p !== undefined ? p : []
-          console.log(this.registeredUser)
-        },
-        e => {
-          console.log(e), this.launchMessage(e)
-          let aux = false
-          if (e.error.email != undefined) {
-            this.launchMessage("Este Correo ya se encuentra en uso, por favor digite otro.")
-            aux = true
-          }
-          if (e.error.username != undefined) {
-            if (e.error.username[0] == "This field must be unique.") {
-              this.launchMessage("El User Name ya se encuentra en uso, por favor digite otro.")
-              aux = true
-            }
-          }
-          if (e.error.phone_number != undefined) {
-            this.launchMessage("Por favor verifique el número de teléfono.")
-            aux = true
-          }
-          if (e.error.non_field_errors != undefined) {
-            this.launchMessage("La contraseña es muy debil.")
-            aux = true
-          }
-          if (aux == false && e.error) {
-            this.launchMessage("Verifique que: El campo nombre y apellidos tenga mas de 3 caracteres, el username tenga mas de 6 caracteres o que la contraseña tenga mas de 8 caracteres.")
-            aux = false
-          }
-        },
-        () => {
-          console.log("Por fuera:", this.registeredUser)
-          this.register = false
-          this.launchMessage("Registrado!!")
-        }
-      ) */
-
     } else {
       if (this.match == false) {
         this.launchMessage("Por favor verifica los datos, las contraseñas no son iguales.")
