@@ -190,7 +190,7 @@ export class LoginComponent implements OnInit {
                   aux = true
                 }
                 if (aux == false && e.error) {
-                  this.launchMessage("Verifique que: El campo nombre y apellidos tenga mas de 3 caracteres, el username tenga mas de 6 caracteres o que la contraseña tenga mínimo 4 caracteres.")
+                  this.launchMessage("Verifique que: El campo nombre y apellidos tenga mas de 3 caracteres, el nombre de usuario tenga mas de 6 caracteres o que la contraseña tenga mínimo 4 caracteres.")
                   aux = false
                 }
               },
