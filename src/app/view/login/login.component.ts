@@ -177,7 +177,7 @@ export class LoginComponent implements OnInit {
                 }
                 if (e.error.username != undefined) {
                   if (e.error.username[0] == "This field must be unique.") {
-                    this.launchMessage("El User Name ya se encuentra en uso, por favor digite otro.")
+                    this.launchMessage("El Nombre de usuario ya se encuentra en uso, por favor digite otro.")
                     aux = true
                   }
                 }
@@ -190,7 +190,7 @@ export class LoginComponent implements OnInit {
                   aux = true
                 }
                 if (aux == false && e.error) {
-                  this.launchMessage("Verifique que: El campo nombre y apellidos tenga mas de 3 caracteres, el username tenga mas de 6 caracteres o que la contraseña tenga mas de 8 caracteres.")
+                  this.launchMessage("Verifique que: El campo nombre y apellidos tenga mas de 3 caracteres, el username tenga mas de 6 caracteres o que la contraseña tenga mínimo 4 caracteres.")
                   aux = false
                 }
               },
