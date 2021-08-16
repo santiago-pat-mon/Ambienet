@@ -70,7 +70,11 @@ export class CreatepostComponent implements OnInit {
     if (form.valid) {
       if (this.auxPictureFile != true) {
         if (this.selectedFile.name != null) {
-          this.uploadFile()
+          
+          /* 
+          DECOMENTAR LO DEL UPLOAD FILE CUANDO YA SE TENGA LA CARPETA Y TODO
+          */      
+          //this.uploadFile()
 
           this.postToSend["title"] = form.value.title
           this.postToSend["type_catastrophe"] = form.value.typeCatastrophe
@@ -87,7 +91,7 @@ export class CreatepostComponent implements OnInit {
             p => {
               this.registerPostData = p !== undefined ? p : []
             },
-            e => { console.log(e), this.launchMessage(e) },
+            e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
             () => {
 
               console.log(this.registerPostData)
@@ -147,7 +151,7 @@ export class CreatepostComponent implements OnInit {
     this.createPostService.uploadFile(this.selectedFile).subscribe(
       (p) => {
       },
-      (e) => this.launchMessage(e),
+      (e) => this.launchMessage("Ocurrió un error al subir la imagen, por favor intenta más tarde"),
       () => {
       }
     );

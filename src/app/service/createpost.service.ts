@@ -21,8 +21,10 @@ export class CreatepostService {
 
   /* Service that registers a post */
   registerPost(submission: any): Observable<any> {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.token = this.ls.get("isLoggedToken")
     return this.http.post(buildPostUrl(GlobalVariable.REGISTER_POST), submission, {
-      headers: this.getHeadersNA()
+      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token)
     })
   }
 
@@ -35,6 +37,13 @@ export class CreatepostService {
   }
 }
 
+/* Construction of the post url */
+function buildPostUrl(type: string): string {
+  let finalUrl = GlobalVariable.BASE_SERVER_URL
+  finalUrl += type
+  return finalUrl
+}
+
 /* Construction of the post url to php */
 function buildPOSTUrl(type: string): string {
   let finalUrl = GlobalVariable.BASE_API_URL_PHP
@@ -44,13 +53,6 @@ function buildPOSTUrl(type: string): string {
 
 /* Construction of the get url */
 function buildGetUrl(type: string): string {
-  let finalUrl = GlobalVariable.BASE_SERVER_URL
-  finalUrl += type
-  return finalUrl
-}
-
-/* Construction of the post url */
-function buildPostUrl(type: string): string {
   let finalUrl = GlobalVariable.BASE_SERVER_URL
   finalUrl += type
   return finalUrl

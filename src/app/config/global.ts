@@ -4,12 +4,14 @@ export const GlobalVariable = Object.freeze({
 
     // PHP
     BASE_API_URL_PHP: "https://ambienet.000webhostapp.com/api/",
+    //BASE_API_URL_PHP: "https://ambienet-frontend.web.app/",
+    //BASE_API_URL_PHP: "http://localhost/php/",
     PROFILE_PICTURE_PHP: "attachFile.php",
     POST_PICTURE_PHP: "attachFile.php",
 
     // DJANGO
-    BASE_SERVER_URL: "http://localhost:8000/",
-    //BASE_SERVER_URL: "https://ambienetuq.tk/",
+    //BASE_SERVER_URL: "http://localhost:8000/",
+    BASE_SERVER_URL: "https://ambienetuq.xyz/",
     REGISTER_USER: "users/signup/",
     LOGIN_USER: "users/login/",
     READ_USERS: "users/",

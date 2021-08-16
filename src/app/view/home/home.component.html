@@ -1,78 +1,165 @@
-<div *ngIf="rol=='admin'">
-    <app-topmenu (sidenavToggle)="snav.toggle()"></app-topmenu>
-    <mat-sidenav-container class="example-container">
-        <!-- Side navigation -->
-        <mat-sidenav #snav [mode]="currentScreenWidth === 'xs' ? 'over' : 'side'"
-            [fixedInViewport]="currentScreenWidth === 'xs'" fixedTopGap="40"
-            [opened]="currentScreenWidth === 'xs' ? 'false' : 'true'" [ngStyle]="{
-            'width.em': currentScreenWidth === 'xs' ? 16 : sidenavWidth
-            }" style="background-color: #1f7500;" (mouseenter)="increase()" (mouseleave)="decrease()">
-            <app-sidenav></app-sidenav>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <!--Content-->
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
+<div *ngIf="rol == 'admin'">
+  <app-topmenu (sidenavToggle)="snav.toggle()"></app-topmenu>
+  <mat-sidenav-container class="example-container">
+    <!-- Side navigation -->
+    <mat-sidenav
+      #snav
+      [mode]="currentScreenWidth === 'xs' ? 'over' : 'side'"
+      [fixedInViewport]="currentScreenWidth === 'xs'"
+      fixedTopGap="40"
+      [opened]="currentScreenWidth === 'xs' ? 'false' : 'true'"
+      [ngStyle]="{
+        'width.em': currentScreenWidth === 'xs' ? 16 : sidenavWidth
+      }"
+      style="background-color: #29a08d"
+      (mouseenter)="increase()"
+      (mouseleave)="decrease()"
+    >
+      <app-sidenav></app-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <!--Content-->
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>
-<div *ngIf="rol=='user'">
-    <app-topmenu></app-topmenu>
-    <div *ngIf="size">
-        <mat-toolbar style="background-color: #589b3f; width: 100%; height: 45px;">
-            <div style="margin-left: 2%;">
-                <b style="font-size: 15px; font-weight: 500; color: #FFFFFF;">{{ first_name_data }}
-                    {{ last_name_data }}</b>
-            </div>
-            <div style="margin-left: auto;">
-                <button mat-button
-                    style="background-color: #589b3f; color: #FFFFFF; border-left: 2px solid #000000; border-right: 1px solid #000000;"
-                    routerLink="/dashboard" hidden>Inicio</button>
-                <button mat-button
-                    style="background-color: #589b3f; color: #FFFFFF; border-left: 1px solid #000000; border-right: 1px solid #000000;"
-                    routerLink="/profile" hidden>Mi perfil</button>
-                <button mat-button
-                    style="background-color: #589b3f; color: #FFFFFF; border-left: 1px solid #000000; border-right: 1px solid #000000;"
-                    routerLink="/createpost" hidden>Realizar aporte</button>
-                <button mat-button
-                    style="background-color: #589b3f; color: #FFFFFF; border-left: 1px solid #000000; border-right: 2px solid #000000;"
-                    routerLink="/company" hidden>Soy entusiasta o Corporación</button>
-            </div>
-        </mat-toolbar>
-    </div>
-    <div *ngIf="!size">
-        <mat-toolbar style="background-color: #589b3f; width: 100%; height: 40px;">
-            <button mat-button [matMenuTriggerFor]="menu">
-                <mat-icon style="color: #FFFFFF;">menu</mat-icon>
-                <b style="color: #FFFFFF;">Menu</b>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item style="background-color: #589b3f; color: #FFFFFF;" routerLink="/dashboard"
-                    hidden>Inicio</button>
-                <button mat-menu-item style="background-color: #589b3f; color: #FFFFFF;" routerLink="/profile" hidden>Mi
-                    perfil</button>
-                <button mat-menu-item style="background-color: #589b3f; color: #FFFFFF;" routerLink="/createpost"
-                    hidden>Realizar aporte</button>
-                <button mat-menu-item style="background-color: #589b3f; color: #FFFFFF;" routerLink="/company"
-                    hidden>Soy entusiasta o Corporación</button>
-            </mat-menu>
-        </mat-toolbar>
-    </div>
+<div *ngIf="rol == 'user'" class="backgroundContainer">
+  <app-topmenu></app-topmenu>
+  <div *ngIf="size">
+    <mat-toolbar style="background-color: #29a08d; width: 100%; height: 45px">
+      <div style="margin-left: 2%">
+        <b style="font-size: 15px; font-weight: 500; color: #ffffff"
+          >{{ first_name_data }} {{ last_name_data }}</b
+        >
+      </div>
+      <div style="margin-left: auto">
+        <button
+          mat-button
+          style="
+            background-color: #29a08d;
+            color: #ffffff;
+            border-left: 2px solid #000000;
+            border-right: 1px solid #000000;
+          "
+          routerLink="/dashboard"
+          hidden
+        >
+          Inicio
+        </button>
+        <button
+          mat-button
+          style="
+            background-color: #29a08d;
+            color: #ffffff;
+            border-left: 1px solid #000000;
+            border-right: 1px solid #000000;
+          "
+          routerLink="/profile"
+          hidden
+        >
+          Mi perfil
+        </button>
+        <button
+          mat-button
+          style="
+            background-color: #29a08d;
+            color: #ffffff;
+            border-left: 1px solid #000000;
+            border-right: 1px solid #000000;
+          "
+          routerLink="/createpost"
+          hidden
+        >
+          Realizar aporte
+        </button>
+        <button
+          mat-button
+          style="
+            background-color: #29a08d;
+            color: #ffffff;
+            border-left: 1px solid #000000;
+            border-right: 2px solid #000000;
+          "
+          routerLink="/company"
+          hidden
+        >
+          Soy entusiasta o Corporación
+        </button>
+      </div>
+    </mat-toolbar>
+  </div>
+  <div *ngIf="!size">
+    <mat-toolbar style="background-color: #29a08d; width: 100%; height: 40px">
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon style="color: #ffffff">menu</mat-icon>
+        <b style="color: #ffffff">Menu</b>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button
+          mat-menu-item
+          style="background-color: #29a08d; color: #ffffff"
+          routerLink="/dashboard"
+          hidden
+        >
+          Inicio
+        </button>
+        <button
+          mat-menu-item
+          style="background-color: #29a08d; color: #ffffff"
+          routerLink="/profile"
+          hidden
+        >
+          Mi perfil
+        </button>
+        <button
+          mat-menu-item
+          style="background-color: #29a08d; color: #ffffff"
+          routerLink="/createpost"
+          hidden
+        >
+          Realizar aporte
+        </button>
+        <button
+          mat-menu-item
+          style="background-color: #29a08d; color: #ffffff"
+          routerLink="/company"
+          hidden
+        >
+          Soy entusiasta o Corporación
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+  </div>
 
-    <!--Content-->
-    <router-outlet></router-outlet>
+  <!--Content-->
+  <router-outlet></router-outlet>
+
+  <!-- Footer -->
+  <section class="footer">
+    <section class="footerContainer">
+      <p>hola mundo</p>
+    </section>
+  </section>
 </div>
 
 <!-- Guest -->
-<div *ngIf="rol=='guest'">
-    <app-topmenu></app-topmenu>
-    <mat-toolbar style="background-color: #589b3f; width: 100%; height: 40px;">
-        <div style="margin-left: 2%;">
-            <b style="font-size: 15px;">Invitado(a)</b>
-        </div>
-        <div style="margin-left: auto;">
-            <button mat-button (click)="registerGuest()" hidden>Registrate</button>
-        </div>
-    </mat-toolbar>
-    <!--Content-->
-    <router-outlet></router-outlet>
+<div *ngIf="rol == 'guest'">
+  <app-topmenu></app-topmenu>
+  <mat-toolbar style="background-color: #29a08d; width: 100%; height: 40px">
+    <div style="margin-left: 2%">
+      <b style="font-size: 15px">Invitado(a)</b>
+    </div>
+    <div style="margin-left: auto">
+      <button mat-button (click)="registerGuest()" class="homeButton" hidden>
+        Registrate
+      </button>
+    </div>
+  </mat-toolbar>
+  <!--Content-->
+  <router-outlet></router-outlet>
+  <section class="footer">
+    <section class="footerContainer">
+      <p>hola mundo</p>
+    </section>
+  </section>
 </div>

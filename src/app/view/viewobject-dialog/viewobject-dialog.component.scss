@@ -1,5 +1,13 @@
 .container {
-    text-align: center;
-    height: 80vh; 
-    overflow: auto;
+  text-align: center;
+  height: 80vh;
+  overflow: auto;
+}
+
+.dialogButton {
+  background-color: #29a08d;
+  color: #ffffff;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
 }

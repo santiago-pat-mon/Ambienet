@@ -91,6 +91,7 @@ export class LoginComponent implements OnInit {
             //See captcha
             console.log("Token Captcha (Login): " + token);
 
+            // commet this
             //this.loguinTest()
 
             this.loginService.verifyUser(form.value).subscribe(

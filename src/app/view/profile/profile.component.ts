@@ -94,8 +94,10 @@ export class ProfileComponent implements OnInit {
         console.log(p)
         this.userData = p !== undefined ? p : []
       },
-      e => { console.log(e), this.launchMessage(e) },
+      e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
       () => {
+
+        console.log(this.userData)
         this.reputationValue = this.userData.profile.reputation
         this.userNameValue = this.userData.username
         this.myLatitude = this.userData.profile.latitude
@@ -233,7 +235,7 @@ export class ProfileComponent implements OnInit {
                 this.userUpdated = p !== undefined ? p : []
               },
               e => {
-                console.log(e), this.launchMessage(e)
+                console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde")
               },
               () => {
                 console.log("Por fuera:", this.userUpdated)
@@ -291,7 +293,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.uploadFile(this.selectedFile).subscribe(
       (p) => {
       },
-      (e) => this.launchMessage(e),
+      (e) => this.launchMessage("Ocurrió un error, por favor intenta más tarde"),
       () => {
       }
     );

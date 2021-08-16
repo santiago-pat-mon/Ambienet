@@ -1,20 +1,31 @@
-<div class="container" *ngIf="rol=='admin'">
-    <mat-card class="dataContainer">
-        <h4 style="text-align: center;">Estadísticas</h4>
-        <div>
-            <div>
-                <div style="display: block">
-                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-                        [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
-                    </canvas>
-                </div>
-            </div>
+<div class="container" *ngIf="rol == 'admin'">
+  <mat-card class="dataContainer">
+    <h4 style="text-align: center">Estadísticas</h4>
+    <div>
+      <div>
+        <div style="display: block">
+          <canvas
+            baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+          >
+          </canvas>
         </div>
-    </mat-card>
-</div>
-<div class="container" *ngIf="rol=='user' || rol=='guest'">
-    <div class="dataContainer">
-        <p>Acceso restringido. No eres un Administrador, eres un usuario o visitante.</p>
-        <button mat-raised-button color="primary" routerLink="/dashboard">Volver</button>
+      </div>
     </div>
+  </mat-card>
+</div>
+<div class="container" *ngIf="rol == 'user' || rol == 'guest'">
+  <div class="dataContainer">
+    <p>
+      Acceso restringido. No eres un Administrador, eres un usuario o visitante.
+    </p>
+    <button mat-raised-button routerLink="/dashboard" class="staticsButton">
+      Volver
+    </button>
+  </div>
 </div>

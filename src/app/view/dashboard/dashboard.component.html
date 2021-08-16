@@ -1,49 +1,82 @@
 <div class="container">
-    <mat-card *ngFor="let object of postData">
-        <mat-card-header>
-            <div mat-card-avatar class="profilePicture">
-                <img *ngIf="object.profile.picture != null" src="../../api/{{object.profile.picture}}"
-                    title="{{object.username}}" />
-                <img *ngIf="object.profile.picture == null" src="../../api/profilePicture/default-user-image.png"
-                    title="{{object.username}}" />
+  <mat-card
+    *ngFor="let object of postData"
+    class="cardContainer"
+    style="border-radius: 25px"
+  >
+    <mat-card-header>
+      <div mat-card-avatar class="profilePicture">
+        <img
+          *ngIf="object.profile.picture != null"
+          src="../../api/{{ object.profile.picture }}"
+          title="{{ object.username }}"
+        />
+        <img
+          *ngIf="object.profile.picture == null"
+          src="../../api/profilePicture/default-user-image.png"
+          title="{{ object.username }}"
+        />
+      </div>
+      <mat-card-title>
+        <b>{{ object.username }}</b>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <mat-icon>stars</mat-icon>{{ object.profile.reputation }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content style="text-align: center">
+      <h2>{{ object.title }}</h2>
+      <section>
+        <mat-tab-group mat-align-tabs="center">
+          <mat-tab label="Imagen">
+            <button
+              class="imageButton"
+              (click)="viewObject(object)"
+              style="
+                margin: 0px;
+                margin-top: 20px;
+                margin-bottom: 10px;
+                padding: 0px;
+                border: 0px;
+                cursor: pointer;
+              "
+            >
+              <img src="../../api/{{ object.photo }}" />
+            </button>
+          </mat-tab>
+          <mat-tab label="Ubicación">
+            <div class="mapContainerDashboard">
+              <agm-map
+                [latitude]="object.latitude"
+                [longitude]="object.longitude"
+                [zoom]="zoom"
+              >
+                <agm-marker
+                  [latitude]="object.latitude"
+                  [longitude]="object.longitude"
+                >
+                  <agm-info-window>
+                    <strong>{{ object.title }}</strong>
+                  </agm-info-window>
+                </agm-marker>
+              </agm-map>
             </div>
-            <mat-card-title>
-                <b>{{object.username}}</b>
-            </mat-card-title>
-            <mat-card-subtitle>
-                <mat-icon>stars</mat-icon>{{object.profile.reputation}}
-            </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content style="text-align: center;">
-            <h2>{{object.title}}</h2>
-            <section>
-                <mat-tab-group mat-align-tabs="center">
-                    <mat-tab label="Imagen">
-                        <button class="imageButton" (click)="viewObject(object)"
-                            style="margin: 0px; margin-top: 20px; margin-bottom: 10px; padding: 0px; border: 0px; cursor: pointer;">
-                            <img src="../../api/{{object.photo}}" />
-                        </button>
-                    </mat-tab>
-                    <mat-tab label="Ubicación">
-                        <div class="mapContainerDashboard">
-                            <agm-map [latitude]="object.latitude" [longitude]="object.longitude" [zoom]="zoom">
-                                <agm-marker [latitude]="object.latitude" [longitude]="object.longitude">
-                                    <agm-info-window>
-                                        <strong>{{object.title}}</strong>
-                                    </agm-info-window>
-                                </agm-marker>
-                            </agm-map>
-                        </div>
-                    </mat-tab>
-                </mat-tab-group>
-            </section>
-            <h3>{{object.type_catastrophe}}</h3>
-            <p>{{object.description}}</p>
-            <section>
-                <b class="countValidation">{{object.validator_number}}</b>
-                <button mat-raised-button color="primary" (click)="validatePost(object)"
-                    [disabled]="rol=='guest' ? true : false">Validar</button>
-            </section>
-        </mat-card-content>
-    </mat-card>
+          </mat-tab>
+        </mat-tab-group>
+      </section>
+      <h3>{{ object.type_catastrophe }}</h3>
+      <p>{{ object.description }}</p>
+      <section>
+        <b class="countValidation">{{ object.validator_number }}</b>
+        <button
+          mat-raised-button
+          class="dashboardButton"
+          (click)="validatePost(object)"
+          [disabled]="rol == 'guest' ? true : false"
+        >
+          Validar
+        </button>
+      </section>
+    </mat-card-content>
+  </mat-card>
 </div>

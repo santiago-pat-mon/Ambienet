@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
   loadData() {
 
     /* BORRAR */
-    this.postData = [{
+    /* this.postData = [{
       username: "Hola",
       profile: {
         picture: null,
@@ -59,8 +59,8 @@ export class DashboardComponent implements OnInit {
       validator_number: 300,
       type_catastrophe: "lluvia",
       description: "Aguacero fuerte"
-    }]
-    /* this.viewPostService.getPosts().subscribe(
+    }] */
+    this.viewPostService.getPosts().subscribe(
       p => {
         console.log(p.results)
         this.postData = p.results !== undefined ? p.results : []
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
       () => {
         console.log("Dashboard actualizado")
       }
-    ) */
+    )
   }
 
   /* Method in charge of making a zoom to the psot image */

@@ -1,103 +1,139 @@
-<div class="container" *ngIf="rol=='user'">
-    <div class="dataContainer">
-        <mat-card>
-            <p>Actualizar mi perfil</p>
-            <mat-tab-group mat-align-tabs="center">
-                <mat-tab label="Mi ubicación">
-                    <p><b>Importante:</b> Por defecto tienes la ubicación de tu dispositivo, pero si quieres poner
-                        una marca en un lugar distinto debes dar doble Clic en la ubicación que desees del mapa.
-                        El botón “Ubicación del dispositivo” pondrá la ubicación de tu dispositivo nuevamente. </p>
-                    <div class="mapContainerPost">
-                        <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom"
-                            (mapReady)="mapReadyHandler($event)">
-                            <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
-                                <agm-info-window>
-                                    <strong>Ubicación</strong>
-                                    <p><b>Latitud: </b>{{myLatitude}}</p>
-                                    <p><b>Longitud: </b>{{myLongitude}}</p>
-                                </agm-info-window>
-                            </agm-marker>
-                        </agm-map>
-                    </div>
-                </mat-tab>
-            </mat-tab-group>
-            <button mat-raised-button color="primary" style="margin-top: 20px;" (click)="selectDeviceLocation()">
-                Ubicación del dispositivo
-            </button>
-            <div class="userForm">
-                <img *ngIf="userData.profile.picture != null" class="profilePicture"
-                    src="../../api/{{userData.profile.picture}}" />
-                <img *ngIf="userData.profile.picture == null" class="profilePicture"
-                    src="../../api/profilePicture/default-user-image.png" /><br /><br />
-                <mat-form-field>
-                    <mat-label>Reputación</mat-label>
-                    <input matInput [(value)]="reputationValue" type="text" disabled />
-                </mat-form-field>
-                <mat-form-field>
-                    <mat-label>User Name</mat-label>
-                    <input matInput [(value)]="userNameValue" type="text" disabled />
-                </mat-form-field>
-                <form [formGroup]="userForm" (ngSubmit)="validateCredentialsProfile(userForm)">
-                    <mat-form-field>
-                        <mat-label>Nombre(s)</mat-label>
-                        <input matInput formControlName="first_name" type="text" required />
-                        <mat-error *ngIf="userForm.controls.first_name.invalid">{{getErrorMessage("first_name")}}
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Apellido(s)</mat-label>
-                        <input matInput formControlName="last_name" type="text" required />
-                        <mat-error *ngIf="userForm.controls.last_name.invalid">{{getErrorMessage("last_name")}}
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Teléfono</mat-label>
-                        <input matInput formControlName="phone_number" type="number" />
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Correo Electrónico</mat-label>
-                        <input matInput formControlName="email" type="email" required />
-                        <mat-error *ngIf="userForm.controls.email.invalid">{{getErrorMessage("email")}}</mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Biografía</mat-label>
-                        <input matInput formControlName="biography" type="text" />
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>País</mat-label>
-                        <input matInput formControlName="country" type="text" />
-                        <mat-error *ngIf="userForm.controls.country.invalid">Solo ingresar letras no números</mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Departamento</mat-label>
-                        <input matInput formControlName="state" type="text" />
-                        <mat-error *ngIf="userForm.controls.state.invalid">Solo ingresar letras no números</mat-error>
-                    </mat-form-field>
-                    <mat-form-field>
-                        <mat-label>Ciudad</mat-label>
-                        <input matInput formControlName="city" type="text" />
-                        <mat-error *ngIf="userForm.controls.city.invalid">Solo ingresar letras no números</mat-error>
-                    </mat-form-field>
-                    <br />
-                    <!-- Select file-->
-                    <mat-label style="font-size: 15px;">Foto de perfil</mat-label><br /><br />
-                    <input #inputFile type="file" (change)="selectFile($event)">
-                    <br />
-                    <br />
-                    <button mat-raised-button style="background-color: #1f7500bd; color: #FFFFFF;">ACTUALIZAR</button>
-                </form>
-            </div>
-        </mat-card>
-    </div>
+<div class="container" *ngIf="rol == 'user'">
+  <div class="dataContainer">
+    <mat-card class="cardContainer">
+      <p>Actualizar mi perfil</p>
+      <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Mi ubicación">
+          <p>
+            <b>Importante:</b> Por defecto tienes la ubicación de tu
+            dispositivo, pero si quieres poner una marca en un lugar distinto
+            debes dar doble Clic en la ubicación que desees del mapa. El botón
+            “Ubicación del dispositivo” pondrá la ubicación de tu dispositivo
+            nuevamente.
+          </p>
+          <div class="mapContainerPost">
+            <agm-map
+              [latitude]="myLatitude"
+              [longitude]="myLongitude"
+              [zoom]="zoom"
+              (mapReady)="mapReadyHandler($event)"
+            >
+              <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
+                <agm-info-window>
+                  <strong>Ubicación</strong>
+                  <p><b>Latitud: </b>{{ myLatitude }}</p>
+                  <p><b>Longitud: </b>{{ myLongitude }}</p>
+                </agm-info-window>
+              </agm-marker>
+            </agm-map>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+      <button
+        mat-raised-button
+        class="profileButton"
+        style="margin-top: 20px"
+        (click)="selectDeviceLocation()"
+      >
+        Ubicación del dispositivo
+      </button>
+      <div class="userForm">
+        <img
+          *ngIf="userData.profile.picture != null"
+          class="profilePicture"
+          src="https://ambienet.000webhostapp.com/api/{{
+            userData.profile.picture
+          }}"
+        />
+        <img
+          *ngIf="userData.profile.picture == null"
+          class="profilePicture"
+          src="https://ambienet.000webhostapp.com/api/profilePicture/default-user-image.png"
+        />
+        <br />
+        <!-- Select file-->
+        <input #inputFile type="file" (change)="selectFile($event)" />
+        <br />
+        <br />
+        <mat-form-field>
+          <mat-label>Reputación</mat-label>
+          <input matInput [(value)]="reputationValue" type="text" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>User Name</mat-label>
+          <input matInput [(value)]="userNameValue" type="text" disabled />
+        </mat-form-field>
+        <form
+          [formGroup]="userForm"
+          (ngSubmit)="validateCredentialsProfile(userForm)"
+        >
+          <mat-form-field>
+            <mat-label>Nombre(s)</mat-label>
+            <input matInput formControlName="first_name" type="text" required />
+            <mat-error *ngIf="userForm.controls.first_name.invalid"
+              >{{ getErrorMessage("first_name") }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Apellido(s)</mat-label>
+            <input matInput formControlName="last_name" type="text" required />
+            <mat-error *ngIf="userForm.controls.last_name.invalid"
+              >{{ getErrorMessage("last_name") }}
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="phone_number" type="number" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Correo Electrónico</mat-label>
+            <input matInput formControlName="email" type="email" required />
+            <mat-error *ngIf="userForm.controls.email.invalid">{{
+              getErrorMessage("email")
+            }}</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Biografía</mat-label>
+            <input matInput formControlName="biography" type="text" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>País</mat-label>
+            <input matInput formControlName="country" type="text" />
+            <mat-error *ngIf="userForm.controls.country.invalid"
+              >Solo ingresar letras no números</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Departamento</mat-label>
+            <input matInput formControlName="state" type="text" />
+            <mat-error *ngIf="userForm.controls.state.invalid"
+              >Solo ingresar letras no números</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Ciudad</mat-label>
+            <input matInput formControlName="city" type="text" />
+            <mat-error *ngIf="userForm.controls.city.invalid"
+              >Solo ingresar letras no números</mat-error
+            >
+          </mat-form-field>
+          <br />
+          <button mat-raised-button class="profileButton">ACTUALIZAR</button>
+        </form>
+      </div>
+    </mat-card>
+  </div>
 </div>
-<div *ngIf="rol=='admin'">
-    <div class="dataContainer">
-        <p>Acceso restringido. No eres un usuario, eres un administrador.</p>
-    </div>
+<div *ngIf="rol == 'admin'">
+  <div class="dataContainer">
+    <p>Acceso restringido. No eres un usuario, eres un administrador.</p>
+  </div>
 </div>
-<div *ngIf="rol=='guest'">
-    <div class="dataContainer">
-        <p>Por favor regístrate para acceder a estas funcionalidades.</p>
-        <button mat-raised-button color="primary" (click)="registerGuest()" hidden>Registrate</button>
-    </div>
+<div *ngIf="rol == 'guest'">
+  <div class="dataContainer">
+    <p>Por favor regístrate para acceder a estas funcionalidades.</p>
+    <button mat-raised-button color="primary" (click)="registerGuest()" hidden>
+      Registrate
+    </button>
+  </div>
 </div>

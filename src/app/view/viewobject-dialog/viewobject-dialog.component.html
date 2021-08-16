@@ -1,7 +1,13 @@
-<div *ngIf="objectType=='image'">
-    <div class="container">
-        <img src="../../api/{{object.object.photo}}" width="900px" height="700px" />
-        <br />
-        <button mat-raised-button color="primary" (click)="onNoClick()">Volver</button>
-    </div>
+<div *ngIf="objectType == 'image'">
+  <div class="container">
+    <img
+      src="../../api/{{ object.object.photo }}"
+      width="900px"
+      height="700px"
+    />
+    <br />
+    <button mat-raised-button class="dialogButton" (click)="onNoClick()">
+      Volver
+    </button>
+  </div>
 </div>

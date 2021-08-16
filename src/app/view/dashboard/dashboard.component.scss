@@ -1,67 +1,82 @@
 @mixin smallmobile {
-    @media (max-width: 335px) {
-      @content;
-    }
+  @media (max-width: 335px) {
+    @content;
+  }
 }
 
 @mixin medianMeasure {
-    @media (max-width: 580px) {
-        @content;
-    }
+  @media (max-width: 580px) {
+    @content;
+  }
 }
 
 .container {
-    margin: auto;
-    width: 90%;
+  margin: auto;
+  width: 90%;
 }
 
 .imageButton img {
-    width: 450px;
-    height: 300px;
-    @include medianMeasure() {
-        width: 250px;
-        height: 170px;
-    }
-    @include smallmobile() {
-        width: 150px;
-        height: 110px;
-    }
+  width: 450px;
+  height: 300px;
+  @include medianMeasure() {
+    width: 250px;
+    height: 170px;
+  }
+  @include smallmobile() {
+    width: 150px;
+    height: 110px;
+  }
 }
 
 .mapContainerDashboard {
-    width: 600px; 
-    margin: auto;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    @include smallmobile() {
-        width: 200px;
-    }
-    @include medianMeasure() {
-        width: 450px;
-    }
+  width: 600px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  @include smallmobile() {
+    width: 200px;
+  }
+  @include medianMeasure() {
+    width: 450px;
+  }
 }
 
 agm-map {
-    height: 350px;
+  height: 350px;
 }
 
 .profilePicture {
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.dashboardButton {
+  background-color: #29a08d;
+  color: #ffffff;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+}
+
+.cardContainer {
+  margin-top: 20px;
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.7);
 }
 
 .countValidation {
-    padding-top: 2px;
-    padding-bottom: 2px;
-    padding-left: 7px;
-    padding-right: 7px;
-    border: 2px solid black;
-    margin-right: 10px;
-    border-radius: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 7px;
+  padding-right: 7px;
+  border: 2px solid black;
+  margin-right: 10px;
+  border-radius: 5px;
 }
 
 mat-card {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
