@@ -69,12 +69,8 @@ export class CreatepostComponent implements OnInit {
   validateCredentialsPost(form: FormGroup) {
     if (form.valid) {
       if (this.auxPictureFile != true) {
-        if (this.selectedFile.name != null) {
-          
-          /* 
-          DECOMENTAR LO DEL UPLOAD FILE CUANDO YA SE TENGA LA CARPETA Y TODO
-          */      
-          //this.uploadFile()
+        if (this.selectedFile.name != null) {     
+          this.uploadFile()
 
           this.postToSend["title"] = form.value.title
           this.postToSend["type_catastrophe"] = form.value.typeCatastrophe
@@ -94,6 +90,9 @@ export class CreatepostComponent implements OnInit {
             e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
             () => {
 
+              console.log("lo que envio") 
+              console.log(this.postToSend)
+              console.log("lo que recibo")
               console.log(this.registerPostData)
               this.clearData(form)
               this.launchMessage("Post creado.")

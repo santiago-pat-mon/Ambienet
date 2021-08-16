@@ -8,13 +8,15 @@
       <div mat-card-avatar class="profilePicture">
         <img
           *ngIf="object.profile.picture != null"
-          src="../../api/{{ object.profile.picture }}"
+          src="http://13.58.8.74/php/api/{{ object.profile.picture }}"
           title="{{ object.username }}"
+          style="width: 50px; height: 50px; border-radius: 25px"
         />
         <img
           *ngIf="object.profile.picture == null"
-          src="../../api/profilePicture/default-user-image.png"
+          src="http://13.58.8.74/php/api/profilePicture/default-user-image.png"
           title="{{ object.username }}"
+          style="width: 50px; height: 50px; border-radius: 25px"
         />
       </div>
       <mat-card-title>
@@ -41,7 +43,7 @@
                 cursor: pointer;
               "
             >
-              <img src="../../api/{{ object.photo }}" />
+              <img src="{{ object.photo }}" />
             </button>
           </mat-tab>
           <mat-tab label="Ubicación">

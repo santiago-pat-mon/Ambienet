@@ -3,9 +3,8 @@ export const GlobalVariable = Object.freeze({
        used for communication are declared */
 
     // PHP
-    BASE_API_URL_PHP: "https://ambienet.000webhostapp.com/api/",
-    //BASE_API_URL_PHP: "https://ambienet-frontend.web.app/",
     //BASE_API_URL_PHP: "http://localhost/php/",
+    BASE_API_URL_PHP: "http://13.58.8.74/php/",
     PROFILE_PICTURE_PHP: "attachFile.php",
     POST_PICTURE_PHP: "attachFile.php",
 

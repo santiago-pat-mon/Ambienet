@@ -1,7 +1,7 @@
 <div class="container" *ngIf="rol == 'user'">
   <div class="dataContainer">
     <mat-card class="cardContainer">
-      <p>Actualizar mi perfil</p>
+      <p style="font-weight: bold; font-size: 20px">Actualizar mi perfil</p>
       <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Mi ubicación">
           <p>
@@ -41,14 +41,12 @@
         <img
           *ngIf="userData.profile.picture != null"
           class="profilePicture"
-          src="https://ambienet.000webhostapp.com/api/{{
-            userData.profile.picture
-          }}"
+          src="http://13.58.8.74/php/api/{{ userData.profile.picture }}"
         />
         <img
           *ngIf="userData.profile.picture == null"
           class="profilePicture"
-          src="https://ambienet.000webhostapp.com/api/profilePicture/default-user-image.png"
+          src="http://13.58.8.74/php/api/profilePicture/default-user-image.png"
         />
         <br />
         <!-- Select file-->
