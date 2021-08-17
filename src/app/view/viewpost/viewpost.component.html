@@ -68,7 +68,7 @@
         <ng-container matColumnDef="photo">
           <th mat-header-cell *matHeaderCellDef>Imagen</th>
           <td mat-cell *matCellDef="let post">
-            {{ post.photo }}
+            <img src="{{ post.photo }}" style="width: 40px; height: 40px" />
           </td>
         </ng-container>
         <!-- user name Column -->

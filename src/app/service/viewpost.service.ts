@@ -31,15 +31,19 @@ export class ViewpostService {
 
   /* Service that sends the information of a user who validated a post */
   sendValidatorData(submission: any): Observable<any> {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.token = this.ls.get("isLoggedToken")
     return this.http.post(buildPostUrl(GlobalVariable.SEND_VALIDATOR_POST), submission, {
-      headers: this.getHeadersNA()
+      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token),
     })
   }
 
   /* Service that adds one when the validate button is pressed */
   addValidator(submission: any, id: string): Observable<any> {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.token = this.ls.get("isLoggedToken")
     return this.http.patch(buildPatchUrl(GlobalVariable.INCREASE_POST_VALIDATION, id), submission, {
-      headers: this.getHeadersNA()
+      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token),
     })
   }
 

@@ -1,0 +1,34 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+.dataContainer {
+  width: 90%;
+  margin: auto;
+}
+
+.userForm {
+  margin-top: 20px;
+}
+
+.userForm mat-form-field {
+  width: 80%;
+}
+
+.companyButton {
+  background-color: #29a08d;
+  color: #ffffff;
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+}
+
+.cardContainer {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.7);
+}

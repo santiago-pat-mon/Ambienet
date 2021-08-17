@@ -1,0 +1,52 @@
+<div class="container" *ngIf="rol == 'user'">
+  <div class="dataContainer">
+    <mat-card class="cardContainer">
+      <p style="font-weight: bold; font-size: 20px">
+        Realizar solicitud para cambio de Rol
+      </p>
+      <div class="userForm">
+        <form
+          [formGroup]="rolRequestForm"
+          (ngSubmit)="validateCredentialsRolRequest(rolRequestForm)"
+        >
+          <mat-form-field>
+            <mat-label>¿Por qué deseo realizar esta solicitud?</mat-label>
+            <textarea
+              matInput
+              formControlName="message"
+              type="text"
+              rows="5"
+              style="resize: none"
+              required
+            ></textarea>
+            <mat-error *ngIf="rolRequestForm.controls.message.invalid">
+              {{ getErrorMessage("message") }}
+            </mat-error>
+          </mat-form-field>
+          <br />
+          <button mat-raised-button class="companyButton" hidden>
+            Enviar solicitud
+          </button>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>
+<div *ngIf="rol == 'admin'">
+  <div class="dataContainer">
+    <p>Acceso restringido. No eres un usuario, eres un administrador.</p>
+  </div>
+</div>
+<div *ngIf="rol == 'guest'">
+  <div class="dataContainer">
+    <p>Por favor regístrate para acceder a estas funcionalidades.</p>
+    <button
+      mat-raised-button
+      class="companyButton"
+      (click)="registerGuest()"
+      hidden
+    >
+      Registrate
+    </button>
+  </div>
+</div>

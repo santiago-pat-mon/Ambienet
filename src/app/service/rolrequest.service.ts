@@ -7,28 +7,37 @@ import { GlobalVariable } from '../config/global';
 @Injectable({
   providedIn: 'root'
 })
-export class ViewuserService {
+export class RolRequestService {
   ls: SecureLS
   token
+  userNameData
 
   constructor(private http: HttpClient) { }
 
-  /* Select posts from the database */
-  getUsers(): Observable<any> {
+  /* Send change rol user */
+  sendRolRequest(submission: any): Observable<any> {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.token = this.ls.get("isLoggedToken")
-    return this.http.get(buildGetUrl(GlobalVariable.READ_USERS), {
-      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token),
+    return this.http.post(buildPostUrl(GlobalVariable.ROLREQUEST_SEND), submission, {
+      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token)
     })
   }
 
-  // I included these headers because otherwise FireFox
-  // will request text/html instead of application/json
-  private getHeadersNA() {
-    const headers = new HttpHeaders()
-    headers.set("Accept", "application/json")
-    return headers
+  /* Select posts from the database */
+  getRolRequests(): Observable<any> {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.token = this.ls.get("isLoggedToken")
+    return this.http.get(buildGetUrl(GlobalVariable.READ_ROL_REQUEST), {
+      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token),
+    })
   }
+}
+
+/* Construction of the post url */
+function buildPostUrl(type: string): string {
+  let finalUrl = GlobalVariable.BASE_SERVER_URL
+  finalUrl += type
+  return finalUrl
 }
 
 /* Construction of the get url */

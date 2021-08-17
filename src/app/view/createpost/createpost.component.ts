@@ -89,7 +89,6 @@ export class CreatepostComponent implements OnInit {
             },
             e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
             () => {
-
               console.log("lo que envio") 
               console.log(this.postToSend)
               console.log("lo que recibo")

@@ -29,8 +29,6 @@ export class ViewuserComponent implements OnInit {
     "state",
     "city",
     "reputation",
-    "latitude",
-    "longitude",
     "picture",
     "delete_user",
   ]

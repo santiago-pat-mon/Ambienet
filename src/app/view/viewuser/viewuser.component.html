@@ -86,24 +86,27 @@
           </td>
         </ng-container>
         <!-- latitude Column -->
-        <ng-container matColumnDef="latitude">
+        <!-- <ng-container matColumnDef="latitude">
           <th mat-header-cell *matHeaderCellDef>Latitud</th>
           <td mat-cell *matCellDef="let user">
             {{ user.profile.latitude }}
           </td>
-        </ng-container>
+        </ng-container> -->
         <!-- longitude Column -->
-        <ng-container matColumnDef="longitude">
+        <!-- <ng-container matColumnDef="longitude">
           <th mat-header-cell *matHeaderCellDef>Longitud</th>
           <td mat-cell *matCellDef="let user">
             {{ user.profile.longitude }}
           </td>
-        </ng-container>
+        </ng-container> -->
         <!-- picture Column -->
         <ng-container matColumnDef="picture">
           <th mat-header-cell *matHeaderCellDef>Imagen perfil</th>
           <td mat-cell *matCellDef="let user">
-            {{ user.profile.picture }}
+            <img
+              src="http://13.58.8.74/php/api/{{ user.profile.picture }}"
+              style="width: 40px; height: 40px"
+            />
           </td>
         </ng-container>
         <!-- actionDeletePost  -->

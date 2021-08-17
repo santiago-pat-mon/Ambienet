@@ -44,22 +44,6 @@ export class DashboardComponent implements OnInit {
 
   /* Method in charge of loading the posts */
   loadData() {
-
-    /* BORRAR */
-    /* this.postData = [{
-      username: "Hola",
-      profile: {
-        picture: null,
-        reputation: "5"
-      },
-      photo: null,
-      latitude: 4.510852799999999,
-      longitude: -75.65570919999999,
-      title: "hola mundo",
-      validator_number: 300,
-      type_catastrophe: "lluvia",
-      description: "Aguacero fuerte"
-    }] */
     this.viewPostService.getPosts().subscribe(
       p => {
         console.log(p.results)

@@ -19,5 +19,7 @@ export const GlobalVariable = Object.freeze({
     READ_POSTS: "posts/",
     DELETE_POST: "posts/",
     SEND_VALIDATOR_POST: "posts/validator/",
-    INCREASE_POST_VALIDATION: "posts/" /* id del post */
+    INCREASE_POST_VALIDATION: "posts/", /* id del post */
+    ROLREQUEST_SEND: "users/make_request/",
+    READ_ROL_REQUEST: "staffs/pending_role_requests/",
 })

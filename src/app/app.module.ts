@@ -39,6 +39,7 @@ import { ChartsModule } from 'ng2-charts';
 import { StatisticsComponent } from './view/statistics/statistics.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from "ng-recaptcha";
 import { RequestsComponent } from './view/requests/requests.component';
+import { RolrequestComponent } from './view/rolrequest/rolrequest.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { RequestsComponent } from './view/requests/requests.component';
     ViewuserComponent,
     StatisticsComponent,
     RequestsComponent,
+    RolrequestComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({

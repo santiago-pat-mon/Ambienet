@@ -11,6 +11,7 @@ import { ViewpostComponent } from './view/viewpost/viewpost.component';
 import { ViewuserComponent } from './view/viewuser/viewuser.component';
 import { StatisticsComponent } from './view/statistics/statistics.component';
 import { RequestsComponent } from './view/requests/requests.component';
+import { RolrequestComponent } from './view/rolrequest/rolrequest.component';
 
 /* routes */
 const routes: Routes = [
@@ -44,6 +45,11 @@ const routes: Routes = [
         path: "company",
         canActivate: [AuthGuard],
         component: CompanyComponent,
+      },
+      {
+        path: "rolrequest",
+        canActivate: [AuthGuard],
+        component: RolrequestComponent,
       },
       {
         path: "viewpost",
