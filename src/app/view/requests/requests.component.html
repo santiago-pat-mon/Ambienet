@@ -3,65 +3,54 @@
     <h3 style="text-align: center">Peticiones de cambio de ROL</h3>
     <div style="overflow-x: auto">
       <mat-form-field style="width: 100%">
-        <input
-          matInput
-          (keyup)="applyObjectFilter($event.target.value)"
-          placeholder="Buscar post por nombre de usuario o correo"
-          style="width: 100%; color: #000000"
-        />
+        <input matInput (keyup)="applyObjectFilter($event.target.value)"
+          placeholder="Buscar post por nombre de usuario o correo" style="width: 100%; color: #000000" />
         <mat-icon matSuffix>
-          <img
-            width="20"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKgSURBVEhLtZY9aBRRFIUHFP/AQo1I0EZcRVbW3c3+DdushY34g82ikEILcfMjBIwISRBtFCsbtdJWQYNir2gEEVIYo4aglWulWIRtUmix+t3JGYjOTHZG1gOH9959597z5s2bt+tEoW8Jl+GTQqHwGr6kf4+2Qdsr2b+DQmUKvaD9tQJ/wNulUmmL0pIBg7PwpxWjfQr7y+Xyjnq9vqpWq63L5XJpYheYb8qwSSyr9HggqaHkhXw+f1ThUKTT6TXorsE2bGG2W1Mrg8JFEmw7WnCvwh3B0w2ht6f/aOYKRwOh905ojygUG+TcVe6IQuFA0GdC+EyhRKhUKtsosUh+U6FwILiiFfXbmDbx0SX/odXgFOYUCgLBYxNls9ntNsbopjeRAOQMa7GnFQqCyWlEbTvCNqY/T2yXNxkT5ByX0bhCQTDpHQT7TjT+Bi95kzHBqT0ho1GFgmDyvonY330aTzFu2YfqCWKAnHGrYYYKBYHA+1D91dCe0Xg6k8ls8kQdgPaV5fjvORSIeqFdO59TqdRatnA1Y/+7+kR7QNJQoHHRtGmnFIoGwltWGF61cbVa3Uj/gWJmOAOv02+4rrvZSwKMNxB/Y5pisXhI4WjYLUzCFxLs7hpQ2LELk/FFmQzw3nZqysFwPbFH0BYyqXBn8CL3k7SgxDsw8sNlzoUzppX+Kxykf852Q7Jo8GR7EM8reRFOwmG25ZidKPpj0F68PbmZ2PZ+V983fUvbo5LRsFsY8Qhi/zcnQOafY37Q9PRHQzSzbPtWr2Ac2N1FoVMkTsDzFD/J+I8tjTCyxbxPZNYJ9k4oatv1/80o2gNnl5v4xGwu1gGJC1s5hd/9bWTEbEiy7sDMKPohxOiwJN2DzOaWmdzQVPehAzII9R/EcX4D3JA6+GR9ZcwAAAAASUVORK5CYII="
-          />
+          <img width="20"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKgSURBVEhLtZY9aBRRFIUHFP/AQo1I0EZcRVbW3c3+DdushY34g82ikEILcfMjBIwISRBtFCsbtdJWQYNir2gEEVIYo4aglWulWIRtUmix+t3JGYjOTHZG1gOH9959597z5s2bt+tEoW8Jl+GTQqHwGr6kf4+2Qdsr2b+DQmUKvaD9tQJ/wNulUmmL0pIBg7PwpxWjfQr7y+Xyjnq9vqpWq63L5XJpYheYb8qwSSyr9HggqaHkhXw+f1ThUKTT6TXorsE2bGG2W1Mrg8JFEmw7WnCvwh3B0w2ht6f/aOYKRwOh905ojygUG+TcVe6IQuFA0GdC+EyhRKhUKtsosUh+U6FwILiiFfXbmDbx0SX/odXgFOYUCgLBYxNls9ntNsbopjeRAOQMa7GnFQqCyWlEbTvCNqY/T2yXNxkT5ByX0bhCQTDpHQT7TjT+Bi95kzHBqT0ho1GFgmDyvonY330aTzFu2YfqCWKAnHGrYYYKBYHA+1D91dCe0Xg6k8ls8kQdgPaV5fjvORSIeqFdO59TqdRatnA1Y/+7+kR7QNJQoHHRtGmnFIoGwltWGF61cbVa3Uj/gWJmOAOv02+4rrvZSwKMNxB/Y5pisXhI4WjYLUzCFxLs7hpQ2LELk/FFmQzw3nZqysFwPbFH0BYyqXBn8CL3k7SgxDsw8sNlzoUzppX+Kxykf852Q7Jo8GR7EM8reRFOwmG25ZidKPpj0F68PbmZ2PZ+V983fUvbo5LRsFsY8Qhi/zcnQOafY37Q9PRHQzSzbPtWr2Ac2N1FoVMkTsDzFD/J+I8tjTCyxbxPZNYJ9k4oatv1/80o2gNnl5v4xGwu1gGJC1s5hd/9bWTEbEiy7sDMKPohxOiwJN2DzOaWmdzQVPehAzII9R/EcX4D3JA6+GR9ZcwAAAAASUVORK5CYII=" />
         </mat-icon>
       </mat-form-field>
-      <table
-        mat-table
-        id="tableRequests"
-        [dataSource]="requestDataSource"
-        class="mat-elevation-z8"
-      >
+      <table mat-table id="tableRequests" [dataSource]="requestDataSource" class="mat-elevation-z8"
+        style="text-align: left;">
         <!-- username Column -->
         <ng-container matColumnDef="username">
           <th mat-header-cell *matHeaderCellDef>Nombre usuario</th>
-          <td mat-cell *matCellDef="let request">
+          <td mat-cell *matCellDef="let request" style="padding-left: 5px; padding-right: 5px;">
             {{ request.requesting_user.username }}
           </td>
         </ng-container>
         <!-- name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nombre completo</th>
-          <td mat-cell *matCellDef="let request">
+          <td mat-cell *matCellDef="let request" style="padding-left: 5px; padding-right: 5px;">
             {{ request.requesting_user.first_name }}
             {{ request.requesting_user.last_name }}
           </td>
         </ng-container>
-        <!-- message Column -->
-        <!-- <ng-container matColumnDef="message">
-          <th mat-header-cell *matHeaderCellDef>Mensaje</th>
-          <td mat-cell *matCellDef="let request">
-            {{ request.message }}
-          </td>
-        </ng-container> -->
         <!-- role Column -->
-        <ng-container matColumnDef="role">
-          <th mat-header-cell *matHeaderCellDef>Rol</th>
-          <td mat-cell *matCellDef="let request">
-            {{ request.requesting_user.role }}
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let request" style="padding-left: 5px; padding-right: 5px;">
+            {{
+            request.status == 1
+            ? "Pendiente"
+            : request.status == 2
+            ? "Rechazado"
+            : "Aprobado"
+            }}
           </td>
         </ng-container>
         <!-- email Column -->
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef>Correo electrónico</th>
-          <td mat-cell *matCellDef="let request">
+          <td mat-cell *matCellDef="let request" style="padding-left: 5px; padding-right: 5px;">
             {{ request.requesting_user.email }}
           </td>
         </ng-container>
         <!-- phone_number Column -->
         <ng-container matColumnDef="phone_number">
           <th mat-header-cell *matHeaderCellDef>Teléfono</th>
-          <td mat-cell *matCellDef="let request">
+          <td mat-cell *matCellDef="let request" style="padding-left: 5px; padding-right: 5px;">
             {{ request.requesting_user.phone_number }}
           </td>
         </ng-container>
@@ -69,25 +58,19 @@
         <ng-container matColumnDef="actions" stickyEnd>
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell style="padding-left: 10px" *matCellDef="let request">
-            <button
-              mat-mini-fab
-              style="padding: 0px; margin-right: 5px"
-              color="primary"
-              aria-label="info icon"
-              title="Ver Mensaje"
-              (click)="deleteUser(user)"
-            >
-              <mat-icon>message</mat-icon>
+            <button mat-mini-fab style="padding: 0px; margin-right: 5px" color="primary" aria-label="info icon"
+              title="Aceptar solicitud" [disabled]="request.status == 2 || request.status == 3 ? true : false"
+              (click)="acceptRequest(request)">
+              <mat-icon>check_circle</mat-icon>
             </button>
-            <button
-              mat-mini-fab
-              style="padding: 0px; margin-right: 5px"
-              color="warn"
-              aria-label="info icon"
-              title="Eliminar Usuario"
-              (click)="deleteUser(user)"
-            >
-              <mat-icon>delete_forever</mat-icon>
+            <button mat-mini-fab style="padding: 0px; margin-right: 5px" color="primary" aria-label="info icon"
+              title="Rechazar solicitud" [disabled]="request.status == 2 || request.status == 3 ? true : false"
+              (click)="rejectRequest(request)">
+              <mat-icon>highlight_off</mat-icon>
+            </button>
+            <button mat-mini-fab style="padding: 0px; margin-right: 5px" color="primary" aria-label="info icon"
+              title="Ver Mensaje" (click)="viewMessage(request)">
+              <mat-icon>message</mat-icon>
             </button>
           </td>
         </ng-container>
@@ -95,11 +78,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
-    <mat-paginator
-      [length]="100"
-      [pageSize]="5"
-      [pageSizeOptions]="[5, 10, 25, 100]"
-    ></mat-paginator>
+    <mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </mat-card>
 </div>
 <div class="container" *ngIf="rol == 'user' || rol == 'guest'">

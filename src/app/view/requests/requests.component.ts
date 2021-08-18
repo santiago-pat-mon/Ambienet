@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { RequestModel } from 'src/app/model/request';
 import * as SecureLS from 'secure-ls';
 import { RolRequestService } from 'src/app/service/rolrequest.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewobjectDialogComponent } from '../viewobject-dialog/viewobject-dialog.component';
 
 @Component({
   selector: 'app-requests',
@@ -17,12 +19,14 @@ export class RequestsComponent implements OnInit {
   rol: string
   postDataSource
   errorMessage = ""
+  acceptResponseData
+  rejectResponseData
   requestDataSource
   request
   displayedColumns = [
     "username",
     "name",
-    "role",
+    "status",
     "email",
     "phone_number",
     "actions",
@@ -31,6 +35,7 @@ export class RequestsComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator
 
   constructor(
+    public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private viewRequestService: RolRequestService,
   ) { }
@@ -90,6 +95,56 @@ export class RequestsComponent implements OnInit {
     this.requestDataSource.filter = filterValue
   }
 
+  /* Method responsible for displaying the message */
+  viewMessage(user) {
+    const dialogRef = this.dialog.open(ViewobjectDialogComponent, {
+      width: "1000px",
+      data: {
+        type: "message",
+        object: user,
+      },
+    })
+  }
+
+  /* Method in charge of accepting the role change */
+  acceptRequest(user) {
+    let sendDataAccept = {}
+    sendDataAccept["user__username"] = user.requesting_user.username
+    sendDataAccept["new_role"] = user.new_role
+    sendDataAccept["request_status"] = "approved"
+    console.log(sendDataAccept)
+
+    this.viewRequestService.acceptOrRejectRolRequest(sendDataAccept).subscribe(
+      p => {
+        console.log(p)
+        this.acceptResponseData = p !== undefined ? p : []
+      },
+      e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
+      () => {
+        this.launchMessage("Se aceptó la solicitud de: " + user.requesting_user.first_name + " " + user.requesting_user.last_name)
+        this.getRequestData()
+      }
+    )
+  }
+
+  rejectRequest(user) {
+    let sendDataReject = {}
+    sendDataReject["user__username"] = user.requesting_user.username
+    sendDataReject["request_status"] = "reject"
+    console.log(sendDataReject)
+
+    this.viewRequestService.acceptOrRejectRolRequest(sendDataReject).subscribe(
+      p => {
+        console.log(p)
+        this.rejectResponseData = p !== undefined ? p : []
+      },
+      e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
+      () => {
+        this.launchMessage("Se rechazó la solicitud de: " + user.requesting_user.first_name + " " + user.requesting_user.last_name)
+        this.getRequestData()
+      }
+    )
+  }
 
   /** Launch message of the snackBar component */
   launchMessage(message: string) {

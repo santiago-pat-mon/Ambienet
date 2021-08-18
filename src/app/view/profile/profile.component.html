@@ -12,12 +12,8 @@
             nuevamente.
           </p>
           <div class="mapContainerPost">
-            <agm-map
-              [latitude]="myLatitude"
-              [longitude]="myLongitude"
-              [zoom]="zoom"
-              (mapReady)="mapReadyHandler($event)"
-            >
+            <agm-map [latitude]="myLatitude" [longitude]="myLongitude" [zoom]="zoom"
+              (mapReady)="mapReadyHandler($event)">
               <agm-marker [latitude]="myLatitude" [longitude]="myLongitude">
                 <agm-info-window>
                   <strong>Ubicación</strong>
@@ -29,25 +25,14 @@
           </div>
         </mat-tab>
       </mat-tab-group>
-      <button
-        mat-raised-button
-        class="profileButton"
-        style="margin-top: 20px"
-        (click)="selectDeviceLocation()"
-      >
+      <button mat-raised-button class="profileButton" style="margin-top: 20px" (click)="selectDeviceLocation()">
         Ubicación del dispositivo
       </button>
       <div class="userForm">
-        <img
-          *ngIf="userData.profile.picture != null"
-          class="profilePicture"
-          src="http://13.58.8.74/php/api/{{ userData.profile.picture }}"
-        />
-        <img
-          *ngIf="userData.profile.picture == null"
-          class="profilePicture"
-          src="http://13.58.8.74/php/api/profilePicture/default-user-image.png"
-        />
+        <img *ngIf="userData?.profile.picture != null" class="profilePicture"
+          src="http://13.58.8.74/php/api/{{ userData.profile.picture }}" />
+        <img *ngIf="userData?.profile.picture == null" class="profilePicture"
+          src="http://13.58.8.74/php/api/profilePicture/default-user-image.png" />
         <br />
         <!-- Select file-->
         <input #inputFile type="file" (change)="selectFile($event)" />
@@ -61,22 +46,21 @@
           <mat-label>User Name</mat-label>
           <input matInput [(value)]="userNameValue" type="text" disabled />
         </mat-form-field>
-        <form
-          [formGroup]="userForm"
-          (ngSubmit)="validateCredentialsProfile(userForm)"
-        >
+        <mat-form-field>
+          <mat-label>Mi rol</mat-label>
+          <input matInput [(value)]="userRolValue" type="text" disabled />
+        </mat-form-field>
+        <form [formGroup]="userForm" (ngSubmit)="validateCredentialsProfile(userForm)">
           <mat-form-field>
             <mat-label>Nombre(s)</mat-label>
             <input matInput formControlName="first_name" type="text" required />
-            <mat-error *ngIf="userForm.controls.first_name.invalid"
-              >{{ getErrorMessage("first_name") }}
+            <mat-error *ngIf="userForm.controls.first_name.invalid">{{ getErrorMessage("first_name") }}
             </mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Apellido(s)</mat-label>
             <input matInput formControlName="last_name" type="text" required />
-            <mat-error *ngIf="userForm.controls.last_name.invalid"
-              >{{ getErrorMessage("last_name") }}
+            <mat-error *ngIf="userForm.controls.last_name.invalid">{{ getErrorMessage("last_name") }}
             </mat-error>
           </mat-form-field>
           <mat-form-field>
@@ -88,7 +72,7 @@
             <input matInput formControlName="email" type="email" required />
             <mat-error *ngIf="userForm.controls.email.invalid">{{
               getErrorMessage("email")
-            }}</mat-error>
+              }}</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Biografía</mat-label>
@@ -97,34 +81,25 @@
           <mat-form-field>
             <mat-label>País</mat-label>
             <input matInput formControlName="country" type="text" />
-            <mat-error *ngIf="userForm.controls.country.invalid"
-              >Solo ingresar letras no números</mat-error
-            >
+            <mat-error *ngIf="userForm.controls.country.invalid">Solo ingresar letras no números</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Departamento</mat-label>
             <input matInput formControlName="state" type="text" />
-            <mat-error *ngIf="userForm.controls.state.invalid"
-              >Solo ingresar letras no números</mat-error
-            >
+            <mat-error *ngIf="userForm.controls.state.invalid">Solo ingresar letras no números</mat-error>
           </mat-form-field>
           <mat-form-field>
             <mat-label>Ciudad</mat-label>
             <input matInput formControlName="city" type="text" />
-            <mat-error *ngIf="userForm.controls.city.invalid"
-              >Solo ingresar letras no números</mat-error
-            >
+            <mat-error *ngIf="userForm.controls.city.invalid">Solo ingresar letras no números</mat-error>
           </mat-form-field>
           <br />
           <button mat-raised-button class="profileButton">ACTUALIZAR</button>
         </form>
         <br />
-        <button
-          mat-raised-button
-          class="profileButton"
-          routerLink="/rolrequest"
-        >
-          Realizar solicitud de Rol
+        <button mat-raised-button class="profileButton" routerLink="/rolrequest"
+          [style]="userData?.role == 1 || userData?.role == 2 ? 'display: none;' : 'display: inline;'">
+          Solicitud para Sensor Social
         </button>
       </div>
     </mat-card>

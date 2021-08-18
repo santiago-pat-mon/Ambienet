@@ -1,29 +1,21 @@
 <div class="container">
-  <mat-card
-    *ngFor="let object of postData"
-    class="cardContainer"
-    style="border-radius: 25px"
-  >
+  <mat-card *ngFor="let object of postData" class="cardContainer" style="border-radius: 25px">
     <mat-card-header>
       <div mat-card-avatar class="profilePicture">
-        <img
-          *ngIf="object.profile.picture != null"
-          src="http://13.58.8.74/php/api/{{ object.profile.picture }}"
-          title="{{ object.username }}"
-          style="width: 50px; height: 50px; border-radius: 25px"
-        />
-        <img
-          *ngIf="object.profile.picture == null"
-          src="http://13.58.8.74/php/api/profilePicture/default-user-image.png"
-          title="{{ object.username }}"
-          style="width: 50px; height: 50px; border-radius: 25px"
-        />
+        <img *ngIf="object.user.profile.picture != null"
+          src="http://13.58.8.74/php/api/{{ object.user.profile.picture }}" title="{{ object.user.username }}"
+          style="width: 50px; height: 50px; border-radius: 25px" />
+        <img *ngIf="object.user.profile.picture == null"
+          src="http://13.58.8.74/php/api/profilePicture/default-user-image.png" title="{{ object.user.username }}"
+          style="width: 50px; height: 50px; border-radius: 25px" />
       </div>
       <mat-card-title>
-        <b>{{ object.username }}</b>
+        <b style="margin-right: 10px;">{{ object.user.username }}</b>
+        <b style="color: #29a08d; font-size: 17px;"> {{object.user.role == 1 ? '[Entidad Importante]' :
+          object.user.role == 2 ? '[Sensor Social Importante]' : ''}}</b>
       </mat-card-title>
       <mat-card-subtitle>
-        <mat-icon>stars</mat-icon>{{ object.profile.reputation }}
+        <mat-icon>stars</mat-icon>{{ object.user.profile.reputation }}
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content style="text-align: center">
@@ -31,32 +23,21 @@
       <section>
         <mat-tab-group mat-align-tabs="center">
           <mat-tab label="Imagen">
-            <button
-              class="imageButton"
-              (click)="viewObject(object)"
-              style="
+            <button class="imageButton" (click)="viewObject(object)" style="
                 margin: 0px;
                 margin-top: 20px;
                 margin-bottom: 10px;
                 padding: 0px;
                 border: 0px;
                 cursor: pointer;
-              "
-            >
+              ">
               <img src="{{ object.photo }}" />
             </button>
           </mat-tab>
           <mat-tab label="Ubicación">
             <div class="mapContainerDashboard">
-              <agm-map
-                [latitude]="object.latitude"
-                [longitude]="object.longitude"
-                [zoom]="zoom"
-              >
-                <agm-marker
-                  [latitude]="object.latitude"
-                  [longitude]="object.longitude"
-                >
+              <agm-map [latitude]="object.latitude" [longitude]="object.longitude" [zoom]="zoom">
+                <agm-marker [latitude]="object.latitude" [longitude]="object.longitude">
                   <agm-info-window>
                     <strong>{{ object.title }}</strong>
                   </agm-info-window>
@@ -70,12 +51,8 @@
       <p>{{ object.description }}</p>
       <section>
         <b class="countValidation">{{ object.validator_number }}</b>
-        <button
-          mat-raised-button
-          class="dashboardButton"
-          (click)="validatePost(object)"
-          [disabled]="rol == 'guest' ? true : false"
-        >
+        <button mat-raised-button class="dashboardButton" (click)="validatePost(object)"
+          [disabled]="rol == 'guest' ? true : false">
           Validar
         </button>
       </section>

@@ -1,11 +1,37 @@
 <div *ngIf="objectType == 'image'">
   <div class="container">
-    <img
-      src="../../api/{{ object.object.photo }}"
-      width="900px"
-      height="700px"
-    />
+    <img src="{{ object.object.photo }}" width="900px" height="700px" />
     <br />
+  </div>
+  <div style="text-align: center">
+    <button mat-raised-button class="dialogButton" (click)="onNoClick()">
+      Volver
+    </button>
+  </div>
+</div>
+<div *ngIf="objectType == 'message'">
+  <div class="containerMessage">
+    <p style="font-weight: bold; font-size: 20px">Información del mensaje</p>
+    <p style="text-align: left">
+      <b>Nombre de usuario: </b> {{ object.object.requesting_user.username }}
+    </p>
+    <p style="text-align: left">
+      <b>Nombre completo: </b>
+      {{ object.object.requesting_user.first_name }}
+      {{ object.object.requesting_user.last_name }}
+    </p>
+    <p style="text-align: left">
+      <b>Correo electrónico: </b>
+      {{ object.object.requesting_user.email }}
+    </p>
+    <p style="text-align: left">
+      <b>Teléfono: </b>
+      {{ object.object.requesting_user.phone_number }}
+    </p>
+    <p style="font-size: 17px; font-weight: bold">MENSAJE</p>
+    <p style="text-align: justify">{{ object.object.message }}</p>
+  </div>
+  <div style="text-align: center">
     <button mat-raised-button class="dialogButton" (click)="onNoClick()">
       Volver
     </button>

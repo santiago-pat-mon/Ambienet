@@ -3,78 +3,67 @@
     <h3 style="text-align: center">POSTS Registrados</h3>
     <div style="overflow-x: auto">
       <mat-form-field style="width: 100%">
-        <input
-          matInput
-          (keyup)="applyObjectFilter($event.target.value)"
-          placeholder="Buscar post por nombre de usuario o tipo de catástrofe"
-          style="width: 100%; color: #000000"
-        />
+        <input matInput (keyup)="applyObjectFilter($event.target.value)"
+          placeholder="Buscar post por nombre de usuario o tipo de catástrofe" style="width: 100%; color: #000000" />
         <mat-icon matSuffix>
-          <img
-            width="20"
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKgSURBVEhLtZY9aBRRFIUHFP/AQo1I0EZcRVbW3c3+DdushY34g82ikEILcfMjBIwISRBtFCsbtdJWQYNir2gEEVIYo4aglWulWIRtUmix+t3JGYjOTHZG1gOH9959597z5s2bt+tEoW8Jl+GTQqHwGr6kf4+2Qdsr2b+DQmUKvaD9tQJ/wNulUmmL0pIBg7PwpxWjfQr7y+Xyjnq9vqpWq63L5XJpYheYb8qwSSyr9HggqaHkhXw+f1ThUKTT6TXorsE2bGG2W1Mrg8JFEmw7WnCvwh3B0w2ht6f/aOYKRwOh905ojygUG+TcVe6IQuFA0GdC+EyhRKhUKtsosUh+U6FwILiiFfXbmDbx0SX/odXgFOYUCgLBYxNls9ntNsbopjeRAOQMa7GnFQqCyWlEbTvCNqY/T2yXNxkT5ByX0bhCQTDpHQT7TjT+Bi95kzHBqT0ho1GFgmDyvonY330aTzFu2YfqCWKAnHGrYYYKBYHA+1D91dCe0Xg6k8ls8kQdgPaV5fjvORSIeqFdO59TqdRatnA1Y/+7+kR7QNJQoHHRtGmnFIoGwltWGF61cbVa3Uj/gWJmOAOv02+4rrvZSwKMNxB/Y5pisXhI4WjYLUzCFxLs7hpQ2LELk/FFmQzw3nZqysFwPbFH0BYyqXBn8CL3k7SgxDsw8sNlzoUzppX+Kxykf852Q7Jo8GR7EM8reRFOwmG25ZidKPpj0F68PbmZ2PZ+V983fUvbo5LRsFsY8Qhi/zcnQOafY37Q9PRHQzSzbPtWr2Ac2N1FoVMkTsDzFD/J+I8tjTCyxbxPZNYJ9k4oatv1/80o2gNnl5v4xGwu1gGJC1s5hd/9bWTEbEiy7sDMKPohxOiwJN2DzOaWmdzQVPehAzII9R/EcX4D3JA6+GR9ZcwAAAAASUVORK5CYII="
-          />
+          <img width="20"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKgSURBVEhLtZY9aBRRFIUHFP/AQo1I0EZcRVbW3c3+DdushY34g82ikEILcfMjBIwISRBtFCsbtdJWQYNir2gEEVIYo4aglWulWIRtUmix+t3JGYjOTHZG1gOH9959597z5s2bt+tEoW8Jl+GTQqHwGr6kf4+2Qdsr2b+DQmUKvaD9tQJ/wNulUmmL0pIBg7PwpxWjfQr7y+Xyjnq9vqpWq63L5XJpYheYb8qwSSyr9HggqaHkhXw+f1ThUKTT6TXorsE2bGG2W1Mrg8JFEmw7WnCvwh3B0w2ht6f/aOYKRwOh905ojygUG+TcVe6IQuFA0GdC+EyhRKhUKtsosUh+U6FwILiiFfXbmDbx0SX/odXgFOYUCgLBYxNls9ntNsbopjeRAOQMa7GnFQqCyWlEbTvCNqY/T2yXNxkT5ByX0bhCQTDpHQT7TjT+Bi95kzHBqT0ho1GFgmDyvonY330aTzFu2YfqCWKAnHGrYYYKBYHA+1D91dCe0Xg6k8ls8kQdgPaV5fjvORSIeqFdO59TqdRatnA1Y/+7+kR7QNJQoHHRtGmnFIoGwltWGF61cbVa3Uj/gWJmOAOv02+4rrvZSwKMNxB/Y5pisXhI4WjYLUzCFxLs7hpQ2LELk/FFmQzw3nZqysFwPbFH0BYyqXBn8CL3k7SgxDsw8sNlzoUzppX+Kxykf852Q7Jo8GR7EM8reRFOwmG25ZidKPpj0F68PbmZ2PZ+V983fUvbo5LRsFsY8Qhi/zcnQOafY37Q9PRHQzSzbPtWr2Ac2N1FoVMkTsDzFD/J+I8tjTCyxbxPZNYJ9k4oatv1/80o2gNnl5v4xGwu1gGJC1s5hd/9bWTEbEiy7sDMKPohxOiwJN2DzOaWmdzQVPehAzII9R/EcX4D3JA6+GR9ZcwAAAAASUVORK5CYII=" />
         </mat-icon>
       </mat-form-field>
-      <table
-        mat-table
-        id="tablePosts"
-        [dataSource]="postDataSource"
-        class="mat-elevation-z8"
-      >
+      <table mat-table id="tablePosts" [dataSource]="postDataSource" class="mat-elevation-z8" style="text-align: left;">
         <!-- title Column -->
         <ng-container matColumnDef="title">
           <th mat-header-cell *matHeaderCellDef>Título</th>
-          <td mat-cell *matCellDef="let post">
+          <td mat-cell *matCellDef="let post" style="padding-left: 5px; padding-right: 5px;">
             {{ post.title }}
           </td>
         </ng-container>
         <!-- type Column -->
         <ng-container matColumnDef="type_catastrophe">
           <th mat-header-cell *matHeaderCellDef>Tipo de Catástrofe</th>
-          <td mat-cell *matCellDef="let post">
+          <td mat-cell *matCellDef="let post" style="padding-left: 5px; padding-right: 5px;">
             {{ post.type_catastrophe }}
           </td>
         </ng-container>
         <!-- description Column -->
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef>Descripción</th>
-          <td mat-cell *matCellDef="let post">
+          <td mat-cell *matCellDef="let post" style="padding-left: 5px; padding-right: 5px;">
             {{ post.description }}
           </td>
         </ng-container>
         <!-- latitude Column -->
         <ng-container matColumnDef="latitude">
           <th mat-header-cell *matHeaderCellDef>Latitud</th>
-          <td mat-cell *matCellDef="let post">
+          <td mat-cell *matCellDef="let post" style="padding-left: 5px; padding-right: 5px;">
             {{ post.latitude }}
           </td>
         </ng-container>
         <!-- longitude Column -->
         <ng-container matColumnDef="longitude">
           <th mat-header-cell *matHeaderCellDef>Longitud</th>
-          <td mat-cell *matCellDef="let post">
+          <td mat-cell *matCellDef="let post" style="padding-left: 5px; padding-right: 5px;">
             {{ post.longitude }}
           </td>
         </ng-container>
         <!-- longitude Column -->
         <ng-container matColumnDef="created">
           <th mat-header-cell *matHeaderCellDef>Fecha de creación</th>
-          <td mat-cell *matCellDef="let post">
+          <td mat-cell *matCellDef="let post" style="padding-left: 5px; padding-right: 5px;">
             {{ post.created }}
           </td>
         </ng-container>
         <!-- Image Column -->
         <ng-container matColumnDef="photo">
           <th mat-header-cell *matHeaderCellDef>Imagen</th>
-          <td mat-cell *matCellDef="let post">
+          <td mat-cell *matCellDef="let post" style="padding-left: 5px; padding-right: 5px;">
             <img src="{{ post.photo }}" style="width: 40px; height: 40px" />
           </td>
         </ng-container>
         <!-- user name Column -->
         <ng-container matColumnDef="user">
           <th mat-header-cell *matHeaderCellDef>Nombre Usuario</th>
-          <td mat-cell *matCellDef="let post">
+          <td mat-cell *matCellDef="let post" style="padding-left: 5px; padding-right: 5px;">
             {{ post.username }}
           </td>
         </ng-container>
@@ -82,14 +71,8 @@
         <ng-container matColumnDef="delete_post" stickyEnd>
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell style="padding-left: 10px" *matCellDef="let post">
-            <button
-              mat-raised-button
-              style="padding: 0px"
-              color="warn"
-              aria-label="info icon"
-              title="Eliminar Post"
-              (click)="deletePost(post)"
-            >
+            <button mat-mini-fab style="padding: 0px" color="warn" aria-label="info icon" title="Eliminar Post"
+              (click)="deletePost(post)">
               <mat-icon>delete_forever</mat-icon>
             </button>
           </td>
@@ -99,11 +82,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
-    <mat-paginator
-      [length]="100"
-      [pageSize]="5"
-      [pageSizeOptions]="[5, 10, 25, 100]"
-    ></mat-paginator>
+    <mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
   </mat-card>
 </div>
 <div class="container" *ngIf="rol == 'user' || rol == 'guest'">

@@ -111,6 +111,7 @@ export class LoginComponent implements OnInit {
                   ls.set("isLoggedIn", "true")
                   ls.set("isLoggedRol", "admin")
                   ls.set("isLoggedToken", this.userLoggedIn.token)
+                  ls.set("isLoggedUserName", this.userLoggedIn.user.username)
                 } else {
                   if (this.userLoggedIn.user.is_staff == false) {
                     this.router.navigate(["dashboard"])

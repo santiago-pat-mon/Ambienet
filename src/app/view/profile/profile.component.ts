@@ -26,25 +26,10 @@ export class ProfileComponent implements OnInit {
   zoom = 16
   auxPictureFile = false
   userNameValue
+  userRolValue
   reputationValue
   userUpdated
-  userData = {
-    username: "sdfs",
-    first_name: "sdf",
-    last_name: "sdfsdf",
-    email: "sdfsd@hola.com",
-    phone_number: "2313131231",
-    profile: {
-      biography: "sdf",
-      country: "sdfsdf",
-      state: "sdfs",
-      city: "sdfsdf",
-      reputation: 5.0,
-      latitude: 4.5121535999999995,
-      longitude: -75.65475839999999,
-      picture: "url/image.jpg",
-    }
-  }
+  userData
   profileToSend = {}
   profileToSendData = {}
   selectedFile = {
@@ -91,15 +76,15 @@ export class ProfileComponent implements OnInit {
   loadUserData() {
     this.profileService.getUserData().subscribe(
       p => {
-        console.log(p)
         this.userData = p !== undefined ? p : []
       },
       e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
       () => {
-
-        console.log(this.userData)
+        console.log("AQUI")
+        console.log(this.userData.role)
         this.reputationValue = this.userData.profile.reputation
         this.userNameValue = this.userData.username
+        this.userRolValue = this.userData.role == 1 ? 'Entidad' : this.userData.role == 2 ? 'Sensor Social' : 'Normal'
         this.myLatitude = this.userData.profile.latitude
         this.myLongitude = this.userData.profile.longitude
         this.userForm.controls["first_name"].setValue(this.userData.first_name)

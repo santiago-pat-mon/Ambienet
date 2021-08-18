@@ -18,6 +18,7 @@ export class ViewobjectDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.object)
     this.objectType = this.object.type
     const object = this.object.object
     this.configObject(object)
