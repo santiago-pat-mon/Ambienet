@@ -23,4 +23,5 @@ export const GlobalVariable = Object.freeze({
     ROLREQUEST_SEND: "users/make_request/",
     READ_ROL_REQUEST: "staffs/pending_role_requests/",
     ACCEPT_OR_REJECT_ROL_REQUEST: "staffs/answer_role_requests/",
+    REPORT_POST: "posts/",
 })

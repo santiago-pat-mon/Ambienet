@@ -59,6 +59,24 @@ agm-map {
   height: auto;
 }
 
+.reportButtonDisabled {
+  color: #888888;
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+}
+
+.reportButton {
+  color: #29a08d;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.reportButton:hover {
+  text-decoration: underline;
+}
+
 .cardContainer {
   margin-top: 20px;
   border-radius: 25px;
@@ -74,6 +92,18 @@ agm-map {
   border: 2px solid black;
   margin-right: 10px;
   border-radius: 5px;
+}
+
+.viewAccordeon {
+  width: 90%; 
+  margin: auto; 
+  margin-top: 20px; 
+  margin-bottom: 20px;
+  display: inline;
+}
+
+.hiddenAccordeon {
+  display: none;
 }
 
 mat-card {

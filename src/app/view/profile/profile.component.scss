@@ -38,7 +38,7 @@
 }
 
 .userForm {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .userForm mat-form-field {
@@ -55,7 +55,7 @@
   width: 600px;
   margin: auto;
   margin-top: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   @include smallmobile() {
     width: 200px;
   }

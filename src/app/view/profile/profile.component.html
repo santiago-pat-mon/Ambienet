@@ -1,10 +1,15 @@
 <div class="container" *ngIf="rol == 'user'">
   <div class="dataContainer">
     <mat-card class="cardContainer">
-      <p style="font-weight: bold; font-size: 20px">Actualizar mi perfil</p>
+      <p style="font-weight: bold; font-size: 20px; color: #29a08d;">Actualizar mi Perfil</p>
+      <p></p>
+      <button mat-raised-button class="profileButton" routerLink="/rolrequest"
+        [style]="userData?.role == 1 || userData?.role == 2 ? 'display: none;' : 'display: inline;'">
+        Solicitud para Sensor Social
+      </button>
       <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Mi ubicación">
-          <p>
+          <p style="width: 80%; margin: auto; margin-top: 10px; font-size: 14px;">
             <b>Importante:</b> Por defecto tienes la ubicación de tu
             dispositivo, pero si quieres poner una marca en un lugar distinto
             debes dar doble Clic en la ubicación que desees del mapa. El botón
@@ -23,11 +28,11 @@
               </agm-marker>
             </agm-map>
           </div>
+          <button mat-raised-button class="profileButton" (click)="selectDeviceLocation()">
+            Ubicación del dispositivo
+          </button>
         </mat-tab>
       </mat-tab-group>
-      <button mat-raised-button class="profileButton" style="margin-top: 20px" (click)="selectDeviceLocation()">
-        Ubicación del dispositivo
-      </button>
       <div class="userForm">
         <img *ngIf="userData?.profile.picture != null" class="profilePicture"
           src="http://13.58.8.74/php/api/{{ userData.profile.picture }}" />
@@ -96,11 +101,6 @@
           <br />
           <button mat-raised-button class="profileButton">ACTUALIZAR</button>
         </form>
-        <br />
-        <button mat-raised-button class="profileButton" routerLink="/rolrequest"
-          [style]="userData?.role == 1 || userData?.role == 2 ? 'display: none;' : 'display: inline;'">
-          Solicitud para Sensor Social
-        </button>
       </div>
     </mat-card>
   </div>

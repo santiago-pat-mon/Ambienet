@@ -47,7 +47,8 @@ export class DashboardComponent implements OnInit {
     this.viewPostService.getPosts().subscribe(
       p => {
         console.log(p.results)
-        this.postData = p.results !== undefined ? p.results : []
+        let aux = p.results !== undefined ? p.results : []
+        this.postData = aux.filter((item) => item.is_banned == false)
       },
       e => { console.log(e), this.launchMessage(e) },
       () => {
@@ -98,10 +99,31 @@ export class DashboardComponent implements OnInit {
           () => {
             this.loadData()
             this.launchMessage("Gracias por validar este post: " + object.title)
-            this.addValidator = {}
-            this.validateToSendData = {}
           }
         )
+      }
+    )
+  }
+
+  reportPost(objectPost) {
+    console.log("REPORTADO")
+    console.log(objectPost.id)
+    this.viewPostService.sendReportData(objectPost.id).subscribe(
+      p => {
+        console.log(p)
+        this.validateData = p !== undefined ? p : []
+      },
+      e => {
+        console.log(e)
+        if (e.error.non_field_errors) {
+          this.launchMessage("Usted ya reportó este Post")
+        } else {
+          this.launchMessage("Ocurrió un error, por favor intenta más tarde")
+        }
+      },
+      () => {
+        this.loadData()
+        this.launchMessage("Gracias por enviar tu reporte sobre este Post")
       }
     )
   }

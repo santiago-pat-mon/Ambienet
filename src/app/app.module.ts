@@ -26,6 +26,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { SidenavComponent } from './view/sidenav/sidenav.component';
@@ -40,6 +42,7 @@ import { StatisticsComponent } from './view/statistics/statistics.component';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from "ng-recaptcha";
 import { RequestsComponent } from './view/requests/requests.component';
 import { RolrequestComponent } from './view/rolrequest/rolrequest.component';
+import { CreateadvancedpostComponent } from './view/createadvancedpost/createadvancedpost.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +61,7 @@ import { RolrequestComponent } from './view/rolrequest/rolrequest.component';
     StatisticsComponent,
     RequestsComponent,
     RolrequestComponent,
+    CreateadvancedpostComponent,
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -86,6 +90,8 @@ import { RolrequestComponent } from './view/rolrequest/rolrequest.component';
     MatDatepickerModule,
     MatTableModule,
     MatPaginatorModule,
+    MatChipsModule,
+    MatExpansionModule,
     ChartsModule,
     RecaptchaV3Module,
   ],

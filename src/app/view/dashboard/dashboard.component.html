@@ -10,12 +10,12 @@
           style="width: 50px; height: 50px; border-radius: 25px" />
       </div>
       <mat-card-title>
-        <b style="margin-right: 10px;">{{ object.user.username }}</b>
-        <b style="color: #29a08d; font-size: 17px;"> {{object.user.role == 1 ? '[Entidad Importante]' :
+        <b style="margin-right: 5px; color: #29a08d; font-size: 16px;">{{ object.user.username }}</b>
+        <b style="color: #0d00ff; font-size: 15px;"> {{object.user.role == 1 ? '[Entidad Importante]' :
           object.user.role == 2 ? '[Sensor Social Importante]' : ''}}</b>
       </mat-card-title>
       <mat-card-subtitle>
-        <mat-icon>stars</mat-icon>{{ object.user.profile.reputation }}
+        <mat-icon>stars</mat-icon><b>{{ object.user.profile.reputation }}</b>
       </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content style="text-align: center">
@@ -49,11 +49,35 @@
       </section>
       <h3>{{ object.type_catastrophe }}</h3>
       <p>{{ object.description }}</p>
-      <section>
+      <section *ngIf="object.advanced_report" style="width: 90%; margin: auto; margin-top: 20px; margin-bottom: 20px;">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header style="background-color: #d1d1d1;">
+              <mat-panel-title style="font-weight: bold; color: #29a08d;">
+                Datos del Formulario Avanzado
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <section style="text-align: left; width: 100%; height: auto;">
+              <p><b>Fenómeno Climático: </b>{{object.advanced_report.climatic_phenomenon}}</p>
+              <p><b>Intervalo de Tiempo: </b>{{object.advanced_report.time_interval}} Minutos</p>
+              <p><b>Temperatura Máxima: </b>{{object.advanced_report.temp_max}} °C</p>
+              <p><b>Temperatura Mínima: </b>{{object.advanced_report.temp_min}} °C</p>
+              <p><b>Afectaciones que Conlleva: </b>{{object.advanced_report.conditions_can_be_triggered}}</p>
+              <p><b>Riesgos Asociados: </b>{{object.advanced_report.associated_risks}}</p>
+            </section>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </section>
+      <section style="width: 100%;">
         <b class="countValidation">{{ object.validator_number }}</b>
         <button mat-raised-button class="dashboardButton" (click)="validatePost(object)"
           [disabled]="rol == 'guest' ? true : false">
           Validar
+        </button>
+      </section>
+      <section style="width: 100%; margin-top: 20px;">
+        <button [class]="rol == 'guest' ? 'reportButtonDisabled' : 'reportButton'" (click)="reportPost(object)">
+          Reportar este Post
         </button>
       </section>
     </mat-card-content>

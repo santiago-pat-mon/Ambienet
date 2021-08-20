@@ -47,6 +47,15 @@ export class ViewpostService {
     })
   }
 
+  /* Service used to report a post */
+  sendReportData(submission: any): Observable<any> {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.token = this.ls.get("isLoggedToken")
+    return this.http.post(buildPostUrl(GlobalVariable.REPORT_POST + submission + "/report_post/"), submission, {
+      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token),
+    })
+  }
+
   // I included these headers because otherwise FireFox
   // will request text/html instead of application/json
   private getHeadersNA() {

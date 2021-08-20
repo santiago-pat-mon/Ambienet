@@ -96,6 +96,8 @@ export class LoginComponent implements OnInit {
 
             this.loginService.verifyUser(form.value).subscribe(
               p => {
+                console.log("login")
+                console.log(p)
                 this.userLoggedIn = p !== undefined ? p : []
               },
               e => {
@@ -122,6 +124,7 @@ export class LoginComponent implements OnInit {
                     ls.set("isLoggedFirstName", this.userLoggedIn.user.first_name)
                     ls.set("isLoggedLastName", this.userLoggedIn.user.last_name)
                     ls.set("isLoggedUserName", this.userLoggedIn.user.username)
+                    ls.set("isLoggedRolUser", this.userLoggedIn.user.role)
                   } else {
                     this.launchMessage("Usuario o contraseña incorrecta")
                   }

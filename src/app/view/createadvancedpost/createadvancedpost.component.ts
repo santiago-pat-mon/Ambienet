@@ -1,25 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { CreatepostService } from "src/app/service/createpost.service";
-import { Router } from '@angular/router';
-import * as SecureLS from 'secure-ls';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import * as SecureLS from 'secure-ls';
+import { CreatepostService } from 'src/app/service/createpost.service';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
-  selector: 'app-createpost',
-  templateUrl: './createpost.component.html',
-  styleUrls: ['./createpost.component.scss']
+  selector: 'app-createadvancedpost',
+  templateUrl: './createadvancedpost.component.html',
+  styleUrls: ['./createadvancedpost.component.scss']
 })
-export class CreatepostComponent implements OnInit {
+export class CreateadvancedpostComponent implements OnInit {
   /* Declaration of variables */
   ls: SecureLS
   rol: string
   userName
-  userRole
-  registerPostData
-  postForm: FormGroup
+  registerAdvancedPostData
+  advancedPostForm: FormGroup
+  advancedPostToSend = {
+    advanced_report: {}
+  }
   selectedDate = ""
-  postToSend = {}
   myLatitude
   myLongitude
   zoom = 16
@@ -31,7 +34,18 @@ export class CreatepostComponent implements OnInit {
     type: null
   }
 
-  /* Component constructor */
+  selectable = true;
+  removable = true;
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  conditionCtrl = new FormControl();
+  conditions: string[] = [];
+
+  selectable2 = true;
+  removable2 = true;
+  separatorKeysCodes2: number[] = [ENTER, COMMA];
+  riskCtrl = new FormControl();
+  risks: string[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -54,16 +68,18 @@ export class CreatepostComponent implements OnInit {
     this.ls = new SecureLS({ encodingType: "aes" })
     this.rol = this.ls.get("isLoggedRol")
     this.userName = this.ls.get("isLoggedUserName")
-    this.userRole = this.ls.get("isLoggedRolUser")
-    console.log(this.userRole)
   }
 
   /* Method responsible for initializing the forms */
   initForms() {
-    this.postForm = this.formBuilder.group({
+    this.advancedPostForm = this.formBuilder.group({
       title: new FormControl("", [Validators.required]),
       typeCatastrophe: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required]),
+      climatic_phenomenon: new FormControl("", [Validators.required]),
+      time_interval: new FormControl("", [Validators.required]),
+      temp_max: new FormControl("", [Validators.required]),
+      temp_min: new FormControl("", [Validators.required]),
     })
   }
 
@@ -73,46 +89,48 @@ export class CreatepostComponent implements OnInit {
     if (form.valid) {
       if (this.auxPictureFile != true) {
         if (this.selectedFile.name != null) {
-          this.uploadFile()
+          if (this.conditions.length > 0) {
+            if (this.risks.length > 0) {
+              this.uploadFile()
 
-          this.postToSend["title"] = form.value.title
-          this.postToSend["type_catastrophe"] = form.value.typeCatastrophe
-          this.postToSend["description"] = form.value.description
-          this.postToSend["latitude"] = this.myLatitude
-          this.postToSend["longitude"] = this.myLongitude
-          /* this.postToSend["created"] = this.selectedDate */
-          this.postToSend["photo"] = this.selectedFile.type + "/" + this.selectedFile.name
-          this.postToSend["user"] = this.userName
-          this.postToSend["type_post"] = "COM"
+              this.advancedPostToSend["title"] = form.value.title
+              this.advancedPostToSend["type_catastrophe"] = form.value.typeCatastrophe
+              this.advancedPostToSend["description"] = form.value.description
+              this.advancedPostToSend["latitude"] = this.myLatitude
+              this.advancedPostToSend["longitude"] = this.myLongitude
+              // this.advancedPostToSend["created"] = this.selectedDate
+              this.advancedPostToSend["photo"] = this.selectedFile.type + "/" + this.selectedFile.name
+              this.advancedPostToSend["user"] = this.userName
+              this.advancedPostToSend["type_post"] = "ADV"
+              this.advancedPostToSend.advanced_report["climatic_phenomenon"] = form.value.climatic_phenomenon
+              this.advancedPostToSend.advanced_report["time_interval"] = form.value.time_interval
+              this.advancedPostToSend.advanced_report["temp_max"] = form.value.temp_max
+              this.advancedPostToSend.advanced_report["temp_min"] = form.value.temp_min
+              this.advancedPostToSend.advanced_report["conditions_can_be_triggered"] = this.conditions.toString()
+              this.advancedPostToSend.advanced_report["associated_risks"] = this.risks.toString()
+              console.log(this.advancedPostToSend)
 
-          console.log(this.postToSend)
-
-          /* Connection and sending of the postToSend to the server */
-          this.createPostService.registerPost(this.postToSend).subscribe(
-            p => {
-              this.registerPostData = p !== undefined ? p : []
-            },
-            e => {
-              console.log(e)
-              if (e.error.title) {
-                this.launchMessage("El título debe tener más de 5 caracteres y menos de 20 caracteres")
-              } else {
-                if (e.error.description) {
-                  this.launchMessage("La descripción debe tener mínimo 5 caracteres y máximo 255 caracteres")
-                } else {
-                  this.launchMessage("Ocurrió un error, por favor intenta más tarde")
+              // Connection and sending of the advancedPostToSend to the server
+              this.createPostService.registerPost(this.advancedPostToSend).subscribe(
+                p => {
+                  this.registerAdvancedPostData = p !== undefined ? p : []
+                },
+                e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
+                () => {
+                  console.log("lo que envio")
+                  console.log(this.advancedPostToSend)
+                  console.log("lo que recibo")
+                  console.log(this.registerAdvancedPostData)
+                  this.clearData(form)
+                  this.launchMessage("Post creado.")
                 }
-              }
-            },
-            () => {
-              console.log("lo que envio")
-              console.log(this.postToSend)
-              console.log("lo que recibo")
-              console.log(this.registerPostData)
-              this.clearData(form)
-              this.launchMessage("Post creado.")
+              )
+            } else {
+              this.launchMessage("Por favor ingresa al menos un riesgo que podría desencadenar")
             }
-          )
+          } else {
+            this.launchMessage("Por favor ingresa al menos una afectación al medio ambiente")
+          }
         } else {
           this.launchMessage("Por favor ingresa una imagen.")
         }
@@ -129,7 +147,11 @@ export class CreatepostComponent implements OnInit {
     /* this.selectedFile.name = null
     this.selectedFile.base64textString = null
     this.selectedFile.type = null */
-    this.postToSend = {}
+    this.advancedPostToSend = {
+      advanced_report: {}
+    }
+    this.conditions = []
+    this.risks = []
     form.reset()
   }
 
@@ -252,13 +274,33 @@ export class CreatepostComponent implements OnInit {
     let errorMessage = ""
     switch (component) {
       case "title":
-        errorMessage = this.postForm.get("title").hasError("required")
+        errorMessage = this.advancedPostForm.get("title").hasError("required")
           ? "Campo Título requerido"
           : ""
         break
       case "description":
-        errorMessage = this.postForm.get("description").hasError("required")
+        errorMessage = this.advancedPostForm.get("description").hasError("required")
           ? "Campo Descripción requerido"
+          : ""
+        break
+      case "climatic_phenomenon":
+        errorMessage = this.advancedPostForm.get("climatic_phenomenon").hasError("required")
+          ? "Campo Fenómeno Climático requerido"
+          : ""
+        break
+      case "time_interval":
+        errorMessage = this.advancedPostForm.get("time_interval").hasError("required")
+          ? "Campo Intervalo de Tiempo requerido"
+          : ""
+        break
+      case "temp_max":
+        errorMessage = this.advancedPostForm.get("temp_max").hasError("required")
+          ? "Campo Temperatura Máxima requerido"
+          : ""
+        break
+      case "temp_min":
+        errorMessage = this.advancedPostForm.get("temp_min").hasError("required")
+          ? "Campo Temperatura Mínima requerido"
           : ""
         break
     }
@@ -279,7 +321,55 @@ export class CreatepostComponent implements OnInit {
     return uuidValue;
   }
 
-  /** Launch message of the snackBar component */
+  /* ------------------ CONDITIONS ------------------- */
+  addCondition(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our condition
+    if (value) {
+      this.conditions.push(value);
+    }
+
+    // Clear the input value
+    event.input.value = ''
+
+    this.conditionCtrl.setValue(null);
+  }
+
+  removeCondition(condition: string): void {
+    const index = this.conditions.indexOf(condition);
+
+    if (index >= 0) {
+      this.conditions.splice(index, 1);
+    }
+  }
+  /* ---------------- END CONDITION ----------------- */
+
+  /* ------------------ RISKS ------------------- */
+  addRisk(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our condition
+    if (value) {
+      this.risks.push(value);
+    }
+
+    // Clear the input value
+    event.input.value = ''
+
+    this.riskCtrl.setValue(null);
+  }
+
+  removeRisk(condition: string): void {
+    const index = this.risks.indexOf(condition);
+
+    if (index >= 0) {
+      this.risks.splice(index, 1);
+    }
+  }
+  /* ---------------- END RISKS ----------------- */
+
+  /* Launch message of the snackBar component */
   launchMessage(message: string) {
     this.errorMessage = ""
     const action = "OK"
@@ -287,4 +377,5 @@ export class CreatepostComponent implements OnInit {
       duration: 10000,
     })
   }
+
 }

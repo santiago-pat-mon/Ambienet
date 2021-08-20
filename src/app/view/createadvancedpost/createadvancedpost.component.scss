@@ -1,0 +1,69 @@
+@mixin smallmobile {
+    @media (max-width: 335px) {
+      @content;
+    }
+  }
+  
+  @mixin medianMeasure {
+    @media (max-width: 580px) {
+      @content;
+    }
+  }
+  
+  .container {
+    margin: auto;
+    width: 90%;
+  }
+  
+  .dataContainer {
+    width: 90%;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .cardContainer {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 25px;
+    -webkit-box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 0px 14px 1px rgba(0, 0, 0, 0.7);
+  }
+  
+  .createsButton {
+    background-color: #29a08d;
+    color: #ffffff;
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+  }
+
+  .backButton {
+    background-color: #29a08d;
+    color: #ffffff;
+    width: 60px;
+    height: auto;
+    float: left;
+  }
+  
+  .mapContainerPost {
+    width: 600px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    @include smallmobile() {
+      width: 200px;
+    }
+    @include medianMeasure() {
+      width: 450px;
+    }
+  }
+  
+  agm-map {
+    height: 350px;
+  }
+  
+  mat-form-field {
+    width: 90%;
+  }
+  
