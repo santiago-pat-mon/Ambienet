@@ -1,13 +1,17 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { RolrequestService } from './rolrequest.service';
+import { RolRequestService } from './rolrequest.service';
 
 describe('RolrequestService', () => {
-  let service: RolrequestService;
+  let service: RolRequestService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(RolrequestService);
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [RolRequestService]
+    });
+    service = TestBed.inject(RolRequestService);
   });
 
   it('should be created', () => {

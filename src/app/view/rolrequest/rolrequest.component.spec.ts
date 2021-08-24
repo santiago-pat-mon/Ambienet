@@ -1,4 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder, FormsModule } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { RolrequestComponent } from './rolrequest.component';
 
@@ -8,9 +12,11 @@ describe('RolrequestComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RolrequestComponent ]
+      imports: [FormsModule, RouterTestingModule, MatSnackBarModule, HttpClientTestingModule],
+      providers: [FormBuilder, MatSnackBar],
+      declarations: [RolrequestComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +25,7 @@ describe('RolrequestComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('Componente RolRequests funcionando correctamente.', () => {
     expect(component).toBeTruthy();
   });
 });
