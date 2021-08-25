@@ -116,7 +116,7 @@
                             ingreses una nueva afectación o riesgo presiona Enter
                         </p>
                         <mat-form-field>
-                            <mat-label>Afectaciones al Medio Ambiente</mat-label>
+                            <mat-label>Afectaciones</mat-label>
                             <mat-chip-list #chipList aria-label="Afectaciones">
                                 <mat-chip *ngFor="let condition of conditions" [selectable]="selectable"
                                     [removable]="removable" (removed)="removeCondition(condition)">

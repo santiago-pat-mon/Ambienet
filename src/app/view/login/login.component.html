@@ -18,14 +18,14 @@
                 </mat-form-field>
                 <br />
                 <br />
-                <button mat-raised-button
-                    style="background-color: #1f7500bd; color: #FFFFFF; width: 200px;">INGRESAR</button>
+                <button mat-raised-button class="loguinButton">INGRESAR</button>
             </form>
             <br />
             <button mat-raised-button color="primary" style="color: #FFFFFF; width: 200px;"
                 (click)="register = true">Registrar</button>
             <br /><br />
-            <button mat-raised-button color="warn" style="color: #FFFFFF; width: 200px;" (click)="enterGuest()">Ingresar
+            <button mat-raised-button style="background-color: #1f7500bd; color: #FFFFFF; width: 200px;"
+                (click)="enterGuest()">Ingresar
                 como
                 Invitado</button>
         </div>
@@ -54,7 +54,7 @@
                 </div>
             </mat-tab>
         </mat-tab-group>
-        <button mat-raised-button color="primary" style="margin-top: 20px;" (click)="selectDeviceLocation()">
+        <button mat-raised-button class="loguinButton" style="margin-top: 20px;" (click)="selectDeviceLocation()">
             Ubicación del dispositivo
         </button>
         <div class="registerForm">
@@ -97,10 +97,10 @@
                     <input matInput type="password" formControlName="repeat_password" required />
                 </mat-form-field>
                 <br />
-                <button mat-raised-button style="background-color: #1f7500bd; color: #FFFFFF;">Registrar</button>
+                <button mat-raised-button class="loguinButton">Registrar</button>
             </form>
             <br />
-            <button mat-raised-button color="primary" style="color: #FFFFFF; margin-bottom: 20px;"
+            <button mat-raised-button color="primary" class="loguinButton" style="margin-bottom: 20px;"
                 (click)="register=false">Volver</button>
         </div>
     </div>
