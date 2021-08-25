@@ -41,7 +41,7 @@ export class StatisticsComponent implements OnInit {
   public barChartData: ChartDataSets[] = [
     {
       data: [],
-      label: "TOTAL",
+      label: "Ocultar/Mostrar",
       backgroundColor: [],
       borderColor: [],
     },
@@ -67,8 +67,14 @@ export class StatisticsComponent implements OnInit {
   loadData() {
     this.viewPostService.getPosts().subscribe(
       p => {
-        console.log(p.results)
-        this.graphicsData = p.results !== undefined ? p.results : []
+        let dataAux = p.results !== undefined ? p.results : []
+
+        if (dataAux.length >= 15) {
+          this.graphicsData = dataAux.slice(0, 15)
+        } else {
+          this.graphicsData = dataAux
+        }
+        console.log(this.graphicsData)
       },
       e => { console.log(e) },
       () => {

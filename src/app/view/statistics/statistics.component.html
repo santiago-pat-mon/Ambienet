@@ -1,18 +1,11 @@
 <div class="container" *ngIf="rol == 'admin'">
   <mat-card class="dataContainer">
-    <h4 style="text-align: center">Estadísticas</h4>
+    <h4 style="text-align: center">Cantidad de validaciones por Post (Últimos 15 Post)</h4>
     <div>
       <div>
         <div style="display: block">
-          <canvas
-            baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [plugins]="barChartPlugins"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"
-          >
+          <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+            [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType">
           </canvas>
         </div>
       </div>
