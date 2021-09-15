@@ -22,6 +22,15 @@ export class ViewuserService {
     })
   }
 
+  /* Block user from the database */
+  blockUser(submission: any): Observable<any> {
+    this.ls = new SecureLS({ encodingType: "aes" })
+    this.token = this.ls.get("isLoggedToken")
+    return this.http.post(buildPostUrl(GlobalVariable.BLOCK_USER), submission, {
+      headers: new HttpHeaders().set('Authorization', 'Token ' + this.token)
+    })
+  }
+
   // I included these headers because otherwise FireFox
   // will request text/html instead of application/json
   private getHeadersNA() {
@@ -29,6 +38,13 @@ export class ViewuserService {
     headers.set("Accept", "application/json")
     return headers
   }
+}
+
+/* Construction of the user url */
+function buildPostUrl(type: string): string {
+  let finalUrl = GlobalVariable.BASE_SERVER_URL
+  finalUrl += type
+  return finalUrl
 }
 
 /* Construction of the get url */

@@ -95,7 +95,22 @@ export class ViewuserComponent implements OnInit {
     this.userDataSource.filter = filterValue
   }
 
-  deleteUser(user) {
+  blockUser(user) {
+    this.viewUserService.blockUser(user).subscribe(
+      p => {
+        console.log("AQUI")
+        console.log(p)
+      },
+      e => {
+        if (e.error) {
+          this.launchMessage("El usuario ya está bloqueado actualmente.")
+        }
+      },
+      () => {
+        this.getUserData()
+        this.launchMessage("Usuario bloqueado")
+      }
+    )
   }
 
   /** Launch message of the snackBar component */

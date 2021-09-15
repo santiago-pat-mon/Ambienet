@@ -85,9 +85,9 @@
         <ng-container matColumnDef="delete_user" stickyEnd>
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell style="padding-left: 10px" *matCellDef="let user">
-            <button mat-mini-fab style="padding: 0px" color="warn" aria-label="info icon" title="Eliminar Usuario"
-              (click)="deleteUser(user)">
-              <mat-icon>delete_forever</mat-icon>
+            <button mat-mini-fab style="padding: 0px" color="warn" [disabled]="user.is_active == false ? true : false"
+              aria-label="info icon" title="Bloquear Usuario" (click)="blockUser(user)">
+              <mat-icon>block</mat-icon>
             </button>
           </td>
         </ng-container>
