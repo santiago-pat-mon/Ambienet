@@ -62,7 +62,8 @@ export class CreatepostComponent implements OnInit {
   initForms() {
     this.postForm = this.formBuilder.group({
       title: new FormControl("", [Validators.required]),
-      typeCatastrophe: new FormControl("", [Validators.required]),
+      typePost: new FormControl("", [Validators.required]),
+      typeCatastrophe: new FormControl(),
       description: new FormControl("", [Validators.required]),
     })
   }
@@ -77,13 +78,14 @@ export class CreatepostComponent implements OnInit {
 
           this.postToSend["title"] = form.value.title
           this.postToSend["type_catastrophe"] = form.value.typeCatastrophe
+          this.postToSend["type_post"] = form.value.typePost
           this.postToSend["description"] = form.value.description
           this.postToSend["latitude"] = this.myLatitude
           this.postToSend["longitude"] = this.myLongitude
           /* this.postToSend["created"] = this.selectedDate */
           this.postToSend["photo"] = this.selectedFile.type + "/" + this.selectedFile.name
           this.postToSend["user"] = this.userName
-          this.postToSend["type_post"] = "COM"
+          this.postToSend["type_report"] = "COM"
 
           console.log(this.postToSend)
 

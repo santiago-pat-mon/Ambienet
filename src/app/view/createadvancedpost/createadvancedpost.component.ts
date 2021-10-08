@@ -74,7 +74,6 @@ export class CreateadvancedpostComponent implements OnInit {
   initForms() {
     this.advancedPostForm = this.formBuilder.group({
       title: new FormControl("", [Validators.required]),
-      typeCatastrophe: new FormControl("", [Validators.required]),
       description: new FormControl("", [Validators.required]),
       climatic_phenomenon: new FormControl("", [Validators.required]),
       time_interval: new FormControl("", [Validators.required]),
@@ -95,13 +94,14 @@ export class CreateadvancedpostComponent implements OnInit {
 
               this.advancedPostToSend["title"] = form.value.title
               this.advancedPostToSend["type_catastrophe"] = form.value.typeCatastrophe
+              this.advancedPostToSend["type_post"] = "REP"
               this.advancedPostToSend["description"] = form.value.description
               this.advancedPostToSend["latitude"] = this.myLatitude
               this.advancedPostToSend["longitude"] = this.myLongitude
               // this.advancedPostToSend["created"] = this.selectedDate
               this.advancedPostToSend["photo"] = this.selectedFile.type + "/" + this.selectedFile.name
               this.advancedPostToSend["user"] = this.userName
-              this.advancedPostToSend["type_post"] = "ADV"
+              this.advancedPostToSend["type_report"] = "ADV"
               this.advancedPostToSend.advanced_report["climatic_phenomenon"] = form.value.climatic_phenomenon
               this.advancedPostToSend.advanced_report["time_interval"] = form.value.time_interval
               this.advancedPostToSend.advanced_report["temp_max"] = form.value.temp_max

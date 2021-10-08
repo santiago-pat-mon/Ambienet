@@ -48,8 +48,17 @@
               </mat-error>
             </mat-form-field>
             <mat-form-field>
+              <mat-label>Tipo de Post</mat-label>
+              <mat-select matSelect formControlName="typePost" required>
+                <mat-option value="NEW">Noticia Positiva</mat-option>
+                <mat-option value="CAT">Catástrofe</mat-option>
+                <mat-option value="COMP">Denuncia</mat-option>
+                <mat-option value="REP">Reporte</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field>
               <mat-label>Tipo de catástrofe</mat-label>
-              <mat-select matSelect formControlName="typeCatastrophe" required>
+              <mat-select matSelect formControlName="typeCatastrophe">
                 <mat-option value="Derrumbe">Derrumbe – Deslizamiento de tierra.
                 </mat-option>
                 <mat-option value="Ola_de_calor">Ola de calor</mat-option>
