@@ -2,12 +2,10 @@
   <mat-card *ngFor="let object of postData" class="cardContainer" style="border-radius: 25px">
     <mat-card-header>
       <div mat-card-avatar class="profilePicture">
-        <img *ngIf="object.user.profile.picture != null"
-          src="http://13.58.8.74/php/api/{{ object.user.profile.picture }}" title="{{ object.user.username }}"
-          style="width: 50px; height: 50px; border-radius: 25px" />
-        <img *ngIf="object.user.profile.picture == null"
-          src="http://13.58.8.74/php/api/profilePicture/default-user-image.png" title="{{ object.user.username }}"
-          style="width: 50px; height: 50px; border-radius: 25px" />
+        <img *ngIf="object.user.profile.picture != null" src="http://localhost:2015/{{ object.user.profile.picture }}"
+          title="{{ object.user.username }}" style="width: 50px; height: 50px; border-radius: 25px" />
+        <img *ngIf="object.user.profile.picture == null" src="http://localhost:2015/default-user-image.png"
+          title="{{ object.user.username }}" style="width: 50px; height: 50px; border-radius: 25px" />
       </div>
       <mat-card-title>
         <b style="margin-right: 5px; color: #29a08d; font-size: 16px;">{{ object.user.username }}</b>

@@ -35,9 +35,9 @@
       </mat-tab-group>
       <div class="userForm">
         <img *ngIf="userData?.profile.picture != null" class="profilePicture"
-          src="http://13.58.8.74/php/api/{{ userData.profile.picture }}" />
+          src="http://localhost:2015/{{ userData.profile.picture }}" />
         <img *ngIf="userData?.profile.picture == null" class="profilePicture"
-          src="http://13.58.8.74/php/api/profilePicture/default-user-image.png" />
+          src="http://localhost:2015/default-user-image.png" />
         <br />
         <!-- Select file-->
         <input #inputFile type="file" (change)="selectFile($event)" />
