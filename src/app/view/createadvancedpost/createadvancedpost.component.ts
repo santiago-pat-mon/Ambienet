@@ -99,7 +99,7 @@ export class CreateadvancedpostComponent implements OnInit {
               this.advancedPostToSend["latitude"] = this.myLatitude
               this.advancedPostToSend["longitude"] = this.myLongitude
               // this.advancedPostToSend["created"] = this.selectedDate
-              this.advancedPostToSend["photo"] = this.selectedFile.type + "/" + this.selectedFile.name
+              this.advancedPostToSend["photo"] = this.selectedFile.name
               this.advancedPostToSend["user"] = this.userName
               this.advancedPostToSend["type_report"] = "ADV"
               this.advancedPostToSend.advanced_report["climatic_phenomenon"] = form.value.climatic_phenomenon

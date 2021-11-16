@@ -83,7 +83,7 @@ export class CreatepostComponent implements OnInit {
           this.postToSend["latitude"] = this.myLatitude
           this.postToSend["longitude"] = this.myLongitude
           /* this.postToSend["created"] = this.selectedDate */
-          this.postToSend["photo"] = this.selectedFile.type + "/" + this.selectedFile.name
+          this.postToSend["photo"] = this.selectedFile.name
           this.postToSend["user"] = this.userName
           this.postToSend["type_report"] = "COM"
 
@@ -128,9 +128,9 @@ export class CreatepostComponent implements OnInit {
 
   /* Method in charge of cleaning the variables and the form */
   clearData(form) {
-    /* this.selectedFile.name = null
+    this.selectedFile.name = null
     this.selectedFile.base64textString = null
-    this.selectedFile.type = null */
+    this.selectedFile.type = null
     this.postToSend = {}
     form.reset()
   }

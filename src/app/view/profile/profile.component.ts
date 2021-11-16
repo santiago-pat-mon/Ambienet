@@ -106,7 +106,7 @@ export class ProfileComponent implements OnInit {
         if (this.selectedFile.name != null) {
           this.uploadFile()
 
-          this.profileToSendData["picture"] = this.selectedFile.type + "/" + this.selectedFile.name
+          this.profileToSendData["picture"] = this.selectedFile.name
 
           if (this.userData.first_name != form.value.first_name) {
             this.profileToSend["first_name"] = form.value.first_name

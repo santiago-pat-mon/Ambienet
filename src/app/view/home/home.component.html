@@ -16,71 +16,77 @@
   </mat-sidenav-container>
 </div>
 <div *ngIf="rol == 'user'" class="backgroundContainer">
-  <app-topmenu></app-topmenu>
-  <div *ngIf="size">
-    <mat-toolbar style="background-color: #29a08d; width: 100%; height: 45px">
-      <div style="margin-left: 2%">
-        <b style="font-size: 15px; font-weight: 500; color: #ffffff">{{ first_name_data }} {{ last_name_data }}</b>
-      </div>
-      <div style="margin-left: auto">
-        <button mat-button style="
-            background-color: #29a08d;
-            color: #ffffff;
-            border-left: 2px solid #000000;
-            border-right: 1px solid #000000;
-          " routerLink="/dashboard" hidden>
-          Inicio
+  <section id="header">
+    <app-topmenu></app-topmenu>
+    <div *ngIf="size">
+      <mat-toolbar style="background-color: #29a08d; width: 100%; height: 45px">
+        <div style="margin-left: 2%">
+          <b style="font-size: 15px; font-weight: 500; color: #ffffff">{{ first_name_data }} {{ last_name_data }}</b>
+        </div>
+        <div style="margin-left: auto">
+          <button mat-button style="
+              background-color: #29a08d;
+              color: #ffffff;
+              border-left: 2px solid #000000;
+              border-right: 1px solid #000000;
+            " routerLink="/dashboard" (click)="routeNow(true)" hidden>
+            Inicio
+          </button>
+          <button mat-button style="
+              background-color: #29a08d;
+              color: #ffffff;
+              border-left: 1px solid #000000;
+              border-right: 1px solid #000000;
+            " routerLink="/profile" (click)="routeNow(false)" hidden>
+            Mi perfil
+          </button>
+          <button mat-button style="
+              background-color: #29a08d;
+              color: #ffffff;
+              border-left: 1px solid #000000;
+              border-right: 1px solid #000000;
+            " routerLink="/createpost" (click)="routeNow(false)" hidden>
+            Realizar aporte
+          </button>
+          <button mat-button style="
+              background-color: #29a08d;
+              color: #ffffff;
+              border-left: 1px solid #000000;
+              border-right: 2px solid #000000;
+            " routerLink="/company" (click)="routeNow(false)" hidden>
+            Soy entusiasta o Corporación
+          </button>
+        </div>
+      </mat-toolbar>
+    </div>
+    <div *ngIf="!size">
+      <mat-toolbar style="background-color: #29a08d; width: 100%; height: 40px">
+        <button mat-button [matMenuTriggerFor]="menu">
+          <mat-icon style="color: #ffffff">menu</mat-icon>
+          <b style="color: #ffffff">Menu</b>
         </button>
-        <button mat-button style="
-            background-color: #29a08d;
-            color: #ffffff;
-            border-left: 1px solid #000000;
-            border-right: 1px solid #000000;
-          " routerLink="/profile" hidden>
-          Mi perfil
-        </button>
-        <button mat-button style="
-            background-color: #29a08d;
-            color: #ffffff;
-            border-left: 1px solid #000000;
-            border-right: 1px solid #000000;
-          " routerLink="/createpost" hidden>
-          Realizar aporte
-        </button>
-        <button mat-button style="
-            background-color: #29a08d;
-            color: #ffffff;
-            border-left: 1px solid #000000;
-            border-right: 2px solid #000000;
-          " routerLink="/company" hidden>
-          Soy entusiasta o Corporación
-        </button>
-      </div>
-    </mat-toolbar>
-  </div>
-  <div *ngIf="!size">
-    <mat-toolbar style="background-color: #29a08d; width: 100%; height: 40px">
-      <button mat-button [matMenuTriggerFor]="menu">
-        <mat-icon style="color: #ffffff">menu</mat-icon>
-        <b style="color: #ffffff">Menu</b>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item style="background-color: #29a08d; color: #ffffff" routerLink="/dashboard" hidden>
-          Inicio
-        </button>
-        <button mat-menu-item style="background-color: #29a08d; color: #ffffff" routerLink="/profile" hidden>
-          Mi perfil
-        </button>
-        <button mat-menu-item style="background-color: #29a08d; color: #ffffff" routerLink="/createpost" hidden>
-          Realizar aporte
-        </button>
-        <button mat-menu-item style="background-color: #29a08d; color: #ffffff" routerLink="/company" hidden>
-          Soy entusiasta o Corporación
-        </button>
-      </mat-menu>
-    </mat-toolbar>
-  </div>
-
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item style="background-color: #29a08d; color: #ffffff" routerLink="/dashboard" hidden>
+            Inicio
+          </button>
+          <button mat-menu-item style="background-color: #29a08d; color: #ffffff" routerLink="/profile" hidden>
+            Mi perfil
+          </button>
+          <button mat-menu-item style="background-color: #29a08d; color: #ffffff" routerLink="/createpost" hidden>
+            Realizar aporte
+          </button>
+          <button mat-menu-item style="background-color: #29a08d; color: #ffffff" routerLink="/company" hidden>
+            Soy entusiasta o Corporación
+          </button>
+        </mat-menu>
+      </mat-toolbar>
+    </div>
+    <div id="filterPost" *ngIf="size && activeNow">
+      <select>
+        <option>Hola</option>
+      </select>
+    </div>
+  </section>
   <!--Content-->
   <router-outlet></router-outlet>
 

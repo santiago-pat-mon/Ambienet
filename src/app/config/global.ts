@@ -4,7 +4,7 @@ export const GlobalVariable = Object.freeze({
 
     // PHP
     //BASE_API_URL_PHP: "http://localhost/php/",
-    BASE_API_URL_PHP: "http://13.58.8.74/php/",
+    BASE_API_URL_PHP: "http://18.117.175.146:2015/",
     PROFILE_PICTURE_PHP: "attachFile.php",
     POST_PICTURE_PHP: "attachFile.php",
 
