@@ -20,6 +20,13 @@ export class ViewpostService {
     })
   }
 
+  /* Select filtered posts from the database */
+  getPostsFiltered(filter: string): Observable<any> {
+    return this.http.get(buildGetUrl(GlobalVariable.READ_POSTS_FILTER + filter), {
+      headers: this.getHeadersNA(),
+    })
+  }
+
   /* Delete post from the database */
   deletePost(submission: any): Observable<any> {
     this.ls = new SecureLS({ encodingType: "aes" })

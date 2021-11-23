@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   currentScreenWidth: string = ""
   sidenavWidth = 4.2
   size = true;
-  activeNow = true;
 
   /* Component constructor */
   constructor(
@@ -46,17 +45,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadFilter()
     this.startVariables()
     this.screenWidth()
-  }
-
-  loadFilter() {
-    if(this.router.url == "/dashboard") {
-      this.activeNow = true;
-    } else {
-      this.activeNow = false;
-    }
   }
 
   /* Method in charge of identifying the role that is logged in */
@@ -82,9 +72,4 @@ export class HomeComponent implements OnInit {
   decrease() {
     this.sidenavWidth = 4.2
   }
-
-  routeNow(activeNow: boolean) {
-    this.activeNow = activeNow;
-  }
-
 }

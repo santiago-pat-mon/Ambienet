@@ -46,6 +46,18 @@ export class CreateadvancedpostComponent implements OnInit {
   riskCtrl = new FormControl();
   risks: string[] = [];
 
+  selectable3 = true;
+  removable3 = true;
+  separatorKeysCodes3: number[] = [ENTER, COMMA];
+  personCtrl = new FormControl();
+  people: string[] = [];
+
+  selectable4 = true;
+  removable4 = true;
+  separatorKeysCodes4: number[] = [ENTER, COMMA];
+  specieCtrl = new FormControl();
+  species: string[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -90,41 +102,51 @@ export class CreateadvancedpostComponent implements OnInit {
         if (this.selectedFile.name != null) {
           if (this.conditions.length > 0) {
             if (this.risks.length > 0) {
-              this.uploadFile()
+              if (this.people.length > 0) {
+                if (this.species.length > 0) {
+                  this.uploadFile()
 
-              this.advancedPostToSend["title"] = form.value.title
-              this.advancedPostToSend["type_catastrophe"] = form.value.typeCatastrophe
-              this.advancedPostToSend["type_post"] = "REP"
-              this.advancedPostToSend["description"] = form.value.description
-              this.advancedPostToSend["latitude"] = this.myLatitude
-              this.advancedPostToSend["longitude"] = this.myLongitude
-              // this.advancedPostToSend["created"] = this.selectedDate
-              this.advancedPostToSend["photo"] = this.selectedFile.name
-              this.advancedPostToSend["user"] = this.userName
-              this.advancedPostToSend["type_report"] = "ADV"
-              this.advancedPostToSend.advanced_report["climatic_phenomenon"] = form.value.climatic_phenomenon
-              this.advancedPostToSend.advanced_report["time_interval"] = form.value.time_interval
-              this.advancedPostToSend.advanced_report["temp_max"] = form.value.temp_max
-              this.advancedPostToSend.advanced_report["temp_min"] = form.value.temp_min
-              this.advancedPostToSend.advanced_report["conditions_can_be_triggered"] = this.conditions.toString()
-              this.advancedPostToSend.advanced_report["associated_risks"] = this.risks.toString()
-              console.log(this.advancedPostToSend)
-
-              // Connection and sending of the advancedPostToSend to the server
-              this.createPostService.registerPost(this.advancedPostToSend).subscribe(
-                p => {
-                  this.registerAdvancedPostData = p !== undefined ? p : []
-                },
-                e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
-                () => {
-                  console.log("lo que envio")
+                  this.advancedPostToSend["title"] = form.value.title
+                  this.advancedPostToSend["type_catastrophe"] = form.value.typeCatastrophe
+                  this.advancedPostToSend["type_post"] = "REP"
+                  this.advancedPostToSend["description"] = form.value.description
+                  this.advancedPostToSend["latitude"] = this.myLatitude
+                  this.advancedPostToSend["longitude"] = this.myLongitude
+                  // this.advancedPostToSend["created"] = this.selectedDate
+                  this.advancedPostToSend["photo"] = this.selectedFile.name
+                  this.advancedPostToSend["user"] = this.userName
+                  this.advancedPostToSend["type_report"] = "ADV"
+                  this.advancedPostToSend.advanced_report["climatic_phenomenon"] = form.value.climatic_phenomenon
+                  this.advancedPostToSend.advanced_report["time_interval"] = form.value.time_interval
+                  this.advancedPostToSend.advanced_report["temp_max"] = form.value.temp_max
+                  this.advancedPostToSend.advanced_report["temp_min"] = form.value.temp_min
+                  this.advancedPostToSend.advanced_report["conditions_can_be_triggered"] = this.conditions.toString()
+                  this.advancedPostToSend.advanced_report["associated_risks"] = this.risks.toString()
+                  this.advancedPostToSend.advanced_report["affected_people"] = this.people.toString()
+                  this.advancedPostToSend.advanced_report["affected_species"] = this.species.toString()
                   console.log(this.advancedPostToSend)
-                  console.log("lo que recibo")
-                  console.log(this.registerAdvancedPostData)
-                  this.clearData(form)
-                  this.launchMessage("Post creado.")
+
+                  // Connection and sending of the advancedPostToSend to the server
+                  this.createPostService.registerPost(this.advancedPostToSend).subscribe(
+                    p => {
+                      this.registerAdvancedPostData = p !== undefined ? p : []
+                    },
+                    e => { console.log(e), this.launchMessage("Ocurrió un error, por favor intenta más tarde") },
+                    () => {
+                      console.log("lo que envio")
+                      console.log(this.advancedPostToSend)
+                      console.log("lo que recibo")
+                      console.log(this.registerAdvancedPostData)
+                      this.clearData(form)
+                      this.launchMessage("Post creado.")
+                    }
+                  )
+                } else {
+                  this.launchMessage("Por favor ingresa al menos una especie que podría afectar")
                 }
-              )
+              } else {
+                this.launchMessage("Por favor ingresa al menos una poblacion que podría afectar")
+              }
             } else {
               this.launchMessage("Por favor ingresa al menos un riesgo que podría desencadenar")
             }
@@ -368,6 +390,54 @@ export class CreateadvancedpostComponent implements OnInit {
     }
   }
   /* ---------------- END RISKS ----------------- */
+
+  /* ------------------ PEOPLE ------------------- */
+  addPeople(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our condition
+    if (value) {
+      this.people.push(value);
+    }
+
+    // Clear the input value
+    event.input.value = ''
+
+    this.personCtrl.setValue(null);
+  }
+
+  removePeople(person: string): void {
+    const index = this.people.indexOf(person);
+
+    if (index >= 0) {
+      this.people.splice(index, 1);
+    }
+  }
+  /* ---------------- END PEOPLE ----------------- */
+
+  /* ------------------ SPECIES ------------------- */
+  addSpecie(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our condition
+    if (value) {
+      this.species.push(value);
+    }
+
+    // Clear the input value
+    event.input.value = ''
+
+    this.specieCtrl.setValue(null);
+  }
+
+  removeSpecie(specie: string): void {
+    const index = this.people.indexOf(specie);
+
+    if (index >= 0) {
+      this.species.splice(index, 1);
+    }
+  }
+  /* ---------------- END PEOPLE ----------------- */
 
   /* Launch message of the snackBar component */
   launchMessage(message: string) {

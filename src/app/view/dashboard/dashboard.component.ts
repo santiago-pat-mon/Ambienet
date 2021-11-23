@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as SecureLS from 'secure-ls';
@@ -21,7 +21,71 @@ export class DashboardComponent implements OnInit {
   validateToSendData = {}
   addValidator = {}
   countValidate = 0
-  userName = ""
+  userName = "";
+  visible: boolean = true;
+  noDataFileter: boolean = true;
+  catastrophes = [
+    {
+      value: "Todos",
+      name: "Todos",
+    },
+    {
+      value: "Derrumbe",
+      name: "Derrumbe – Deslizamiento de tierra.",
+    },
+    {
+      value: "Ola_de_calor",
+      name: "Ola de calor",
+    },
+    {
+      value: "Granizo",
+      name: "Granizo",
+    },
+    {
+      value: "Sequía",
+      name: "Sequía",
+    },
+    {
+      value: "Tormenta",
+      name: "Tormenta",
+    },
+    {
+      value: "Erupción_volcánica",
+      name: "Erupción volcánica",
+    },
+    {
+      value: "Incendio_forestal",
+      name: "Incendios forestales",
+    },
+    {
+      value: "Inundación",
+      name: "Inundación",
+    },
+    {
+      value: "Sismo",
+      name: "Sismo",
+    },
+    {
+      value: "Cuencas_hídricas",
+      name: "Contaminación de cuencas hídricas",
+    },
+    {
+      value: "Daño_por_petróleo",
+      name: "Derramamiento de petróleo",
+    },
+    {
+      value: "Tala_de_bosques",
+      name: "Tala de bosques",
+    },
+    {
+      value: "Minería_ilegal",
+      name: "Minería ilegal",
+    },
+    {
+      value: "Otro",
+      name: "Otro",
+    },
+  ]
 
   /* Component constructor */
   constructor(
@@ -29,6 +93,15 @@ export class DashboardComponent implements OnInit {
     public snackBar: MatSnackBar,
     private viewPostService: ViewpostService,
   ) { }
+
+  @HostListener("window:scroll")
+  scrollPosition(){
+    if(window.scrollY >= 100) {
+      this.visible = false;
+    } else {
+      this.visible = true;
+    }
+  }
 
   ngOnInit(): void {
     this.startVariables()
@@ -52,6 +125,11 @@ export class DashboardComponent implements OnInit {
       },
       e => { console.log(e), this.launchMessage(e) },
       () => {
+        if(this.postData.length > 0) {
+          this.noDataFileter = false;
+        } else {
+          this.noDataFileter = true;
+        }
         console.log("Dashboard actualizado")
       }
     )
@@ -126,6 +204,29 @@ export class DashboardComponent implements OnInit {
         this.launchMessage("Gracias por enviar tu reporte sobre este Post")
       }
     )
+  }
+
+  onChangeFilter(value) {
+    if(value == "Todos") {
+      this.loadData()
+    } else {
+      this.viewPostService.getPostsFiltered(value).subscribe(
+        p => {
+          console.log(p.results)
+          let aux = p.results !== undefined ? p.results : []
+          this.postData = aux.filter((item) => item.is_banned == false)
+        },
+        e => { console.log(e), this.launchMessage(e) },
+        () => {          
+          if(this.postData.length > 0) {
+            this.noDataFileter = false;
+          } else {
+            this.noDataFileter = true;
+          }
+          console.log("Dashboard actualizado")
+        }
+      )
+    }
   }
 
   /** Launch message of the snackBar component */

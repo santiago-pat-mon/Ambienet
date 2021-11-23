@@ -1,4 +1,21 @@
+<div id="filterPost" [hidden]="!visible">
+  <mat-form-field appearance="fill">
+    <mat-label>Filtrar los post</mat-label>
+    <mat-select (selectionChange)="onChangeFilter($event.value)">
+      <mat-option *ngFor="let catastrophe of catastrophes" [value]="catastrophe.value">
+        {{catastrophe.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
 <div class="container">
+  <mat-card *ngIf="noDataFileter" class="cardContainer" style="border-radius: 25px; text-align: center;">
+    <mat-card-content>
+      <p style="font-size: 16px; font-weight: bold;">
+        No hay post creados actualmente.
+      </p>
+    </mat-card-content>
+  </mat-card>
   <mat-card *ngFor="let object of postData" class="cardContainer" style="border-radius: 25px">
     <mat-card-header>
       <div mat-card-avatar class="profilePicture">
@@ -62,6 +79,8 @@
               <p><b>Temperatura Mínima: </b>{{object.advanced_report.temp_min}} °C</p>
               <p><b>Afectaciones que Conlleva: </b>{{object.advanced_report.conditions_can_be_triggered}}</p>
               <p><b>Riesgos Asociados: </b>{{object.advanced_report.associated_risks}}</p>
+              <p><b>Población afectada: </b>{{object.advanced_report.affected_people}}</p>
+              <p><b>Especies afectadas: </b>{{object.advanced_report.affected_species}}</p>
             </section>
           </mat-expansion-panel>
         </mat-accordion>

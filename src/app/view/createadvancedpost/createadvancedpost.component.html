@@ -140,16 +140,44 @@
                         </mat-form-field>
                         <mat-form-field>
                             <mat-label>Riesgos Asociados</mat-label>
-                            <mat-chip-list #chipList2 aria-label="Fruit selection">
+                            <mat-chip-list #chipList2 aria-label="Riesgos Asociados">
                                 <mat-chip *ngFor="let risk of risks" [selectable]="selectable2" [removable]="removable2"
                                     (removed)="removeRisk(risk)">
                                     {{risk}}
                                     <mat-icon matChipRemove *ngIf="removable2">cancel</mat-icon>
                                 </mat-chip>
                                 <input placeholder="Nuevo riesgo (Presiona Enter)..." #riskInput
-                                    [formControl]="conditionCtrl" [matChipInputFor]="chipList2"
+                                    [formControl]="riskCtrl" [matChipInputFor]="chipList2"
                                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes2"
                                     (matChipInputTokenEnd)="addRisk($event)" />
+                            </mat-chip-list>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Población afectada</mat-label>
+                            <mat-chip-list #chipList3 aria-label="Poblacion afectada">
+                                <mat-chip *ngFor="let person of people" [selectable]="selectable3" [removable]="removable3"
+                                    (removed)="removePeople(person)">
+                                    {{person}}
+                                    <mat-icon matChipRemove *ngIf="removable3">cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Nueva población (Presiona Enter)..." #peopleInput
+                                    [formControl]="personCtrl" [matChipInputFor]="chipList3"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes3"
+                                    (matChipInputTokenEnd)="addPeople($event)" />
+                            </mat-chip-list>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Especies afectadas</mat-label>
+                            <mat-chip-list #chipList4 aria-label="Especies afectadas">
+                                <mat-chip *ngFor="let specie of species" [selectable]="selectable4" [removable]="removable4"
+                                    (removed)="removeSpecie(specie)">
+                                    {{specie}}
+                                    <mat-icon matChipRemove *ngIf="removable4">cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Nueva especie (Presiona Enter)..." #speciesInput
+                                    [formControl]="specieCtrl" [matChipInputFor]="chipList4"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes4"
+                                    (matChipInputTokenEnd)="addSpecie($event)" />
                             </mat-chip-list>
                         </mat-form-field>
 
