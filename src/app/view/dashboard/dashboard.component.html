@@ -1,7 +1,7 @@
 <div id="filterPost" [hidden]="!visible">
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="fill" style="width: 90%; font-size: 13px;">
     <mat-label>Filtrar los post</mat-label>
-    <mat-select (selectionChange)="onChangeFilter($event.value)">
+    <mat-select #filterSelect (selectionChange)="onChangeFilter($event.value)">
       <mat-option *ngFor="let catastrophe of catastrophes" [value]="catastrophe.value">
         {{catastrophe.name}}
       </mat-option>

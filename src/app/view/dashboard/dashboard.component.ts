@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as SecureLS from 'secure-ls';
@@ -12,6 +12,7 @@ import { ViewobjectDialogComponent } from '../viewobject-dialog/viewobject-dialo
 })
 export class DashboardComponent implements OnInit {
   /* Declaration of variables */
+  @ViewChild("filterSelect") filterSelect;
   ls: SecureLS
   rol: string
   zoom = 16;
@@ -98,6 +99,7 @@ export class DashboardComponent implements OnInit {
   scrollPosition(){
     if(window.scrollY >= 100) {
       this.visible = false;
+      this.filterSelect.close();
     } else {
       this.visible = true;
     }
@@ -207,6 +209,8 @@ export class DashboardComponent implements OnInit {
   }
 
   onChangeFilter(value) {
+    console.log("HOLA: "+ value);
+    
     if(value == "Todos") {
       this.loadData()
     } else {

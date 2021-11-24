@@ -125,7 +125,7 @@
                             ingreses una nueva afectación o riesgo presiona Enter
                         </p>
                         <mat-form-field>
-                            <mat-label>Afectaciones</mat-label>
+                            <mat-label>Afectaciones *</mat-label>
                             <mat-chip-list #chipList aria-label="Afectaciones">
                                 <mat-chip *ngFor="let condition of conditions" [selectable]="selectable"
                                     [removable]="removable" (removed)="removeCondition(condition)">
@@ -139,7 +139,7 @@
                             </mat-chip-list>
                         </mat-form-field>
                         <mat-form-field>
-                            <mat-label>Riesgos Asociados</mat-label>
+                            <mat-label>Riesgos Asociados *</mat-label>
                             <mat-chip-list #chipList2 aria-label="Riesgos Asociados">
                                 <mat-chip *ngFor="let risk of risks" [selectable]="selectable2" [removable]="removable2"
                                     (removed)="removeRisk(risk)">
@@ -153,7 +153,7 @@
                             </mat-chip-list>
                         </mat-form-field>
                         <mat-form-field>
-                            <mat-label>Población afectada</mat-label>
+                            <mat-label>Población afectada *</mat-label>
                             <mat-chip-list #chipList3 aria-label="Poblacion afectada">
                                 <mat-chip *ngFor="let person of people" [selectable]="selectable3" [removable]="removable3"
                                     (removed)="removePeople(person)">
@@ -167,7 +167,7 @@
                             </mat-chip-list>
                         </mat-form-field>
                         <mat-form-field>
-                            <mat-label>Especies afectadas</mat-label>
+                            <mat-label>Especies afectadas *</mat-label>
                             <mat-chip-list #chipList4 aria-label="Especies afectadas">
                                 <mat-chip *ngFor="let specie of species" [selectable]="selectable4" [removable]="removable4"
                                     (removed)="removeSpecie(specie)">
@@ -183,7 +183,7 @@
 
                         <!-- Select file-->
                         <br />
-                        <mat-label style="font-size: 15px">Foto del suceso</mat-label><br /><br />
+                        <mat-label style="font-size: 15px">Foto del suceso *</mat-label><br /><br />
                         <input #inputFile type="file" (change)="selectFile($event)" />
                         <br />
                         <br />

@@ -10,12 +10,21 @@
   }
 }
 
+@mixin median {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
 #filterPost {
   width: 100%;
-  margin-top: 11px;
+  margin-top: 8px;
   text-align: center;
   position: fixed;
   z-index: 2;
+  @include median() {
+    margin-top: 4px;
+  }
 }
 
 .container {
@@ -66,6 +75,9 @@ agm-map {
   max-width: 200px;
   width: 100%;
   height: auto;
+  @include smallmobile() {
+    margin-top: 10px;
+  }
 }
 
 .reportButtonDisabled {
